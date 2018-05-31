@@ -1,25 +1,17 @@
 ;(function($) {
 
     $(document).ready(function() {
+    	// global variables;
+    	var $message = $(".message");
+    	var $conditions = $(".conditions");
+    	var $convert = $(".convert");
+    	var $temperature = $(".temperature");
 
 
     	// on click, get current position
     	$(".getLocation").on("click", function(event) {
     		event.preventDefault();
     		
-	    	function success(position){
-	    		const myCoordinates = position.coords;
-	    		let lat = myCoordinates.latitude
-	    		let lon = myCoordinates.longitude
-	    		let api = ("https://fcc-weather-api.glitch.me/api/current?lat=" + lat + "&lon=" + lon);
-
-	    		$.get(api, function(data) {
-					console.log(data);
-
-						
-				});
-	    	}
-
 	    	function error(error) {
 	    		console.warn(`ERROR(${error.code}): ${error.message}`);
 	    	}
@@ -30,10 +22,64 @@
 				maximumAge: 0
 			};
 
+	    	function success(position){
+	    		const myCoordinates = position.coords;
+	    		let lat = myCoordinates.latitude
+	    		let lon = myCoordinates.longitude
+	    		let api = ("https://fcc-weather-api.glitch.me/api/current?lat=" + lat + "&lon=" + lon);
+
+	    		$.get(api, function(data) {
+	    			let tempC = Math.round(data.main.temp);
+	    			let tempF = Math.round((tempC * 1.8000) + 32);
+	    			tempF += "F";
+	    			tempC += "C";
+	    			let conditions = data.weather[0]["description"];
+	    			    			
+	    			console.log(data, tempF, tempC); 
+
+	    			//calculate how many hours and minutes until local sunset:
+	    			var options = {
+					  hour: 'numeric',
+					  minute: 'numeric',
+					  hour12: true
+					};
+
+	    			let sunsetUTCHours = data.sys.sunset;
+	    			let sunset = new Date(0);
+	    			sunset.setUTCSeconds(sunsetUTCHours);
+	    			let sunsetHour = sunset.getHours();
+	    			let sunsetMinutes = sunset.getMinutes();
+
+	    			let localTimeAtSunset = sunset.toLocaleString('en-US', options);
+	    		
+	    			let currentDate = new Date();
+	    			let currentHour = currentDate.getHours(); 
+	    			let currentMinute = currentDate.getMinutes();
+
+	    			let remainingHours = sunsetHour - currentHour;
+	    			let remainingMinutes = sunsetMinutes - currentMinute;
+
+	 				// don't show negative numbers
+	    			if(remainingHours < 0) {
+	    				remainingHours = -remainingHours;
+	    			}
+	    			if(remainingMinutes < 0) {
+	    				remainingMinutes = -remainingMinutes;
+	    			}
+	    			var cheekyMessage = "You only have " + remainingHours + " hours and " + remainingMinutes + " minutes left before sunset tonight at " + localTimeAtSunset + ". <br> Better get to it!";
+					$message.html(cheekyMessage);
+
+					// show icon
+					$conditions.html(conditions);
+					$temperature.html(tempF+ " or " + tempC);
+					console.log(conditions);
+				});
+
+	    	}
+
     		// check if it is allowed
 	    	if(navigator.geolocation) {
 	        	navigator.geolocation.getCurrentPosition(success, error, options);
-				
 			} 
 		
 		});

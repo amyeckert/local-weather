@@ -30,6 +30,11 @@
 	background-size: cover;
 	background-repeat: no-repeat;
 }
+button {
+	height: 100px;
+	width: 100px;
+
+}
 
 .current {
 	width: 100%;
