@@ -2,31 +2,40 @@
 
     $(document).ready(function() {
 
-    	// on click, get current location
+
+    	// on click, get current position
     	$(".getLocation").on("click", function(event) {
     		event.preventDefault();
-    		console.log("clicked");
-	    	var lat;
-	    	var lon;
     		
+	    	function success(position){
+	    		const myCoordinates = position.coords;
+	    		let lat = myCoordinates.latitude
+	    		let lon = myCoordinates.longitude
+	    		let api = ("https://fcc-weather-api.glitch.me/api/current?lat=" + lat + "&lon=" + lon);
+
+	    		$.get(api, function(data) {
+					console.log(data);
+
+						
+				});
+	    	}
+
+	    	function error(error) {
+	    		console.warn(`ERROR(${error.code}): ${error.message}`);
+	    	}
+
+	    	var options = {
+				enableHighAccuracy: true,
+				timeout: 5000,
+				maximumAge: 0
+			};
+
+    		// check if it is allowed
 	    	if(navigator.geolocation) {
-	        	navigator.geolocation.getCurrentPosition( function(position) {
-	        		lat = location.coords.latitude;
-	        		lon = location.coords.longitude;
-
-			        console.log("Found your location \nLat : "+location.coords.latitude+" \nLang :"+ location.coords.longitude);
-        		});
-    		}
-	    	
-
-			// function onError() {
-			// 	console.log("geolocation error");
-			// }
-	    	// then call the API 
-			var api = "https://fcc-weather-api.glitch.me/api/current?" + location.coords.latitude + "&" +location.coords.longitude;
-			$.get(api, function(data) {
-				console.log(data);
-			});
+	        	navigator.geolocation.getCurrentPosition(success, error, options);
+				
+			} 
+		
 		});
 
     }); //________end doc ready_________________________________________________________//
