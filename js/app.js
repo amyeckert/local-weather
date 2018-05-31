@@ -6,6 +6,7 @@
     	var $conditions = $(".conditions");
     	var $convert = $(".convert");
     	var $temperature = $(".temperature");
+    	var $information = $(".information");
 
 
     	// on click, get current position
@@ -67,12 +68,13 @@
 	    				remainingMinutes = -remainingMinutes;
 	    			}
 	    			var cheekyMessage = "You only have " + remainingHours + " hours and " + remainingMinutes + " minutes left before sunset tonight at " + localTimeAtSunset + ". <br> Better get to it!";
-					$message.html(cheekyMessage);
-
+					$message.html(cheekyMessage).fadeIn(900);
+					$information.fadeIn(400);
 					// show icon
 					$conditions.html(conditions);
-					$temperature.html(tempF+ " or " + tempC);
-					console.log(conditions);
+					$temperature.html(tempF+ " \/ " + tempC);
+
+					console.log();
 				});
 
 	    	}
