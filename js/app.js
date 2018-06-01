@@ -4,13 +4,14 @@
     	// global variables;
     	var $message = $(".message");
     	var $conditions = $(".conditions");
-    	var $convert = $(".convert");
     	var $temperature = $(".temperature");
     	var $information = $(".information");
-
-
+    	var $getLocation = $(".getLocation");
+    	$conditions.hide().html("");
+    	$temperature.hide().html("");
+    	$message.hide().html("");
     	// on click, get current position
-    	$(".getLocation").on("click", function(event) {
+    	$getLocation.on("click", function(event) {
     		event.preventDefault();
     		
 	    	function error(error) {
@@ -74,11 +75,13 @@
 	    				cheekyMessage = "The sun has set. Hope you had an amazing day!";
 
 	    			} else {
-	    				cheekyMessage = "You only have  <br>" + remainingHours + " hours and " + remainingMinutes + " minutes left before sunset tonight at " + localTimeAtSunset + ". <br> Better get to it!";
+	    				cheekyMessage = "You have <br>" + remainingHours + " hours and " + remainingMinutes + " minutes left before sunset tonight at " + localTimeAtSunset + ". <br> Better get to it!";
 	    			}
 	    			
-					$information.fadeIn(400);
-					// $message.html(cheekyMessage).fadeIn(900);
+	    			$getLocation.fadeOut(1500);
+					$conditions.fadeIn(300);
+					$temperature.fadeIn(800);
+					$message.html(cheekyMessage).fadeIn(1000);
 					// show icon
 					$conditions.html(conditions);
 					$temperature.html(tempF+ "  \/ " + tempC);
