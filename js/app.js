@@ -44,15 +44,15 @@
 					  minute: 'numeric',
 					  hour12: true
 					};
-
+					//sunset information
 	    			let sunsetUTCHours = data.sys.sunset;
 	    			let sunset = new Date(0);
 	    			sunset.setUTCSeconds(sunsetUTCHours);
 	    			let sunsetHour = sunset.getHours();
 	    			let sunsetMinutes = sunset.getMinutes();
-
 	    			let localTimeAtSunset = sunset.toLocaleString('en-US', options);
-	    		
+
+	    			 //local time information
 	    			let currentDate = new Date();
 	    			let currentHour = currentDate.getHours(); 
 	    			let currentMinute = currentDate.getMinutes();
@@ -68,17 +68,22 @@
 	    				remainingMinutes = -remainingMinutes;
 	    			}
 	    			// change message if after sunset
-	    			let currentUTCHour = setUTCSeconds(sunsetUTCHours);
+	    			var cheekyMessage = "";
 
-	    			if(sunsetUTCHours)
-	    			var cheekyMessage = "You only have " + remainingHours + " hours and " + remainingMinutes + " minutes left before sunset tonight at " + localTimeAtSunset + ". <br> Better get to it!";
+	    			if(currentHour > sunsetHour && currentMinute > sunsetMinute) {
+	    				cheekyMessage = "The sun has set. Hope you had an amazing day!";
+
+	    			} else {
+	    				cheekyMessage = "You only have  <br>" + remainingHours + " hours and " + remainingMinutes + " minutes left before sunset tonight at " + localTimeAtSunset + ". <br> Better get to it!";
+	    			}
+	    			
 					$information.fadeIn(400);
-					$message.html(cheekyMessage).fadeIn(900);
+					// $message.html(cheekyMessage).fadeIn(900);
 					// show icon
 					$conditions.html(conditions);
-					$temperature.html(tempF+ " \/ " + tempC);
+					$temperature.html(tempF+ "  \/ " + tempC);
 
-					console.log(currentUTCHour, sunset);
+					console.log(currentHour, sunsetHour, localTimeAtSunset);
 				});
 
 	    	}
