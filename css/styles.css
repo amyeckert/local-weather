@@ -5,8 +5,9 @@
 	
 	z-index: 0;
 	background-image: url("../img/AECKERT100303-terratoma_0201-sm.jpg");
-	-webkit-background-size: cover;
-	background-size: cover;
+	-webkit-background-size: 75%;
+	background-size: 75%;
+	background-position: center;
 	background-repeat: no-repeat;
 }
 .header {
@@ -20,7 +21,7 @@
 	display: flex;
 	flex-flow: row nowrap;
 	width: 80%;
-	margin: 90 auto;
+	margin: 0 auto;
 	background-color: transparent;
 	
 }

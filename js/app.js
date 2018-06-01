@@ -36,7 +36,7 @@
 	    			tempC += "C";
 	    			let conditions = data.weather[0]["description"];
 	    			    			
-	    			console.log(data, tempF, tempC); 
+	    			// console.log(data, tempF, tempC); 
 
 	    			//calculate how many hours and minutes until local sunset:
 	    			var options = {
@@ -67,14 +67,18 @@
 	    			if(remainingMinutes < 0) {
 	    				remainingMinutes = -remainingMinutes;
 	    			}
+	    			// change message if after sunset
+	    			let currentUTCHour = setUTCSeconds(sunsetUTCHours);
+
+	    			if(sunsetUTCHours)
 	    			var cheekyMessage = "You only have " + remainingHours + " hours and " + remainingMinutes + " minutes left before sunset tonight at " + localTimeAtSunset + ". <br> Better get to it!";
-					$message.html(cheekyMessage).fadeIn(900);
 					$information.fadeIn(400);
+					$message.html(cheekyMessage).fadeIn(900);
 					// show icon
 					$conditions.html(conditions);
 					$temperature.html(tempF+ " \/ " + tempC);
 
-					console.log();
+					console.log(currentUTCHour, sunset);
 				});
 
 	    	}
