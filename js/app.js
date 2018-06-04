@@ -30,7 +30,7 @@
 				maximumAge: 0
 			};
 			
-			$getLocation.html("...hang on, let me check.");	
+			$getLocation.html("...hang on while I check.");	
 
 	    	function success(position){
 	    		const myCoordinates = position.coords;

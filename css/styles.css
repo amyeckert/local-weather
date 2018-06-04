@@ -106,7 +106,7 @@ button:focus {
 	opacity: 0;
     height: 175px;
     width: 175px;
-	background: hsla(355, 61%, 50%, 0.7);
+	background: hsla(355, 61%, 50%, 0.9);
 
 }
 
@@ -115,7 +115,7 @@ button:focus {
 	height: 125px;
     width: 125px;
 	font-family: 'Abril Fatface', cursive;
-	background: hsla(23, 66%, 50%, 0.7);
+	background: hsla(23, 66%, 50%, 0.9);
 
 }
 
@@ -123,7 +123,7 @@ button:focus {
 	opacity: 0;
 	height: 300px;
 	width: 300px;
-	background: hsla(57, 71%, 50%, 0.7);
+	background: hsla(57, 71%, 50%, 0.9);
 
 }
 
@@ -152,17 +152,17 @@ button:focus {
 }
 
 @media screen and (min-width: 600px) {
-	body {
+	/*body {
 		padding: 0 0 0 0 ;
 
-	}
+	}*/
 	.background {
 		height: auto;
 		min-width: 100%;
 		z-index: 0;
 		background-image: url("../img/AECKERT100303-terratoma_0201.jpg");
-		-webkit-background-size: 75%;
-		background-size: 75%;
+		-webkit-background-size: 70%;
+		background-size: 70%;
 		background-position: center;
 		background-repeat: no-repeat;
 	}
@@ -179,7 +179,7 @@ button:focus {
  		/*background-color: hsla(281, 22%, 89%, 0.5);
  		border: 1px solid hsla(281, 22%, 89%, 0.5);*/
 	}
-	.circel-con {
+	.circelCon {
 		height: 175px;
     	width: 175px;
 	}
