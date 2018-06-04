@@ -43,10 +43,10 @@ button {
 	width: 100%;
 	margin: 0 auto;
 	border: none;
-	border-bottom: 2px solid #FFF;
+	border-bottom: 2px solid transparent;
 	background: transparent;
 	font-family: 'Varela Round', sans-serif;
-	font-size: 16px;
+	font-size: 1.5rem;
 	color: hsl(112, 2%, 11%);
 
 }
@@ -168,7 +168,8 @@ button:focus {
 	}
 
 	button {
-		left: 20%;
+		font-size: 3rem;
+		left: 10%;
 		width: auto;
 		margin: 0 auto;
 		padding: 10px 15px;

@@ -82,7 +82,7 @@
 	    				cheekyMessage = "The sun has set. Hope you had an amazing day!";
 
 	    			} else {
-	    				cheekyMessage = "You have <br>" + remainingHours + " hours and " + remainingMinutes + " minutes left before sunset at <br><span class=\"bold\">" + localTimeAtSunset + "</span>";
+	    				cheekyMessage = "You have <br>" + remainingHours + " hr and " + remainingMinutes + " min left before sunset at <br><span class=\"bold\">" + localTimeAtSunset + "</span>";
 	    			}
 	    			
 	    			$getLocation.fadeOut(1500);
