@@ -43,13 +43,16 @@ button {
 	width: 100%;
 	margin: 0 auto;
 	border: none;
+	border-bottom: 2px solid #FFF;
 	background: transparent;
-	border-radius: 50%;
 	font-family: 'Varela Round', sans-serif;
 	font-size: 16px;
 	color: hsl(112, 2%, 11%);
-	/* add transition so button fades out*/
 
+}
+
+button:hover {
+	border-bottom: 2px solid hsla(57, 71%, 50%, 1);
 }
 
 button:focus {
@@ -165,8 +168,10 @@ button:focus {
 	}
 
 	button {
-		min-height: 100px;
-		min-width: 100px;
+		left: 600px;
+		width: auto;
+		margin: 0 auto;
+		padding: 10px 15px;
 		background: none;	
 	}
 
