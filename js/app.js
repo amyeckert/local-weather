@@ -15,12 +15,18 @@
    		$conditions.html("");
     	$temperature.html("");
     	$message.html("");
+    	
+    	if (!navigator.geolocation) {
+		    output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
+		    return;
+		  }
 
     	// on click, get current position
     	$getLocation.on("click", function(event) {
     		event.preventDefault();
     		
 	    	function error(error) {
+	    		// alert("Please allow this site to access your location information.");
 	    		console.warn(`ERROR(${error.code}): ${error.message}`);
 	    	}
 
@@ -33,17 +39,17 @@
 			$getLocation.html("...hang on while I check.");	
 
 	    	function success(position){
-	    		const myCoordinates = position.coords;
-	    		let lat = myCoordinates.latitude
-	    		let lon = myCoordinates.longitude
-	    		let api = ("https://fcc-weather-api.glitch.me/api/current?lat=" + lat + "&lon=" + lon);
+	    		var myCoordinates = position.coords;
+	    		var lat = myCoordinates.latitude
+	    		var lon = myCoordinates.longitude
+	    		var api = ("https://fcc-weather-api.glitch.me/api/current?lat=" + lat + "&lon=" + lon);
 
 	    		$.get(api, function(data) {
-	    			let tempC = Math.round(data.main.temp);
-	    			let tempF = Math.round((tempC * 1.8000) + 32);
+	    			var tempC = Math.round(data.main.temp);
+	    			var tempF = Math.round((tempC * 1.8000) + 32);
 	    			tempF += "F";
 	    			tempC += "C";
-	    			let conditions = data.weather[0]["description"];
+	    			var conditions = data.weather[0]["description"];
 	    			    			
 	    			//calculate how many hours and minutes until local sunset:
 	    			var options = {
@@ -53,20 +59,20 @@
 					};
 
 					//sunset information
-	    			let sunsetUTCHours = data.sys.sunset;
-	    			let sunset = new Date(0);
+	    			var sunsetUTCHours = data.sys.sunset;
+	    			var sunset = new Date(0);
 	    			sunset.setUTCSeconds(sunsetUTCHours);
-	    			let sunsetHour = sunset.getHours();
-	    			let sunsetMinutes = sunset.getMinutes();
-	    			let localTimeAtSunset = sunset.toLocaleString('en-US', options);
+	    			var sunsetHour = sunset.getHours();
+	    			var sunsetMinutes = sunset.getMinutes();
+	    			var localTimeAtSunset = sunset.toLocaleString('en-US', options);
 
 	    			 //local time information
-	    			let currentDate = new Date();
-	    			let currentHour = currentDate.getHours(); 
-	    			let currentMinute = currentDate.getMinutes();
+	    			var currentDate = new Date();
+	    			var currentHour = currentDate.getHours(); 
+	    			var currentMinute = currentDate.getMinutes();
 
-	    			let remainingHours = sunsetHour - currentHour;
-	    			let remainingMinutes = sunsetMinutes - currentMinute;
+	    			var remainingHours = sunsetHour - currentHour;
+	    			var remainingMinutes = sunsetMinutes - currentMinute;
 
 	 				// don't show negative numbers
 	    			if(remainingHours < 0) {
@@ -100,9 +106,9 @@
 	    	}
 
     		// check if geolocation is allowed, if do, run it
-	    	if(navigator.geolocation) {
+	    	// if(navigator.geolocation) {
 	        	navigator.geolocation.getCurrentPosition(success, error, options);
-			} 
+			// } 
 		});
     }); //________end doc ready_________________________________________________________//
 
