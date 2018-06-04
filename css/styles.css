@@ -2,7 +2,7 @@
 body {
 	font-family: 'Varela Round', sans-serif;
 	font-size: 16px;
-	padding: 20px 0 0 0 ;
+	padding: 40px 0 0 0 ;
 	color: hsl(112, 2%, 11%);
 }
 
@@ -12,7 +12,7 @@ body {
 	z-index: 0;
 	background-image: url("../img/AECKERT100303-terratoma_0201-mob.jpg");
 	-webkit-background-size: 100%;
-	background-size: 100%;
+	background-size: 120%;
 	background-position: center;
 	background-repeat: no-repeat;
 }
@@ -35,7 +35,10 @@ body {
 }
 
 button {
-	min-height: 60px;
+	position: fixed;
+	top: 20px;
+	z-index: 999;
+	min-height: 20px;
 	min-width: 180px;
 	width: 100%;
 	margin: 0 auto;
@@ -54,6 +57,11 @@ button:focus {
 	border: none;
 }
 
+.bold {
+	font-weight: 700;
+	font-size: 2rem;
+}
+
 .information {
  	min-width: 100%;
  	min-height: auto;
@@ -63,10 +71,9 @@ button:focus {
 	justify-content: space-between;
  	background-color: transparent;
  	border: 1px solid transparent;
- 	border-radius: 50%;
-
- 	
+ 	border-radius: 50%;	
 }
+
  .circle {	
  	margin: 0 auto;
 	display: block;
@@ -81,34 +88,39 @@ button:focus {
 	text-align: center;
 	font-size: 1.2rem;
 }
+
 .circle-inner-con {
 	top: 33%;
 
 }
+
 .circle-inner-temp {
 	top: 35%;
 }
+
 .circle-inner-mess {
 	top: 25% ;
 }
-.circle-con {
+
+.circleCon {
+	opacity: 0;
     height: 175px;
     width: 175px;
 	background: hsla(355, 61%, 50%, 0.7);
 
-
 }
 
-.circle-temp {
+.circleTemp {
+	opacity: 0;
 	height: 125px;
     width: 125px;
 	font-family: 'Abril Fatface', cursive;
 	background: hsla(23, 66%, 50%, 0.7);
 
-
 }
 
-.circle-mess {
+.circleMess {
+	opacity: 0;
 	height: 300px;
 	width: 300px;
 	background: hsla(57, 71%, 50%, 0.7);
@@ -121,23 +133,18 @@ button:focus {
 	height: 100%;
 	width: 100%;
 	text-transform: capitalize;
-
-
 }
 
 .temperature {
 	display: block;
-
-
-
 }
 
 .message {
 	display: block;
-
-
-
 }
+
+
+/*----------------------- media queries -------------------------*/
 @media screen and (min-width: 400px) {
 	button {
 		background: rgba(137, 137, 137, 0.1);

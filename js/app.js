@@ -7,9 +7,15 @@
     	var $temperature = $(".temperature");
     	var $information = $(".information");
     	var $getLocation = $(".getLocation");
-    	$conditions.hide().html("");
-    	$temperature.hide().html("");
-    	$message.hide().html("");
+
+    	var $circleCon = $(".circleCon");
+    	var $circleTemp = $(".circleTemp");
+    	var $circleMess = $(".circleMess");
+
+   		$conditions.html("");
+    	$temperature.html("");
+    	$message.html("");
+
     	// on click, get current position
     	$getLocation.on("click", function(event) {
     		event.preventDefault();
@@ -23,6 +29,8 @@
 				timeout: 5000,
 				maximumAge: 0
 			};
+			
+			$getLocation.html("...hang on, let me check.");	
 
 	    	function success(position){
 	    		const myCoordinates = position.coords;
@@ -37,14 +45,13 @@
 	    			tempC += "C";
 	    			let conditions = data.weather[0]["description"];
 	    			    			
-	    			// console.log(data, tempF, tempC); 
-
 	    			//calculate how many hours and minutes until local sunset:
 	    			var options = {
 					  hour: 'numeric',
 					  minute: 'numeric',
 					  hour12: true
 					};
+
 					//sunset information
 	    			let sunsetUTCHours = data.sys.sunset;
 	    			let sunset = new Date(0);
@@ -75,29 +82,28 @@
 	    				cheekyMessage = "The sun has set. Hope you had an amazing day!";
 
 	    			} else {
-	    				cheekyMessage = "You have <br>" + remainingHours + " hours and " + remainingMinutes + " minutes left before sunset tonight at " + localTimeAtSunset + ". <br> Better get to it!";
+	    				cheekyMessage = "You have <br>" + remainingHours + " hours and " + remainingMinutes + " minutes left before sunset at <br><span class=\"bold\">" + localTimeAtSunset + "</span>";
 	    			}
 	    			
 	    			$getLocation.fadeOut(1500);
-					$conditions.fadeIn(300);
-					$temperature.fadeIn(800);
-					$message.html(cheekyMessage).fadeIn(1000);
-					// show icon
+
+	    			//update information
 					$conditions.html(conditions);
 					$temperature.html(tempF+ "  \/ " + tempC);
+					$message.html(cheekyMessage);
 
-					console.log(currentHour, sunsetHour, localTimeAtSunset);
+					//display the information
+	    			$circleCon.fadeTo(500, 1);
+					$circleTemp.fadeTo(800, 1);
+					$circleMess.fadeTo(1000, 1);
 				});
-
 	    	}
 
-    		// check if it is allowed
+    		// check if geolocation is allowed, if do, run it
 	    	if(navigator.geolocation) {
 	        	navigator.geolocation.getCurrentPosition(success, error, options);
 			} 
-		
 		});
-
     }); //________end doc ready_________________________________________________________//
 
 })(jQuery);
