@@ -2,7 +2,7 @@
 body {
 	font-family: 'Varela Round', sans-serif;
 	font-size: 16px;
-	padding: 40px 0 0 0 ;
+	padding: 0 0 0 0 ;
 	color: hsl(112, 2%, 11%);
 }
 
@@ -10,14 +10,18 @@ body {
 	height: auto;
 	min-width: 100%;
 	z-index: 0;
-	background-image: url("../img/AECKERT100303-terratoma_0201-mob.jpg");
+/*	background-image: url("../img/AECKERT100303-terratoma_0201-mob.jpg");
 	-webkit-background-size: 100%;
 	background-size: 120%;
 	background-position: center;
-	background-repeat: no-repeat;
+	background-repeat: no-repeat;*/
 }
 
 .container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 	height: auto;
 	width: 100%;
 	margin: 0 auto;
@@ -35,24 +39,24 @@ body {
 }
 
 button {
-	position: fixed;
-	top: 20px;
+/*	position: fixed;
+	top: 20px;*/
 	z-index: 999;
 	min-height: 20px;
 	min-width: 180px;
 	width: 100%;
 	margin: 0 auto;
 	border: none;
-	border-bottom: 2px solid transparent;
-	background: transparent;
+	background-color: hsla(57, 71%, 50%, 0.8);
 	font-family: 'Varela Round', sans-serif;
 	font-size: 1.5rem;
 	color: hsl(112, 2%, 11%);
+	opacity: 1;
 
 }
 
 button:hover {
-	border-bottom: 2px solid hsla(57, 71%, 50%, 1);
+	background-color: hsla(57, 71%, 50%, 1);
 }
 
 button:focus {
@@ -160,11 +164,11 @@ button:focus {
 		height: auto;
 		min-width: 100%;
 		z-index: 0;
-		background-image: url("../img/AECKERT100303-terratoma_0201.jpg");
-		-webkit-background-size: 70%;
+		/*background-image: url("../img/AECKERT100303-terratoma_0201.jpg");*/
+		/*-webkit-background-size: 70%;
 		background-size: 100%;
 		background-position: center;
-		background-repeat: no-repeat;
+		background-repeat: no-repeat;*/
 	}
 
 	button {
@@ -173,7 +177,7 @@ button:focus {
 		width: auto;
 		margin: 0 auto;
 		padding: 10px 15px;
-		background: none;	
+			
 	}
 
 	.information {
@@ -189,8 +193,8 @@ button:focus {
 }
 
 @media screen and (min-width: 1024px) {
-	.background {
+	/*.background {
 		background-size: 65%;
-	}
+	}*/
 }
 
