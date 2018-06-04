@@ -146,23 +146,20 @@ button:focus {
 
 /*----------------------- media queries -------------------------*/
 @media screen and (min-width: 400px) {
-	button {
-		background: rgba(137, 137, 137, 0.1);
+	.background {
+		background-size: 100%;
 	}
 }
 
 @media screen and (min-width: 600px) {
-	/*body {
-		padding: 0 0 0 0 ;
 
-	}*/
 	.background {
 		height: auto;
 		min-width: 100%;
 		z-index: 0;
 		background-image: url("../img/AECKERT100303-terratoma_0201.jpg");
 		-webkit-background-size: 70%;
-		background-size: 70%;
+		background-size: 100%;
 		background-position: center;
 		background-repeat: no-repeat;
 	}
@@ -170,15 +167,14 @@ button:focus {
 	button {
 		min-height: 100px;
 		min-width: 100px;
-		background: none;
-		
+		background: none;	
 	}
+
 	.information {
  		min-width: 600px;
  		min-height: 600px;
- 		/*background-color: hsla(281, 22%, 89%, 0.5);
- 		border: 1px solid hsla(281, 22%, 89%, 0.5);*/
 	}
+
 	.circelCon {
 		height: 175px;
     	width: 175px;
@@ -186,5 +182,9 @@ button:focus {
 
 }
 
-
+@media screen and (min-width: 1024px) {
+	.background {
+		background-size: 65%;
+	}
+}
 
