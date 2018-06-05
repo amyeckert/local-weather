@@ -114,6 +114,7 @@ button:focus {
     height: 175px;
     width: 175px;
 	background: hsla(355, 61%, 50%, 0.9);
+	transition: opacity 0.5s;
 
 }
 
@@ -123,6 +124,7 @@ button:focus {
     width: 125px;
 	font-family: 'Abril Fatface', cursive;
 	background: hsla(23, 66%, 50%, 0.9);
+	transition: opacity 1s;
 
 }
 
@@ -131,7 +133,12 @@ button:focus {
 	height: 300px;
 	width: 300px;
 	background: hsla(57, 71%, 50%, 0.9);
+	transition: opacity 1.5s;
 
+}
+
+.fadeIn {
+	opacity: 1;
 }
 
 .conditions {

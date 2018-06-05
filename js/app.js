@@ -1,131 +1,134 @@
-;(function($) {
+; 
 
-    $(document).ready(function() {
-    	// global variables;
-    	var $message = $(".message");
-    	var $conditions = $(".conditions");
-    	var $temperature = $(".temperature");
-    	var $information = $(".information");
-    	var $getLocation = $(".getLocation");
+document.onreadystatechange = function () {
+    if (document.readyState === "interactive") {
+    	"use strict";
 
-    	var $circleCon = $(".circleCon");
-    	var $circleTemp = $(".circleTemp");
-    	var $circleMess = $(".circleMess");
+        // global variables;
+    	const message = document.querySelector(".message");
+    	const conditions = document.querySelector(".conditions");
+    	const temperature = document.querySelector(".temperature");
+    	const information = document.querySelector(".information");
+    	const getLocation = document.querySelector(".getLocation");
 
-   		$conditions.html("");
-    	$temperature.html("");
-    	$message.html("");
-    	
-    	if (!navigator.geolocation) {
-		    output.innerHTML = "<p>Geolocation is not supported by your browser. Please enable it to use this silly thing.</p>";
-		}
+    	const circleCon = document.querySelector(".circleCon");
+    	const circleTemp = document.querySelector(".circleTemp");
+    	const circleMess = document.querySelector(".circleMess");
+    	let weatherData;
+    	let api;
+    	let sunset = 0;
 
-    	function error(error) {
-    		alert("Please allow this site to access your location information.");
-    		console.warn(`ERROR(${error.code}): ${error.message}`);
-    	}
-
-    	var options = {
+    	const options = {
 			enableHighAccuracy: true,
 			timeout: 7000,
 			maximumAge: 0
 		};
 
-    	function success(position){
-    		var myCoordinates = position.coords;
-    		var lat = myCoordinates.latitude
-    		var lon = myCoordinates.longitude
-    		var api = ("https://fcc-weather-api.glitch.me/api/current?lat=" + lat + "&lon=" + lon);
-    		// return (lat, lon, api);
-    		
-    		
-			$.get(api, function(data) {
-				var tempC = Math.round(data.main.temp);
-				var tempF = Math.round((tempC * 1.8000) + 32);
-				tempF += "F";
-				tempC += "C";	
-				var conditions = data.weather[0]["description"];
-    			// console.log(api);
-    			var apiData = data;
-    			
-				return apiData;
-			});
+
+    	if (!navigator.geolocation) {
+		    output.innerHTML = "<p>Geolocation is not supported by your browser. Please enable it to use this silly thing.</p>";
+		}
+
+		function error(error) {
+    		console.log("Please allow this site to access your location information.");
+    		console.warn(`ERROR(${error.code}): ${error.message}`);
     	}
 
-    	function calculateTimeTilSunset() {
-    		var data = success();
-    		alert(data);
+    	function success(position) {
+    		let myCoordinates = position.coords;
+    		let lat = myCoordinates.latitude
+    		let lon = myCoordinates.longitude
+    		api = ("https://fcc-weather-api.glitch.me/api/current?lat=" + lat + "&lon=" + lon);
+    		return getWeatherData(api);	
     	}
-    		
 
-			//calculate how many hours and minutes until local sunset:
+		function getWeatherData(api) {
+			fetch(api)
+			.then(function(response) {
+			    return response.json();
+			})
+			.then(function(updatedWeatherData) {	
+			   	weatherData = updatedWeatherData;
+			   	return updateConditions(weatherData);
+		    });		
+		}
 
-			// var timOptions = {
-			//   hour: 'numeric',
-			//   minute: 'numeric',
-			//   hour12: true
-			// };
-			// var sunsetUTCHours = apiData.sys.sunset;
-			// console.log(apiData);
+		function updateConditions(weatherData) {
+			let tempC = Math.round(weatherData.main.temp);
+			let tempF = Math.round((tempC * 1.8000) + 32);
+			tempF += "F";
+			tempC += "C";	
 
-	    	// 		var sunset = new Date(0);
-	    	// 		sunset.setUTCSeconds(sunsetUTCHours);
-	    	// 		var sunsetHour = sunset.getHours();
-	    	// 		var sunsetMinutes = sunset.getMinutes();
-	    	// 		var localTimeAtSunset = sunset.toLocaleString('en-US', timeOptions);
+			let bothTemps = tempF + " \/ " + tempC;
+			let localConditions = weatherData.weather[0]["description"];
 
-	    	// 		 //local time information
-	    	// 		var currentDate = new Date();
-	    	// 		var currentHour = currentDate.getHours(); 
-	    	// 		var currentMinute = currentDate.getMinutes();
+			conditions.textContent = localConditions;
+			temperature.textContent = bothTemps;
+    		calculateTimeTilSunset(weatherData);
+    		fadeIn();
+    	}
 
-	    	// 		var remainingHours = sunsetHour - currentHour;
-	    	// 		var remainingMinutes = sunsetMinutes - currentMinute;
+    	function calculateTimeTilSunset(weatherData) {
+    		let timeData = weatherData;
+    		const timeOptions = {
+			  hour: 'numeric',
+			  minute: 'numeric',
+			  hour12: true
+			};
+			let sunsetUTCHours = timeData.sys.sunset;
 
-	 				// // don't show negative numbers
-	    	// 		if(remainingHours < 0) {
-	    	// 			remainingHours = -remainingHours;
-	    	// 		}
-	    	// 		if(remainingMinutes < 0) {
-	    	// 			remainingMinutes = -remainingMinutes;
-	    	// 		}
-	    			// change message if after sunset
-	    			// var cheekyMessage = "";
+			sunset = new Date(0);
+			sunset.setUTCSeconds(sunsetUTCHours);
+			let sunsetHour = sunset.getHours();
+			let sunsetMinutes = sunset.getMinutes();
+			let localTimeAtSunset = sunset.toLocaleString('en-US', timeOptions);
 
-	    			// if(currentHour > sunsetHour && currentMinute > sunsetMinute) {
-	    			// 	cheekyMessage = "The sun has set. Hope you had an amazing day!";
+			//local time information
+			let currentDate = new Date();
+			let currentHour = currentDate.getHours(); 
+			let currentMinute = currentDate.getMinutes();
 
-	    			// } else {
-	    			// 	cheekyMessage = "You have <br>" + remainingHours + " hr and " + remainingMinutes + " min left <br>before sunset at <br><span class=\"bold\">" + localTimeAtSunset + "</span>";
-	    			// }
+			let remainingHours = sunsetHour - currentHour;
+			let remainingMinutes = sunsetMinutes - currentMinute;
+
+			//don't allow negative numbers
+			if(remainingHours < 0) {
+				remainingHours = -remainingHours;
+			}
+			if(remainingMinutes < 0) {
+				remainingMinutes = -remainingMinutes;
+			}
+
+			//change message if after sunset
+			let cheekyMessage = "";
+
+			if(currentHour > sunsetHour && currentMinute > sunsetMinutes) {
+				cheekyMessage = "Hope you had an amazing day!";
+
+			} else {
+				cheekyMessage = "You have <br>" + remainingHours + " hr and " + remainingMinutes + " min left <br>before sunset at <br><span class=\"bold\">" + localTimeAtSunset + "</span>";
+			}
+
+    		return message.innerHTML = cheekyMessage;
+    	}
+
+    	function fadeIn() {
+    		circleMess.classList.toggle('fadeIn');
+    		circleCon.classList.toggle('fadeIn');
+    		circleTemp.classList.toggle('fadeIn');
+    	}
+
+    	// function updateIcon(weatherData) {
+    	// 	let icon = weatherData.weather[0].icon;
+    	// 	console.log(icon);
+    	// 	return icon;
     	// }
 
-    	// on click, get current position
-    	$getLocation.on("click", function(event) {
-    		event.preventDefault();
-			$getLocation.html("...hang on while I check.");	
-			    			    			
-	    			
-	    			// $getLocation.fadeTo(1000, 0);
+		// click the button 
+		getLocation.addEventListener("click", function( event ) {
+			event.preventDefault(event);	
+			navigator.geolocation.getCurrentPosition(success, error, options);
+	 	});
+    }
+}
 
-	    			//update information
-					// $conditions.html(conditions);
-					// $temperature.html(tempF+ "  \/ " + tempC);
-					// $message.html(cheekyMessage);
-
-					//display the information
-	    // 			$circleCon.fadeTo(500, 1);
-					// $circleTemp.fadeTo(800, 1);
-					// $circleMess.fadeTo(1000, 1);
-	        	navigator.geolocation.getCurrentPosition(success, error, options);
-	        	calculateTimeTilSunset();
-				});
-	    	// }
-
-    		// check if geolocation is allowed, if do, run it
-	    	// if(navigator.geolocation) {
-			// } 
-		// });
-    }); //________end doc ready_________________________________________________________//
-
-})(jQuery);
