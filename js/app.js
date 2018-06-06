@@ -70,28 +70,37 @@ document.onreadystatechange = function () {
 
     	function calculateTimeTilSunset(weatherData) {
     		let timeData = weatherData;
-    		const timeOptions = {
+    		const timeOptions12Hour = {
 			  hour: 'numeric',
 			  minute: 'numeric',
 			  hour12: true
 			};
-			let sunsetUTCHours = timeData.sys.sunset;
 
+			const timeOptions24Hour = {
+			  hour: 'numeric',
+			  minute: 'numeric',
+			  hour12: false
+			};
+
+			let sunsetUTCHours = timeData.sys.sunset;
 			sunset = new Date(0);
 			sunset.setUTCSeconds(sunsetUTCHours);
 			let sunsetHour = sunset.getHours();
 			let sunsetMinutes = sunset.getMinutes();
-			let localTimeAtSunset = sunset.toLocaleString('en-US', timeOptions);
+			let localTimeAtSunset12Hour = sunset.toLocaleString('en-US', timeOptions12Hour);
+			let localTimeAtSunset24Hour = sunset.toLocaleString('en-US', timeOptions24Hour);
 
 			//local time information
 			let currentDate = new Date();
 			let currentHour = currentDate.getHours(); 
 			let currentMinute = currentDate.getMinutes();
 
+			//check if sunset has passed. 
 			let remainingHours = sunsetHour - currentHour;
 			let remainingMinutes = sunsetMinutes - currentMinute;
-
-			//don't allow negative numbers
+			let now = currentHour + ":" + currentMinute;
+			let cheekyMessage = "";
+			
 			if(remainingHours < 0) {
 				remainingHours = -remainingHours;
 			}
@@ -99,16 +108,14 @@ document.onreadystatechange = function () {
 				remainingMinutes = -remainingMinutes;
 			}
 
-			//change message if after sunset
-			let cheekyMessage = "";
-
-			if(currentHour > sunsetHour && currentMinute > sunsetMinutes) {
+			if(now > localTimeAtSunset24Hour) {
 				cheekyMessage = "Hope you had an amazing day!";
-
+				
 			} else {
-				cheekyMessage = "You have <br>" + remainingHours + " hr and " + remainingMinutes + " min left <br>before sunset at <br><span class=\"bold\">" + localTimeAtSunset + "</span>";
+				cheekyMessage = "You have <br>" + remainingHours + " hr and " + remainingMinutes + " min left <br>before sunset at <br><span class=\"bold\">" + localTimeAtSunset12Hour + "</span>";
+				
 			}
-
+			console.log(now, localTimeAtSunset24Hour, localTimeAtSunset12Hour);
     		return message.innerHTML = cheekyMessage;
     	}
 
@@ -124,7 +131,6 @@ document.onreadystatechange = function () {
     	// 	return icon;
     	// }
 
-		// click the button 
 		getLocation.addEventListener("click", function( event ) {
 			event.preventDefault(event);	
 			navigator.geolocation.getCurrentPosition(success, error, options);
