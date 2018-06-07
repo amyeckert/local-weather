@@ -52,10 +52,10 @@ body {
 		z-index: 10;
 		opacity: 1;
 
-		-webkit-transition: opacity 1s ease-out, z-index 1s ease-out ;
-		-moz-transition: opacity 1s ease-out, z-index 1s ease-out ;
-		-o-transition: opacity 1s ease-out, z-index 1s ease-out ;
-		transition: opacity 1s ease-out, z-index 1s ease-out ;
+		-webkit-transition: opacity 0.8s ease-out, z-index 1s ease-out ;
+		-moz-transition: opacity 0.8s ease-out, z-index 1s ease-out ;
+		-o-transition: opacity 0.8s ease-out, z-index 1s ease-out ;
+		transition: opacity 0.8s ease-out, z-index 1s ease-out ;
 
 		@include bp(small) {
 			font-size: 2rem;
@@ -103,6 +103,15 @@ body {
 		position: relative;	
 	}
 
+	@include bp(medsmall) {
+ 		min-width: 600px;
+ 		min-height: 600px;
+ 		height: 600px;
+ 		width: 600px;
+ 		flex-flow: column nowrap;
+	
+	}
+
 	.circle-inner {
 		position: absolute;
 		width: 100%;
@@ -112,7 +121,7 @@ body {
 	}
 
 	.circle-inner-con {
-		top: 41%;
+		top: 39%;
 
 		.conditions {
 			display: block;
@@ -152,6 +161,12 @@ body {
 	-o-transition: display 1s ease ;
 	transition: display 1s ease ;
 
+	@include bp(medsmall) {
+		height: 175px;
+    	width: 175px;
+	
+	}
+
 }
 
 .circleTemp {
@@ -176,44 +191,4 @@ body {
 }
 
 
-
-
-
-
-
-
-
-/*----------------------- media queries -------------------------*/
-
-
-@media screen and (min-width: 600px) {
-
-	button {
-
-			
-	}
-
-	.information {
- 		min-width: 600px;
- 		min-height: 600px;
- 		height: 600px;
- 		width: 600px;
- 		flex-flow: column nowrap;
-	}
-
-	.circelCon {
-		height: 175px;
-    	width: 175px;
-	}
-
-}
-
-@media screen and (min-width: 1024px) {
-	button {
-		font-size: 3.7rem;
-    	width: 25%;
-    	height: 25rem;
-			
-	}
-}
 

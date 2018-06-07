@@ -21,6 +21,8 @@ document.onreadystatechange = function () {
 	    	let weatherData;
 	    	let api;
 	    	let sunset = 0;
+	    	let tempC;
+	    	let tempF;
 
 	    	const options = {
 				enableHighAccuracy: true,
@@ -53,8 +55,10 @@ document.onreadystatechange = function () {
 			}
 
 			function updateConditions(weatherData) {
-				let tempC = Math.round(weatherData.main.temp);
-				let tempF = Math.round((tempC * 1.8000) + 32);
+				tempC = Math.round(weatherData.main.temp);
+				tempF = Math.round((tempC * 1.8000) + 32);
+				updateCircleColor(tempF);
+
 				tempF += "F";
 				tempC += "C";	
 
@@ -123,6 +127,7 @@ document.onreadystatechange = function () {
 	    		circleMess.classList.toggle('fadeIn');
 	    		circleCon.classList.toggle('fadeIn');
 	    		circleTemp.classList.toggle('fadeIn');
+	    		
 	    	}
 
 	    	function fadeOut() {
@@ -135,18 +140,45 @@ document.onreadystatechange = function () {
 	    	// 	return icon;
 	    	// }
 
-	    	// function updateCircleColor() {
-	    		//below zero to 32F gets $c-freezing;
-	    		// 33F - 45F $c-cold
-	    		// 46F - 55F $c-cool
-	    		// 56F - 68F $c-mild
-	    		// 69F - 84F $c-warm
-	    		// 85 and above $c-hot
+	    	function updateCircleColor(temp) {
 
+	    		const temperatureColor  = {
+	    			freezing: 'hsla(276, 98%, 88%, 1)',
+	    			cold: 'hsla(197, 98%, 81%, 1)',
+	    			cool: 'hsla(175, 96%, 50%, 0.98)',
+	    			mild: 'hsla(91, 49%, 50%, 0.99)',
+	    			warm: 'hsla(35, 99%, 50%, 0.99)',
+	    			hot: 'hsla(15, 97%, 50%, 0.99)'
+				}
 
-	    	// }
+				if(temp < 32 ) {
+					circleCon.style.backgroundColor = temperatureColor.freezing;
+					console.log('it\'s bloody freezing!');
 
-	    	// function updateBackgroundImage() {
+				}
+				if (temp >= 33 && temp <= 45) {
+					circleCon.style.backgroundColor = temperatureColor.cold;
+						console.log('it\'s cold!');
+				}
+				if (temp >= 46 && temp <= 55) {
+					circleCon.style.backgroundColor = temperatureColor.cool;
+						console.log('it\'s cool!');
+				}
+				if (temp >= 56 && temp <= 68) {
+					circleCon.style.backgroundColor = temperatureColor.mild;
+						console.log('it\'s mild!');
+				}
+				if (temp >= 69 && temp <= 84) {
+					circleCon.style.backgroundColor = temperatureColor.warm;
+						console.log('it\'s warm!');
+				}
+				if (temp >= 85) {
+					circleCon.style.backgroundColor = temperatureColor.hot;
+						console.log('it\'s hot!');
+				}
+	    	}
+
+	    	// function updateBackgroundImage(arg) {
 
 	    	// }
 
@@ -154,10 +186,9 @@ document.onreadystatechange = function () {
 			getLocation.addEventListener("click", function( event ) {
 				event.preventDefault(event);	
 				navigator.geolocation.getCurrentPosition(success, error, options);
-
+				updateCircleColor();
 		 	});
 		}
-
     }
 }
 

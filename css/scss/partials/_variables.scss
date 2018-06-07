@@ -17,12 +17,13 @@ $h1-font-size: 2 * $base-font-size;
 $c-text: hsl(112, 2%, 11%);
 $c-transparent: hsla(227, 77%, 50%, 0);
 
-// $c-cond-hot: ;
-// $c-cond-warm: ;
-// $c-cond-mild: ;
-// $c-cond-cool: ;
-// $c-cond-cold: ;
-// $c-cond-freezing: ;
+//COLORS FOR DIFFERENT CONDITIONS
+$c-cond-freezing: hsla(276, 98%, 88%, 1) ;
+$c-cond-cold: hsla(197, 98%, 81%, 1) ;
+$c-cond-cool: hsla(175, 96%, 50%, 0.98);
+$c-cond-mild: hsla(91, 49%, 50%, 0.99);
+$c-cond-warm: hsla(35, 99%, 50%, 0.99);
+$c-cond-hot: hsla(15, 97%, 50%, 0.99);
 
 
 
