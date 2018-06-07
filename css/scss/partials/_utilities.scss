@@ -1,0 +1,33 @@
+.bold {
+	font-weight: 700;
+	font-size: $h1-font-size;
+}
+
+.fadeIn {
+	opacity: 1;
+
+}
+
+button.fadeOut {
+	opacity: 0;
+	z-index: 0;
+	
+	@include bp(small) {
+		opacity: 0;
+	}
+	@include bp(medsmall) {
+		opacity: 0;
+	}
+	@include bp(medium) {
+		opacity: 0;
+	}
+	@include bp(large) {
+		opacity: 0;
+	}
+	@include bp(exlarge) {
+		opacity: 0;
+	}
+
+	
+
+}

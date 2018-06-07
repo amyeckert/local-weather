@@ -1,0 +1,54 @@
+{
+  "name": "local-weather",
+  "version": "1.0.0",
+  "description": "get local weather conditions",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amyeckert/local-weather.git"
+  },
+  "author": "amy eckert",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amyeckert/local-weather/issues"
+  },
+  "homepage": "https://github.com/amyeckert/local-weather#readme",
+  "dependencies": {
+    "babelify": "^8.0.0",
+    "gulp-jshint": "^2.1.0",
+    "gulp-postcss": "^7.0.1",
+    "gulp-sass-bulk-import": "^1.0.1",
+    "hoek": "^5.0.3",
+    "jshint": "^2.9.5",
+    "jshint-stylish": "^2.2.1",
+    "minimatch": "^3.0.4",
+    "node-neat": "^2.0.0-beta.0",
+    "tunnel-agent": "^0.6.0",
+    "vinyl-buffer": "^1.0.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "browserify": "^16.2.2",
+    "gulp": "^4.0.0",
+    "gulp-autoprefixer": "^5.0.0",
+    "gulp-babel": "^7.0.1",
+    "gulp-clean-css": "^3.9.4",
+    "gulp-concat": "^2.6.1",
+    "gulp-htmlmin": "^4.0.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-notify": "^3.2.0",
+    "gulp-plumber": "^1.2.0",
+    "gulp-rename": "^1.2.3",
+    "gulp-ruby-sass": "^3.0.0",
+    "gulp-sass": "^4.0.1",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-uglify": "^3.0.0",
+    "gulp-util": "^3.0.8",
+    "vinyl-source-stream": "^2.0.0"
+  }
+}

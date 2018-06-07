@@ -28,8 +28,6 @@ document.onreadystatechange = function () {
 				maximumAge: 0
 			};
 
-
-
 			function error(error) {
 	    		console.log("Please allow this site to access your location information.");
 	    		console.warn(`ERROR(${error.code}): ${error.message}`);
@@ -136,6 +134,22 @@ document.onreadystatechange = function () {
 	    	// 	console.log(icon);
 	    	// 	return icon;
 	    	// }
+
+	    	// function updateCircleColor() {
+	    		//below zero to 32F gets $c-freezing;
+	    		// 33F - 45F $c-cold
+	    		// 46F - 55F $c-cool
+	    		// 56F - 68F $c-mild
+	    		// 69F - 84F $c-warm
+	    		// 85 and above $c-hot
+
+
+	    	// }
+
+	    	// function updateBackgroundImage() {
+
+	    	// }
+
 
 			getLocation.addEventListener("click", function( event ) {
 				event.preventDefault(event);	
