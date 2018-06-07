@@ -105,7 +105,7 @@ body {
     color: #1c1d1b;
     z-index: 10;
     opacity: 1;
-    transition: opacity 1s ease-out, z-index 1s ease-out; }
+    transition: opacity 0.8s ease-out, z-index 1s ease-out; }
     @media (min-width: 420px) {
       .container button {
         font-size: 2rem;
@@ -141,6 +141,13 @@ body {
     display: block;
     border-radius: 50%;
     position: relative; }
+  @media (min-width: 600px) {
+    .information {
+      min-width: 600px;
+      min-height: 600px;
+      height: 600px;
+      width: 600px;
+      flex-flow: column nowrap; } }
   .information .circle-inner {
     position: absolute;
     width: 100%;
@@ -148,7 +155,7 @@ body {
     text-align: center;
     font-size: 1.2rem; }
   .information .circle-inner-con {
-    top: 41%; }
+    top: 39%; }
     .information .circle-inner-con .conditions {
       display: block;
       margin: auto;
@@ -174,6 +181,10 @@ body {
   background: rgba(205, 50, 63, 0.9);
   transition: opacity 0.5s;
   transition: display 1s ease; }
+  @media (min-width: 600px) {
+    .circleCon {
+      height: 175px;
+      width: 175px; } }
 
 .circleTemp {
   display: block;
@@ -192,24 +203,6 @@ body {
   background: rgba(218, 209, 37, 0.9);
   transition: opacity 1.5s; }
 
-/*----------------------- media queries -------------------------*/
-@media screen and (min-width: 600px) {
-  .information {
-    min-width: 600px;
-    min-height: 600px;
-    height: 600px;
-    width: 600px;
-    flex-flow: column nowrap; }
-  .circelCon {
-    height: 175px;
-    width: 175px; } }
-
-@media screen and (min-width: 1024px) {
-  button {
-    font-size: 3.7rem;
-    width: 25%;
-    height: 25rem; } }
-
 .bold {
   font-weight: 700;
   font-size: 32px; }
@@ -220,17 +213,5 @@ body {
 button.fadeOut {
   opacity: 0;
   z-index: 0; }
-  @media (min-width: 420px) {
-    button.fadeOut {
-      opacity: 0; } }
-  @media (min-width: 600px) {
-    button.fadeOut {
-      opacity: 0; } }
-  @media (min-width: 911px) {
-    button.fadeOut {
-      opacity: 0; } }
-  @media (min-width: 1000px) {
-    button.fadeOut {
-      opacity: 0; } }
 
 /*# sourceMappingURL=styles.css.map */

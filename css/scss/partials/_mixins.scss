@@ -1,9 +1,7 @@
+// BREAKPOINTS
+//////////////
 @mixin bp($point) {
-  // @if $point == bp-smallest {
-  //   @media (min-width: 420px) {
-  //     @content;
-  //   }
-  // }
+
   @if $point == small {
     @media (min-width: 420px) {
       @content;
