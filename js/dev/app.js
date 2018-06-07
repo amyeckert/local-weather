@@ -126,8 +126,7 @@ document.onreadystatechange = function () {
 	    	function fadeIn() {
 	    		circleMess.classList.toggle('fadeIn');
 	    		circleCon.classList.toggle('fadeIn');
-	    		circleTemp.classList.toggle('fadeIn');
-	    		
+	    		circleTemp.classList.toggle('fadeIn');	
 	    	}
 
 	    	function fadeOut() {
@@ -154,7 +153,6 @@ document.onreadystatechange = function () {
 				if(temp < 32 ) {
 					circleCon.style.backgroundColor = temperatureColor.freezing;
 					console.log('it\'s bloody freezing!');
-
 				}
 				if (temp >= 33 && temp <= 45) {
 					circleCon.style.backgroundColor = temperatureColor.cold;
