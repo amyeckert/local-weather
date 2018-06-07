@@ -154,7 +154,7 @@ body {
 	opacity: 0;
     height: 175px;
     width: 175px;
-	background: hsla(355, 61%, 50%, 0.9);
+	background-color: $c-transparent;
 	transition: opacity 0.5s;
 	-webkit-transition: display 1s ease ;
 	-moz-transition: display 1s ease ;
@@ -175,7 +175,8 @@ body {
 	height: 125px;
     width: 125px;
 	font-family: $font-accent;
-	background: hsla(23, 66%, 50%, 0.9);
+	// background: hsla(23, 66%, 50%, 0.9);
+	background-color: $c-transparent;
 	transition: opacity 1s;
 
 }
@@ -185,7 +186,8 @@ body {
 	opacity: 0;
 	height: 300px;
 	width: 300px;
-	background: hsla(57, 71%, 50%, 0.9);
+	// background: hsla(57, 71%, 50%, 0.9);
+	background-color: $c-transparent;
 	transition: opacity 1.5s;
 
 }

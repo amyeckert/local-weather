@@ -178,7 +178,7 @@ body {
   opacity: 0;
   height: 175px;
   width: 175px;
-  background: rgba(205, 50, 63, 0.9);
+  background-color: rgba(29, 72, 226, 0);
   transition: opacity 0.5s;
   transition: display 1s ease; }
   @media (min-width: 600px) {
@@ -192,7 +192,7 @@ body {
   height: 125px;
   width: 125px;
   font-family: "Abril Fatface", cursive;
-  background: rgba(212, 108, 43, 0.9);
+  background-color: rgba(29, 72, 226, 0);
   transition: opacity 1s; }
 
 .circleMess {
@@ -200,7 +200,7 @@ body {
   opacity: 0;
   height: 300px;
   width: 300px;
-  background: rgba(218, 209, 37, 0.9);
+  background-color: rgba(29, 72, 226, 0);
   transition: opacity 1.5s; }
 
 .bold {

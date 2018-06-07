@@ -119,7 +119,6 @@ document.onreadystatechange = function () {
 					cheekyMessage = "You have <br>" + remainingHours + " hr and " + remainingMinutes + " min left <br>before sunset at <br><span class=\"bold\">" + localTimeAtSunset12Hour + "</span>";
 					
 				}
-				console.log(now, localTimeAtSunset24Hour, localTimeAtSunset12Hour);
 	    		return message.innerHTML = cheekyMessage;
 	    	}
 
