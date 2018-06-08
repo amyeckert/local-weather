@@ -141,36 +141,65 @@ document.onreadystatechange = function () {
 	    	function updateCircleColor(temp) {
 
 	    		const temperatureColor  = {
-	    			freezing: 'hsla(276, 98%, 88%, 1)',
-	    			cold: 'hsla(197, 98%, 81%, 1)',
-	    			cool: 'hsla(175, 96%, 50%, 0.98)',
-	    			mild: 'hsla(91, 49%, 50%, 0.99)',
-	    			warm: 'hsla(35, 99%, 50%, 0.99)',
-	    			hot: 'hsla(15, 97%, 50%, 0.99)'
-				}
+	    			freezingCon: 'hsla(259, 100%, 97%, 1)',
+	    			freezingTemp: 'hsla(197, 100%, 96%, 1)',
+	    			freezingMess: 'hsla(183, 88%, 90%, 1)',
+
+	    			coldCon: 'hsla(233, 93%, 83%, 1)',
+	    			coldTemp: 'hsla(197, 98%, 81%, 1)',
+	    			coldMess: 'hsla(173, 88%, 73%, 1)',
+
+	    			coolCon: 'hsla(166, 69%, 51%, 1)',
+	    			coolTemp: 'hsla(175, 96%, 50%, 1)',
+	    			coolMess: 'hsla(137, 75%, 64%, 1)',
+
+	    			mildCon: 'hsla(60, 75%, 59%, 1)',
+	    			mildTemp: 'hsla(143, 47%, 51%, 1)',
+	    			mildMess: 'hsla(93, 89%, 41%, 1)',
+
+	    			warmCon: 'hsla(48, 100%, 52%, 1)',
+	    			warmTemp: 'hsla(36, 100%, 64%, 1)',
+	    			warmMess: 'hsla(20, 100%, 65%, 1)',
+
+	    			hotCon: 'hsla(20, 100%, 58%, 1)',
+	    			hotTemp: 'hsla(2, 100%, 50%, 1)',
+	    			hotMess: 'hsla(351, 91%, 64%, 1)'
+				} 
 
 				if(temp < 32 ) {
-					circleCon.style.backgroundColor = temperatureColor.freezing;
+					circleCon.style.backgroundColor = temperatureColor.freezingCon;
+					circleTemp.style.backgroundColor = temperatureColor.freezingTemp;
+					circleMess.style.backgroundColor = temperatureColor.freezingMess;
 					console.log('it\'s bloody freezing!');
 				}
 				if (temp >= 33 && temp <= 45) {
-					circleCon.style.backgroundColor = temperatureColor.cold;
+					circleCon.style.backgroundColor = temperatureColor.coldCon;
+					circleTemp.style.backgroundColor = temperatureColor.coldTemp;
+					circleMess.style.backgroundColor = temperatureColor.coldMess;
 						console.log('it\'s cold!');
 				}
 				if (temp >= 46 && temp <= 55) {
-					circleCon.style.backgroundColor = temperatureColor.cool;
+					circleCon.style.backgroundColor = temperatureColor.coolCon;
+					circleTemp.style.backgroundColor = temperatureColor.coolTemp;
+					circleMess.style.backgroundColor = temperatureColor.coolMess;
 						console.log('it\'s cool!');
 				}
 				if (temp >= 56 && temp <= 68) {
-					circleCon.style.backgroundColor = temperatureColor.mild;
+					circleCon.style.backgroundColor = temperatureColor.mildCon;
+					circleTemp.style.backgroundColor = temperatureColor.mildTemp;
+					circleMess.style.backgroundColor = temperatureColor.mildMess;
 						console.log('it\'s mild!');
 				}
 				if (temp >= 69 && temp <= 84) {
-					circleCon.style.backgroundColor = temperatureColor.warm;
+					circleCon.style.backgroundColor = temperatureColor.warmCon;
+					circleTemp.style.backgroundColor = temperatureColor.warmTemp;
+					circleMess.style.backgroundColor = temperatureColor.warmMess;
 						console.log('it\'s warm!');
 				}
 				if (temp >= 85) {
-					circleCon.style.backgroundColor = temperatureColor.hot;
+					circleCon.style.backgroundColor = temperatureColor.hotCon;
+					circleTemp.style.backgroundColor = temperatureColor.hotTemp;
+					circleMess.style.backgroundColor = temperatureColor.hotMess;
 						console.log('it\'s hot!');
 				}
 	    	}

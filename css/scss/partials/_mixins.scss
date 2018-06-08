@@ -1,5 +1,6 @@
 // BREAKPOINTS
 //////////////
+
 @mixin bp($point) {
 
   @if $point == small {
