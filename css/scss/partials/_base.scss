@@ -9,10 +9,18 @@ body {
 	height: 100%;
 	width: 100%;
 	z-index: 0;
-	// background-image: url('../../img/Sun.png');
- 	background-size: contain;
-    background-position: center;
-	background-repeat: no-repeat;
+	// background-image: url('../../img/happy_cloud.svg');
+ // 	background-size: 50%;
+ //    background-position: center;
+	// background-repeat: no-repeat;
+	
+	.bgImg {
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 50%;
+		width: auto;
+	}
 }
 
 .container {
@@ -71,6 +79,7 @@ body {
 			font-size: 3.2rem;
     		min-width: 600px;
     		min-height: 600px;
+    		width: 600px;
     		top: calc(50% - 600px);
 		  	-webkit-transform: translateY(-50%);
   			-ms-transform: translateY(-50%);
@@ -83,7 +92,8 @@ body {
 		}
 	
 		&:hover {
-			background-color: hsla(43, 94%, 60%, 1);
+
+			// background-color: hsla(43, 94%, 60%, 1);
 		}
 
 		&:focus {

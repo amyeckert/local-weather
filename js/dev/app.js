@@ -3,10 +3,75 @@
 document.onreadystatechange = function () {
     if (document.readyState === "interactive") {
     	"use strict";
+    	// working on implementing this section to automatically prompt for location permission
 
-    	if (!navigator.geolocation) {
-		    output.innerHTML = "<p>Geolocation is not supported by your browser. Please enable it to use this silly thing.</p>";
-		} else {
+		// function prompt(window, pref, message, callback) {
+		//     let branch = Components.classes["@mozilla.org/preferences-service;1"]
+		//                            .getService(Components.interfaces.nsIPrefBranch);
+
+		//     if (branch.getPrefType(pref) === branch.PREF_STRING) {
+		//         switch (branch.getCharPref(pref)) {
+		//         case "always":
+		//             return callback(true);
+		//         case "never":
+		//             return callback(false);
+		//         }
+		//     }
+
+		//     let done = false;
+
+		//     function remember(value, result) {
+		//         return function() {
+		//             done = true;
+		//             branch.setCharPref(pref, value);
+		//             callback(result);
+		//         }
+		//     }
+
+		//     let self = window.PopupNotifications.show(
+		//         window.gBrowser.selectedBrowser,
+		//         "geolocation",
+		//         message,
+		//         "geo-notification-icon",
+		//         {
+		//             label: "Share Location",
+		//             accessKey: "S",
+		//             callback: function(notification) {
+		//                 done = true;
+		//                 callback(true);
+		//             }
+		//         }, [
+		//             {
+		//                 label: "Always Share",
+		//                 accessKey: "A",
+		//                 callback: remember("always", true)
+		//             },
+		//             {
+		//                 label: "Never Share",
+		//                 accessKey: "N",
+		//                 callback: remember("never", false)
+		//             }
+		//         ], {
+		//             eventCallback: function(event) {
+		//                 if (event === "dismissed") {
+		//                     if (!done) callback(false);
+		//                     done = true;
+		//                     window.PopupNotifications.remove(self);
+		//                 }
+		//             },
+		//             persistWhileVisible: true
+		//         });
+		// }
+
+		// prompt(window,
+		//        "extensions.local-weather.allowGeolocation",
+		//        "This page wants to know your location.",
+		//        function callback(allowed) { alert(allowed); });
+//////////////////////////////////////
+
+  //   	if (!navigator.geolocation) {
+		//     alert(" Please enable Geolocation Services in order to use this silly thing.");
+		// } else {
 
 	        // global variables;
 	    	const message = document.querySelector(".message");
@@ -14,15 +79,17 @@ document.onreadystatechange = function () {
 	    	const temperature = document.querySelector(".temperature");
 	    	const information = document.querySelector(".information");
 	    	const getLocation = document.querySelector(".getLocation");
-
+	    	// const background = document.querySelector(".bg-img");
 	    	const circleCon = document.querySelector(".circleCon");
 	    	const circleTemp = document.querySelector(".circleTemp");
 	    	const circleMess = document.querySelector(".circleMess");
-	    	let weatherData;
+	    	
 	    	let api;
 	    	let sunset = 0;
 	    	let tempC;
 	    	let tempF;
+	    	let weatherData;
+	    	
 
 	    	const options = {
 				enableHighAccuracy: true,
@@ -31,7 +98,7 @@ document.onreadystatechange = function () {
 			};
 
 			function error(error) {
-	    		console.log("Please allow this site to access your location information.");
+	    		alert("Please allow this site to access your location information.");
 	    		console.warn(`ERROR(${error.code}): ${error.message}`);
 	    	}
 
@@ -50,6 +117,7 @@ document.onreadystatechange = function () {
 				})
 				.then(function(updatedWeatherData) {	
 				   	weatherData = updatedWeatherData;
+				   	// console.log(weatherData);
 				   	return updateConditions(weatherData);
 			    });		
 			}
@@ -58,6 +126,7 @@ document.onreadystatechange = function () {
 				tempC = Math.round(weatherData.main.temp);
 				tempF = Math.round((tempC * 1.8000) + 32);
 				updateCircleColor(tempF);
+				updateIcon();
 
 				tempF += "F";
 				tempC += "C";	
@@ -132,11 +201,17 @@ document.onreadystatechange = function () {
 	    		getLocation.classList.toggle('fadeOut');
 	    	}
 
-	    	// function updateIcon(weatherData) {
-	    	// 	let icon = weatherData.weather[0].icon;
-	    	// 	console.log(icon);
-	    	// 	return icon;
-	    	// }
+	    	function updateIcon() {
+	    		let bgImages = {
+	    			happyCloud: "img/happy_cloud.svg"
+	    		}
+
+	    		let background = document.querySelector(".bgImg");
+	    		
+	    		background.setAttribute("src", bgImages.happyCloud);
+	    		// console.log(background, bgImages.happyCloud);
+	    		
+	    	}
 
 	    	function updateCircleColor(temp) {
 
@@ -204,17 +279,12 @@ document.onreadystatechange = function () {
 				}
 	    	}
 
-	    	// function updateBackgroundImage(arg) {
-
-	    	// }
-
-
 			getLocation.addEventListener("click", function( event ) {
 				event.preventDefault(event);	
 				navigator.geolocation.getCurrentPosition(success, error, options);
 				updateCircleColor();
 		 	});
 		}
-    }
+    // }
 }
 

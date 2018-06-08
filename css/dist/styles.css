@@ -66,10 +66,13 @@ body {
 .background {
   height: 100%;
   width: 100%;
-  z-index: 0;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat; }
+  z-index: 0; }
+  .background .bgImg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 50%;
+    width: auto; }
 
 .container {
   display: flex;
@@ -119,6 +122,7 @@ body {
         font-size: 3.2rem;
         min-width: 600px;
         min-height: 600px;
+        width: 600px;
         top: calc(50% - 600px);
         -webkit-transform: translateY(-50%);
         transform: translateY(-50%);
@@ -126,8 +130,6 @@ body {
     @media (min-width: 1000px) {
       .container button {
         font-size: 3.7rem; } }
-    .container button:hover {
-      background-color: #f9c339; }
     .container button:focus {
       outline: none;
       border: none; }
