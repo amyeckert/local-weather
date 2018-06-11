@@ -24,7 +24,7 @@ gulp.task(
     'scripts',
     function() {
         var bundler = browserify('js/dev/app.js');
-        bundler.transform(babelify);
+        bundler.transform("babelify", {presets: ["es2015", "react"]});
         return bundler.bundle()
             .on('error', logError)
             .pipe(source('app.js'))

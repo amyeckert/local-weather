@@ -79,7 +79,6 @@ document.onreadystatechange = function () {
     	const temperature = document.querySelector(".temperature");
     	const information = document.querySelector(".information");
     	const getLocation = document.querySelector(".getLocation");
-    	// const background = document.querySelector(".bg-img");
     	const circleCon = document.querySelector(".circleCon");
     	const circleTemp = document.querySelector(".circleTemp");
     	const circleMess = document.querySelector(".circleMess");
