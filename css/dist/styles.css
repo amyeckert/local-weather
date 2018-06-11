@@ -208,6 +208,7 @@ body {
   opacity: 0;
   height: 300px;
   width: 300px;
+  background: rgba(218, 209, 37, 0.9);
   background-color: rgba(29, 72, 226, 0);
   transition: opacity 1.5s; }
 
