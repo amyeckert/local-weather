@@ -79,7 +79,6 @@ document.onreadystatechange = function () {
     	const temperature = document.querySelector(".temperature");
     	const information = document.querySelector(".information");
     	const getLocation = document.querySelector(".getLocation");
-    	// const background = document.querySelector(".bg-img");
     	const circleCon = document.querySelector(".circleCon");
     	const circleTemp = document.querySelector(".circleTemp");
     	const circleMess = document.querySelector(".circleMess");
@@ -98,7 +97,7 @@ document.onreadystatechange = function () {
 
 		function error(error) {
     		alert("Please allow this site to access your location information.");
-    		// console.warn(`ERROR(${error.code}): ${error.message}`);
+    		console.warn(`ERROR(${error.code}): ${error.message}`);
     	}
 
     	function success(position) {
@@ -266,7 +265,8 @@ document.onreadystatechange = function () {
     	}
     	
 		getLocation.addEventListener("click", function( event ) {
-			event.preventDefault(event);	
+			event.preventDefault(event);
+			getLocation.innerHTML = "One moment, please...";
 			navigator.geolocation.getCurrentPosition(success, error, options);
 			updateCircleColor();
 	 	});

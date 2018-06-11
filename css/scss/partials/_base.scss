@@ -14,27 +14,41 @@ body {
 }
 
 .container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
+	display: -webkit-box;
+   	display: -ms-flexbox;
+   	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
 	height: 100%;
 	width: 100%;
 	margin: 0 auto;
 	background-color: transparent;
 	
-	.container-inner {
+	.container__inner {
 		width: 100%;
-		height: 100%;
-		display: flex;
-		flex-flow: column;
-		justify-content: center;
-		align-items: center;
-		
-		@include bp(medsmall) {		
-			position: relative;
-		}
-
+	   	height: 100%;
+	   	display: -webkit-box;
+	   	display: -ms-flexbox;
+	   	display: flex;
+	   	-webkit-box-orient: vertical;
+	   	-webkit-box-direction: normal;
+	       	-ms-flex-flow: column;
+	           	flex-flow: column;
+	   	-webkit-box-pack: center;
+	       	-ms-flex-pack: center;
+	           	justify-content: center;
+	   	-webkit-box-align: center;
+	       	-ms-flex-align: center;
+	           	align-items: center;
+			
 		@include bp(large) {
 			width: 600px;
 			height: 600px;
@@ -44,15 +58,14 @@ body {
 
 	button {
 		position: absolute;
-		align-self: center;
-		min-width: 180px;
+		-ms-flex-item-align: center;
+    	-ms-grid-row-align: center;
+    	align-self: center;
+		width: 75%;
 		min-height: 200px;
-		width: 100%;
-		height: 10rem;
 		margin: 0 auto;
 		border: 1px solid $c-transparent;
 		background-color: $c-transparent;
-		border-radius: 50%;
 		font-family: 'Varela Round', sans-serif;
 		font-size: 1.5rem;
 		color: $c-text;
@@ -67,9 +80,12 @@ body {
 
 		@include bp(small) {
 			font-size: 2rem;
+			width: 400px;
+
 		}
 
 		@include bp(medsmall) {
+			width: 600px;
 			font-size: 3.2rem;
 		}
 
@@ -88,16 +104,23 @@ body {
  	min-width: 100%;
  	min-height: 100vh;
  	margin: 0 auto;
+ 	display: -webkit-box;
+ 	display: -ms-flexbox;
  	display: flex;
-	flex-flow: column nowrap;
-	justify-content: center;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-flow: column nowrap;
+	        flex-flow: column nowrap;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
  	background-color: transparent;
  	border: 1px solid transparent;
  	border-radius: 50%;	
  	z-index: 2;
 
-	 .circle {	
-	 	margin: 0 auto;
+	.circle {	
+		margin: 0 auto;
 		display: block;
 		border-radius: 50%;
 		position: relative;	
@@ -105,13 +128,16 @@ body {
 	}
 
 	@include bp(medsmall) {
-		flex-flow: row nowrap;
+		-webkit-box-orient: horizontal;
+		-webkit-box-direction: normal;
+    	-ms-flex-flow: row nowrap;
+        flex-flow: row nowrap;
  		min-width: 600px;
  		min-height: 600px;
  		transform: translateY(20%);
 	}
 
-	.circle-inner {
+	.circle__inner {
 		position: absolute;
 		width: 100%;
 		padding: 5px;
@@ -119,7 +145,7 @@ body {
 		font-size: 1.2rem;
 	}
 
-	.circle-inner-con {
+	.circle__inner_con {
 		top: 39%;
 
 		.conditions {
@@ -129,8 +155,9 @@ body {
 			width: 100%;
 			text-transform: capitalize;
 		}
-	}	
-	.circle-inner-temp {
+	}
+
+	.circle__inner_temp {
 		top: 38%;
 
 		.temperature {
@@ -138,7 +165,7 @@ body {
 		}
 	}
 
-	.circle-inner-mess {
+	.circle__inner_mess {
 		top: 32% ;
 
 		.message {
@@ -146,7 +173,6 @@ body {
 		}
 	}
 }
-
 
 .circleCon {
 	display: block;
@@ -163,7 +189,6 @@ body {
 	@include bp(medsmall) {
 		height: 175px;
     	width: 175px;
-
 	}
 }
 
