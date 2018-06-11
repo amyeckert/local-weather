@@ -98,7 +98,7 @@ document.onreadystatechange = function () {
 
 		function error(error) {
     		alert("Please allow this site to access your location information.");
-    		// console.warn(`ERROR(${error.code}): ${error.message}`);
+    		console.warn(`ERROR(${error.code}): ${error.message}`);
     	}
 
     	function success(position) {
@@ -106,6 +106,7 @@ document.onreadystatechange = function () {
     		let lat = myCoordinates.latitude
     		let lon = myCoordinates.longitude
     		api = ("https://fcc-weather-api.glitch.me/api/current?lat=" + lat + "&lon=" + lon);
+    		console.log(getLocation.html)
     		return getWeatherData(api);	
     	}
 
@@ -266,8 +267,10 @@ document.onreadystatechange = function () {
     	}
     	
 		getLocation.addEventListener("click", function( event ) {
-			event.preventDefault(event);	
+			event.preventDefault(event);
+			getLocation.innerHTML = "One moment, please...";
 			navigator.geolocation.getCurrentPosition(success, error, options);
+
 			updateCircleColor();
 	 	});
 	}
