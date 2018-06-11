@@ -61,18 +61,13 @@ body {
   font-family: "Varela Round", sans-serif;
   font-size: 16px;
   padding: 0 0 0 0;
-  color: #1c1d1b; }
+  color: #1c1d1b;
+  height: 100vh; }
 
 .background {
   height: 100%;
   width: 100%;
   z-index: 0; }
-  .background .bgImg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 50%;
-    width: auto; }
 
 .container {
   display: flex;
@@ -103,7 +98,10 @@ body {
     height: 15rem;
     width: 15rem;
     min-width: 180px;
-    margin: auto;
+    min-height: 200px;
+    width: 100%;
+    height: 10rem;
+    margin: 0 auto;
     border: 1px solid rgba(29, 72, 226, 0);
     background-color: rgba(29, 72, 226, 0);
     border-radius: 50%;
@@ -112,19 +110,14 @@ body {
     color: #1c1d1b;
     z-index: 10;
     opacity: 1;
+    baseline-shift: baseline;
     transition: opacity 0.8s ease-out, z-index 1s ease-out; }
     @media (min-width: 420px) {
       .container button {
-        font-size: 2rem;
-        width: 50%; } }
+        font-size: 2rem; } }
     @media (min-width: 600px) {
       .container button {
-        font-size: 3.2rem;
-        min-width: 600px;
-        min-height: 600px;
-        width: 600px;
-        top: calc(50% - 600px);
-        margin-top: 300px; } }
+        font-size: 3.2rem; } }
     @media (min-width: 1000px) {
       .container button {
         font-size: 4.7rem; } }
@@ -134,11 +127,11 @@ body {
 
 .information {
   min-width: 100%;
-  min-height: auto;
+  min-height: 100vh;
   margin: 0 auto;
   display: flex;
   flex-flow: column nowrap;
-  justify-content: space-between;
+  justify-content: center;
   background-color: transparent;
   border: 1px solid transparent;
   border-radius: 50%;
@@ -151,11 +144,11 @@ body {
     background-color: orange; }
   @media (min-width: 600px) {
     .information {
+      flex-flow: row nowrap;
       min-width: 600px;
       min-height: 600px;
-      height: 600px;
-      width: 600px;
-      flex-flow: column nowrap; } }
+      -webkit-transform: translateY(20%);
+              transform: translateY(20%); } }
   .information .circle-inner {
     position: absolute;
     width: 100%;
@@ -220,5 +213,26 @@ body {
 button.fadeOut {
   opacity: 0;
   z-index: 0; }
+
+.smaller {
+  display: block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  border: 1px solid rgba(5, 250, 230, 0.98);
+  border-radius: 5px;
+  padding: 8px 14px; }
+  .smaller:hover {
+    background-color: rgba(5, 250, 230, 0.98);
+    border: 1px solid rgba(5, 250, 230, 0.98);
+    border-radius: 5px; }
+  @media (min-width: 420px) {
+    .smaller {
+      width: 50%;
+      max-width: 200px;
+      margin: 0 auto; } }
+  @media (min-width: 911px) {
+    .smaller {
+      display: inline;
+      vertical-align: calc(50%); } }
 
 /*# sourceMappingURL=styles.css.map */
