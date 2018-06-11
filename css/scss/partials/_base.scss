@@ -81,14 +81,14 @@ body {
     		min-height: 600px;
     		width: 600px;
     		top: calc(50% - 600px);
-		  	-webkit-transform: translateY(-50%);
-  			-ms-transform: translateY(-50%);
-  			transform: translateY(-50%);
-   			margin-top: 600px;
+		  	// -webkit-transform: translateX(-50%);
+  			// -ms-transform: translateX(-50%);
+  			// transform: translateX(-50%);
+   			margin-top: 300px;
 		}
 
 		@include bp(large) {
-			font-size: 3.7rem;
+			font-size: 4.7rem;
 		}
 	
 		&:hover {

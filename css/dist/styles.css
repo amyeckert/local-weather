@@ -124,12 +124,10 @@ body {
         min-height: 600px;
         width: 600px;
         top: calc(50% - 600px);
-        -webkit-transform: translateY(-50%);
-        transform: translateY(-50%);
-        margin-top: 600px; } }
+        margin-top: 300px; } }
     @media (min-width: 1000px) {
       .container button {
-        font-size: 3.7rem; } }
+        font-size: 4.7rem; } }
     .container button:focus {
       outline: none;
       border: none; }
