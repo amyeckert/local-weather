@@ -13,10 +13,19 @@ body {
 }
 
 .container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
+	display: -webkit-box;
+   	display: -ms-flexbox;
+   	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
 	height: 100%;
 	width: 100%;
 	margin: 0 auto;
@@ -24,12 +33,21 @@ body {
 	
 	.container-inner {
 		width: 100%;
-		height: 100%;
-		display: flex;
-		flex-flow: column;
-		justify-content: center;
-		align-items: center;
-		
+	   	height: 100%;
+	   	display: -webkit-box;
+	   	display: -ms-flexbox;
+	   	display: flex;
+	   	-webkit-box-orient: vertical;
+	   	-webkit-box-direction: normal;
+	       	-ms-flex-flow: column;
+	           	flex-flow: column;
+	   	-webkit-box-pack: center;
+	       	-ms-flex-pack: center;
+	           	justify-content: center;
+	   	-webkit-box-align: center;
+	       	-ms-flex-align: center;
+	           	align-items: center;
+			
 		@include bp(large) {
 			width: 600px;
 			height: 600px;
@@ -40,13 +58,11 @@ body {
 	button {
 		display: block;
 		position: absolute;
-		align-self: center;
-		height: 15rem;
-		width: 15rem;
-		min-width: 180px;
+		-ms-flex-item-align: center;
+    	-ms-grid-row-align: center;
+    	align-self: center;
+		width: 75%;
 		min-height: 200px;
-		width: 100%;
-		height: 10rem;
 		margin: 0 auto;
 		border: 1px solid $c-transparent;
 		background-color: $c-transparent;
@@ -65,9 +81,11 @@ body {
 
 		@include bp(small) {
 			font-size: 2rem;
+			width: 400px;
 		}
 
 		@include bp(medsmall) {
+			width: 600px;
 			font-size: 3.2rem;
 		}
 
@@ -86,16 +104,23 @@ body {
  	min-width: 100%;
  	min-height: 100vh;
  	margin: 0 auto;
+ 	display: -webkit-box;
+ 	display: -ms-flexbox;
  	display: flex;
-	flex-flow: column nowrap;
-	justify-content: center;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-flow: column nowrap;
+	        flex-flow: column nowrap;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
  	background-color: transparent;
  	border: 1px solid transparent;
  	border-radius: 50%;	
  	z-index: 2;
 
-	 .circle {	
-	 	margin: 0 auto;
+	.circle {	
+		margin: 0 auto;
 		display: block;
 		border-radius: 50%;
 		position: relative;	
@@ -103,7 +128,10 @@ body {
 	}
 
 	@include bp(medsmall) {
-		flex-flow: row nowrap;
+		-webkit-box-orient: horizontal;
+		-webkit-box-direction: normal;
+    	-ms-flex-flow: row nowrap;
+        flex-flow: row nowrap;
  		min-width: 600px;
  		min-height: 600px;
  		transform: translateY(20%);
@@ -127,7 +155,8 @@ body {
 			width: 100%;
 			text-transform: capitalize;
 		}
-	}	
+	}
+
 	.circle-inner-temp {
 		top: 38%;
 
@@ -145,7 +174,6 @@ body {
 	}
 }
 
-
 .circleCon {
 	display: block;
 	opacity: 0;
@@ -161,7 +189,6 @@ body {
 	@include bp(medsmall) {
 		height: 175px;
     	width: 175px;
-
 	}
 }
 
