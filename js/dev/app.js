@@ -90,7 +90,6 @@ document.onreadystatechange = function () {
 	    	let tempF;
 	    	let weatherData;
 	    	
-
 	    	const options = {
 				enableHighAccuracy: true,
 				timeout: 7000,
@@ -278,7 +277,7 @@ document.onreadystatechange = function () {
 						console.log('it\'s hot!');
 				}
 	    	}
-
+	    	
 			getLocation.addEventListener("click", function( event ) {
 				event.preventDefault(event);	
 				navigator.geolocation.getCurrentPosition(success, error, options);
