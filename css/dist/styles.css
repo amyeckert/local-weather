@@ -78,7 +78,7 @@ body {
   width: 100%;
   margin: 0 auto;
   background-color: transparent; }
-  .container .container-inner {
+  .container .container__inner {
     width: 100%;
     height: 100%;
     display: flex;
@@ -86,7 +86,7 @@ body {
     justify-content: center;
     align-items: center; }
     @media (min-width: 1000px) {
-      .container .container-inner {
+      .container .container__inner {
         width: 600px;
         height: 600px;
         z-index: 3; } }
@@ -100,7 +100,6 @@ body {
     margin: 0 auto;
     border: 1px solid rgba(29, 72, 226, 0);
     background-color: rgba(29, 72, 226, 0);
-    border-radius: 50%;
     font-family: 'Varela Round', sans-serif;
     font-size: 1.5rem;
     color: #1c1d1b;
@@ -147,27 +146,27 @@ body {
       min-height: 600px;
       -webkit-transform: translateY(20%);
               transform: translateY(20%); } }
-  .information .circle-inner {
+  .information .circle__inner {
     position: absolute;
     width: 100%;
     padding: 5px;
     text-align: center;
     font-size: 1.2rem; }
-  .information .circle-inner-con {
+  .information .circle__inner_con {
     top: 39%; }
-    .information .circle-inner-con .conditions {
+    .information .circle__inner_con .conditions {
       display: block;
       margin: auto;
       height: 100%;
       width: 100%;
       text-transform: capitalize; }
-  .information .circle-inner-temp {
+  .information .circle__inner_temp {
     top: 38%; }
-    .information .circle-inner-temp .temperature {
+    .information .circle__inner_temp .temperature {
       display: block; }
-  .information .circle-inner-mess {
+  .information .circle__inner_mess {
     top: 32%; }
-    .information .circle-inner-mess .message {
+    .information .circle__inner_mess .message {
       display: block; }
 
 .circleCon {

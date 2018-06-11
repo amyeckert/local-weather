@@ -31,7 +31,7 @@ body {
 	margin: 0 auto;
 	background-color: transparent;
 	
-	.container-inner {
+	.container__inner {
 		width: 100%;
 	   	height: 100%;
 	   	display: -webkit-box;
@@ -66,7 +66,7 @@ body {
 		margin: 0 auto;
 		border: 1px solid $c-transparent;
 		background-color: $c-transparent;
-		border-radius: 50%;
+		// border-radius: 50%;
 		font-family: 'Varela Round', sans-serif;
 		font-size: 1.5rem;
 		color: $c-text;
@@ -137,7 +137,7 @@ body {
  		transform: translateY(20%);
 	}
 
-	.circle-inner {
+	.circle__inner {
 		position: absolute;
 		width: 100%;
 		padding: 5px;
@@ -145,7 +145,7 @@ body {
 		font-size: 1.2rem;
 	}
 
-	.circle-inner-con {
+	.circle__inner_con {
 		top: 39%;
 
 		.conditions {
@@ -157,7 +157,7 @@ body {
 		}
 	}
 
-	.circle-inner-temp {
+	.circle__inner_temp {
 		top: 38%;
 
 		.temperature {
@@ -165,7 +165,7 @@ body {
 		}
 	}
 
-	.circle-inner-mess {
+	.circle__inner_mess {
 		top: 32% ;
 
 		.message {
