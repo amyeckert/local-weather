@@ -5,10 +5,35 @@
 
 .fadeIn {
 	opacity: 1;
-
 }
 
 button.fadeOut {
 	opacity: 0;
 	z-index: 0;
+}
+
+.smaller {
+	display: block;
+	font-size: 0.8rem;
+	text-transform: uppercase;
+	border: 1px solid $c-cond-cool;
+	border-radius: 5px;
+	padding: 8px 14px;
+
+	&:hover {
+		background-color: $c-cond-cool;
+		border: 1px solid $c-cond-cool;
+		border-radius: 5px;
+	}
+
+	@include bp(small) {
+		width: 50%;
+		max-width: 200px;
+		margin: 0 auto;
+	}
+
+	@include bp(medium) {
+		display: inline;
+		vertical-align: calc(50%);
+	}
 }
