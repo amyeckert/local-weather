@@ -98,7 +98,7 @@ document.onreadystatechange = function () {
 
 			function error(error) {
 	    		alert("Please allow this site to access your location information.");
-	    		console.warn(`ERROR(${error.code}): ${error.message}`);
+	    		// console.warn(`ERROR(${error.code}): ${error.message}`);
 	    	}
 
 	    	function success(position) {
