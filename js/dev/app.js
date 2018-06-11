@@ -106,7 +106,7 @@ document.onreadystatechange = function () {
     		let lat = myCoordinates.latitude
     		let lon = myCoordinates.longitude
     		api = ("https://fcc-weather-api.glitch.me/api/current?lat=" + lat + "&lon=" + lon);
-    		console.log(getLocation.html)
+    		// console.log(getLocation.html)
     		return getWeatherData(api);	
     	}
 
