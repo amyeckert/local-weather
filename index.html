@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <head>
+	<title>Local Weather</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Local Weather</title>
+<!-- 	<meta http-equiv='cache-control' content='no-cache'>
+	<meta http-equiv='expires' content='0'>
+	<meta http-equiv='pragma' content='no-cache'> -->
 	<link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Varela+Round" rel="stylesheet">
 	<link rel="stylesheet" href="css/dist/styles.css">
 	<script src="js/dist/app.js"></script>
@@ -29,7 +32,11 @@
 					</div>
 					<div class="circle circleMess">
 						<div class="circle__inner circle__inner_mess">
-							<p class="message"></p>
+							<p class="">You have </p>
+							<p id="time"></p>
+							<p> before sunset at </p>
+							<p id="sunset"></p>
+
 						</div>
 					</div>
 				</div>	
