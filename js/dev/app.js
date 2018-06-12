@@ -73,8 +73,10 @@ document.onreadystatechange = function () {
 		//     alert(" Please enable Geolocation Services in order to use this silly thing.");
 		// } else {
 
+
+		////////////////////
         // global variables;
-    	const message = document.querySelector(".message");
+        //////////////////// 
     	const conditions = document.querySelector(".conditions");
     	const temperature = document.querySelector(".temperature");
     	const information = document.querySelector(".information");
@@ -82,12 +84,14 @@ document.onreadystatechange = function () {
     	const circleCon = document.querySelector(".circleCon");
     	const circleTemp = document.querySelector(".circleTemp");
     	const circleMess = document.querySelector(".circleMess");
-    	
-    	let api;
-    	let sunset = 0;
-    	let tempC;
-    	let tempF;
-    	let weatherData;
+    	const display = document.querySelector('#time');
+    	let api,
+    		tempC,
+    		tempF,
+    		weatherData,
+    		sunset,
+    		durationInMinutes, 
+    		displaySunset = document.querySelector("#sunset");
     	
     	const options = {
 			enableHighAccuracy: true,
@@ -116,7 +120,6 @@ document.onreadystatechange = function () {
 			})
 			.then(function(updatedWeatherData) {	
 			   	weatherData = updatedWeatherData;
-			   	// console.log(weatherData);
 			   	return updateConditions(weatherData);
 		    });		
 		}
@@ -134,60 +137,93 @@ document.onreadystatechange = function () {
 
 			conditions.textContent = localConditions;
 			temperature.textContent = bothTemps;
-    		calculateTimeTilSunset(weatherData);
+    		calculateMinutesUntilSunset(weatherData);
     		fadeIn();
     		fadeOut();
     	}
 
-    	function calculateTimeTilSunset(weatherData) {
-    		let timeData = weatherData;
+    	function calculateMinutesUntilSunset(weatherData) {
+    	
     		const timeOptions12Hour = {
 			  hour: 'numeric',
 			  minute: 'numeric',
 			  hour12: true
 			};
 
-			const timeOptions24Hour = {
-			  hour: 'numeric',
-			  minute: 'numeric',
-			  hour12: false
-			};
-
-			let sunsetUTCHours = timeData.sys.sunset;
+			let now = Date.now();
 			sunset = new Date(0);
+			let sunsetUTCHours = weatherData.sys.sunset;
 			sunset.setUTCSeconds(sunsetUTCHours);
-			let sunsetHour = sunset.getHours();
-			let sunsetMinutes = sunset.getMinutes();
+
+			let utcInterval =  Math.abs(now - sunset); //milliseconds between now and sunset
+			durationInMinutes = utcInterval;
+
+			// let sunsetHour = sunset.getHours();
+			// let sunsetMinutes = sunset.getMinutes();
+
+
+
+			// let interval = new Date(utcInterval * 1000); //convert to miliseconds
+			// let hours = (interval.getHours()) * 60;
+			// let minutes = (interval.getMinutes()) * 60;
+			// durationInMinutes = hours + minutes;
+
 			let localTimeAtSunset12Hour = sunset.toLocaleString('en-US', timeOptions12Hour);
-			let localTimeAtSunset24Hour = sunset.toLocaleString('en-US', timeOptions24Hour);
-
-			//local time information
-			let currentDate = new Date();
-			let currentHour = currentDate.getHours(); 
-			let currentMinute = currentDate.getMinutes();
-
-			//check if sunset has passed. 
-			let remainingHours = sunsetHour - currentHour;
-			let remainingMinutes = sunsetMinutes - currentMinute;
-			let now = currentHour + ":" + currentMinute;
-			let cheekyMessage = "";
-			
-			if(remainingHours < 0) {
-				remainingHours = -remainingHours;
-			}
-			if(remainingMinutes < 0) {
-				remainingMinutes = -remainingMinutes;
-			}
-
-			if(now > localTimeAtSunset24Hour) {
-				cheekyMessage = "Hope you had an amazing day!";
+			// if(now > localTimeAtSunset24Hour) {
+			displaySunset.innerHTML = "<span class=\"bold\">" + localTimeAtSunset12Hour + ".</span>";
 				
-			} else {
-				cheekyMessage = "You have <br>" + remainingHours + " hr and " + remainingMinutes + " min left <br>before sunset at <br><span class=\"bold\">" + localTimeAtSunset12Hour + "</span>";
+			// } 
+			// else {
+			// 	displaySunset.innerHTML = "Hope you had an amazing day!";
 				
-			}
-    		return message.innerHTML = cheekyMessage;
+			// }
+			// console.log("current time = " + now);
+			console.log(weatherData, utcInterval);
+			// console.log(sunsetHour, sunsetMinutes);
+			console.log("duration = " + durationInMinutes + " milliseconds");
+    		
+    		return startTimer(durationInMinutes, display);
     	}
+
+    	//////////////////////////
+    	// countdown until sunset- duration must be in seconds.
+    	//source: https://stackoverflow.com/questions/20618355/the-simplest-possible-javascript-countdown-timer
+    	/////////////////////////
+    	function startTimer(durationInMinutes, display) {
+		    let start = Date.now(),
+		        diff,
+		        minutes,
+		        seconds,
+		        hours;
+	    		
+
+		    function timer() {
+		        // get the number of seconds that have elapsed since 
+		        // startTimer() was called
+		        diff = durationInMinutes - (((Date.now() - start) / 1000) | 0);
+
+		        // does the same job as parseInt -truncates the float
+		        minutes = (diff / (1000 * 60)) % 60 | 0; 	// (diff / 60)  | 0;
+		        seconds = (diff / 1000) % 60 | 0;  			// (diff % 60) | 0;
+		        hours = (diff / (1000 * 60 * 60)) % 24 | 0; // minutes / 60 | 0;
+ 
+		        hours = hours < 10 ? "0" + hours : hours;
+		        minutes = minutes < 10 ? "0" + minutes : minutes;
+		        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+		        display.textContent = hours + ":" + minutes + ":" + seconds + " left" ; 
+
+		        if (diff <= 0) {
+		            // add one second so that the count down starts at the full duration
+		            // example 05:00 not 04:59
+		            start = Date.now() + 1000;
+		        }
+		    };
+		    // we don't want to wait a full second before the timer starts
+		    timer();
+		    setInterval(timer, 1000); 
+		}
+		///////////////////////////
 
     	function fadeIn() {
     		circleMess.classList.toggle('fadeIn');
