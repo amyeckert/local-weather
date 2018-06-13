@@ -136,7 +136,7 @@ document.onreadystatechange = function () {
 			conditions.textContent = localConditions;
 			temperature.textContent = bothTemps;
     		getLocalTimeOfSunset(weatherData);
-    		fadeIn();
+    		fadeInAnimate();
     		fadeOut();
     	}
 
@@ -196,9 +196,9 @@ document.onreadystatechange = function () {
     	}
     	//////////////////////////////////////////////////////
 
-    	function fadeIn() {
+    	function fadeInAnimate() {
     		circleMess.classList.toggle('fadeIn');
-    		circleCon.classList.toggle('fadeIn');
+    		circleCon.classList.toggle('breathe');
     		circleTemp.classList.toggle('fadeIn');	
     	}
 

@@ -122,6 +122,8 @@ body {
 		display: block;
 		border-radius: 50%;
 		position: relative;	
+		transform: scale(1);
+
 	}
 
 	@include bp(medsmall) {
@@ -178,15 +180,14 @@ body {
     width: 175px;
     top: 72px;
     left: 40px;
+    transform: scale(1);
 	background-color: $c-transparent;
 	transition: opacity 0.5s;
 	-webkit-transition: display 1s ease ;
 	-moz-transition: display 1s ease ;
 	-o-transition: display 1s ease ;
 	transition: display 1s ease ;
-	@include bp(medsmall) {
 
-	}
 
 	@include bp(medium) {
 		top: 0;
