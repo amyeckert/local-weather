@@ -115,8 +115,6 @@ body {
 	    -ms-flex-pack: center;
 	        justify-content: center;
  	background-color: transparent;
- 	border: 1px solid transparent;
- 	border-radius: 50%;	
  	z-index: 2;
 
 	.circle {	
@@ -124,7 +122,6 @@ body {
 		display: block;
 		border-radius: 50%;
 		position: relative;	
-		background-color: orange;
 	}
 
 	@include bp(medsmall) {
@@ -166,7 +163,7 @@ body {
 	}
 
 	.circle__inner_mess {
-		top: 32% ;
+		top: 26% ;
 
 		.message {
 			display: block;
@@ -179,16 +176,21 @@ body {
 	opacity: 0;
     height: 175px;
     width: 175px;
+    top: 72px;
+    left: 40px;
 	background-color: $c-transparent;
 	transition: opacity 0.5s;
 	-webkit-transition: display 1s ease ;
 	-moz-transition: display 1s ease ;
 	-o-transition: display 1s ease ;
 	transition: display 1s ease ;
-
 	@include bp(medsmall) {
-		height: 175px;
-    	width: 175px;
+
+	}
+
+	@include bp(medium) {
+		top: 0;
+		left: 0;
 	}
 }
 
@@ -197,9 +199,20 @@ body {
 	opacity: 0;
 	height: 125px;
     width: 125px;
+    left: -70px;
+    top: 5px;
 	font-family: $font-accent;
 	background-color: $c-transparent;
 	transition: opacity 1s;
+
+	@include bp(medsmall) {
+		left: -15px;
+	}
+
+	@include bp(medium) {
+		top: 0;
+		left: 0;
+	}
 }
 
 .circleMess {
@@ -207,7 +220,17 @@ body {
 	opacity: 0;
 	height: 300px;
 	width: 300px;
+	top: -33px;
 	background: hsla(57, 71%, 50%, 0.9);
 	background-color: $c-transparent;
-	transition: opacity 1.5s;
+	transition: opacity 2s;
+	@include bp(medsmall) {
+		top: 60px;
+		left: -66px;
+
+	}
+	@include bp(medium) {
+		top: 0;
+		left: 0;
+	}
 }

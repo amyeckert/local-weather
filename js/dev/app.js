@@ -1,5 +1,4 @@
 ; 
-
 document.onreadystatechange = function () {
     if (document.readyState === "interactive") {
     	"use strict";
@@ -66,14 +65,13 @@ document.onreadystatechange = function () {
 		// prompt(window,
 		//        "extensions.local-weather.allowGeolocation",
 		//        "This page wants to know your location.",
-		//        function callback(allowed) { alert(allowed); });
-//////////////////////////////////////
+		//        function callback(allowed) { alert(allowed); 
+  //      });
+////////////////////////////////////
 
-  //   	if (!navigator.geolocation) {
-		//     alert(" Please enable Geolocation Services in order to use this silly thing.");
-		// } else {
-
-
+    	if (!navigator.geolocation) {
+		    alert(" Please enable Geolocation Services in order to use this silly thing.");
+		} 
 		////////////////////
         // global variables;
         //////////////////// 

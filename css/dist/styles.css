@@ -130,15 +130,12 @@ body {
   flex-flow: column nowrap;
   justify-content: center;
   background-color: transparent;
-  border: 1px solid transparent;
-  border-radius: 50%;
   z-index: 2; }
   .information .circle {
     margin: 0 auto;
     display: block;
     border-radius: 50%;
-    position: relative;
-    background-color: orange; }
+    position: relative; }
   @media (min-width: 600px) {
     .information {
       flex-flow: row nowrap;
@@ -165,7 +162,7 @@ body {
     .information .circle__inner_temp .temperature {
       display: block; }
   .information .circle__inner_mess {
-    top: 32%; }
+    top: 26%; }
     .information .circle__inner_mess .message {
       display: block; }
 
@@ -174,38 +171,58 @@ body {
   opacity: 0;
   height: 175px;
   width: 175px;
+  top: 72px;
+  left: 40px;
   background-color: rgba(29, 72, 226, 0);
   transition: opacity 0.5s;
   transition: display 1s ease; }
-  @media (min-width: 600px) {
+  @media (min-width: 911px) {
     .circleCon {
-      height: 175px;
-      width: 175px; } }
+      top: 0;
+      left: 0; } }
 
 .circleTemp {
   display: block;
   opacity: 0;
   height: 125px;
   width: 125px;
+  left: -70px;
+  top: 5px;
   font-family: "Abril Fatface", cursive;
   background-color: rgba(29, 72, 226, 0);
   transition: opacity 1s; }
+  @media (min-width: 600px) {
+    .circleTemp {
+      left: -15px; } }
+  @media (min-width: 911px) {
+    .circleTemp {
+      top: 0;
+      left: 0; } }
 
 .circleMess {
   display: block;
   opacity: 0;
   height: 300px;
   width: 300px;
+  top: -33px;
   background: rgba(218, 209, 37, 0.9);
   background-color: rgba(29, 72, 226, 0);
-  transition: opacity 1.5s; }
+  transition: opacity 2s; }
+  @media (min-width: 600px) {
+    .circleMess {
+      top: 60px;
+      left: -66px; } }
+  @media (min-width: 911px) {
+    .circleMess {
+      top: 0;
+      left: 0; } }
 
 .bold {
   font-weight: 700;
   font-size: 32px; }
 
 .fadeIn {
-  opacity: 1; }
+  opacity: 0.9; }
 
 button.fadeOut {
   opacity: 0;
