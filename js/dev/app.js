@@ -77,21 +77,22 @@ document.onreadystatechange = function () {
 		////////////////////
         // global variables;
         //////////////////// 
-    	const conditions = document.querySelector(".conditions");
-    	const temperature = document.querySelector(".temperature");
-    	const information = document.querySelector(".information");
-    	const getLocation = document.querySelector(".getLocation");
     	const circleCon = document.querySelector(".circleCon");
     	const circleTemp = document.querySelector(".circleTemp");
     	const circleMess = document.querySelector(".circleMess");
-    	const display = document.querySelector('#time');
+    	const conditions = document.querySelector(".conditions");
+    	const getLocation = document.querySelector(".getLocation");
+    	const information = document.querySelector(".information");
+    	const temperature = document.querySelector(".temperature");
+    	
     	let api,
+    		countdown, 
+    		duration,
+    		displaySunset = document.querySelector("#sunset"),
+    		sunset,
     		tempC,
     		tempF,
-    		weatherData,
-    		sunset,
-    		durationInMinutes, 
-    		displaySunset = document.querySelector("#sunset");
+    		weatherData;
     	
     	const options = {
 			enableHighAccuracy: true,
@@ -109,7 +110,6 @@ document.onreadystatechange = function () {
     		let lat = myCoordinates.latitude
     		let lon = myCoordinates.longitude
     		api = ("https://fcc-weather-api.glitch.me/api/current?lat=" + lat + "&lon=" + lon);
-    		// console.log(getLocation.html)
     		return getWeatherData(api);	
     	}
 
@@ -137,13 +137,12 @@ document.onreadystatechange = function () {
 
 			conditions.textContent = localConditions;
 			temperature.textContent = bothTemps;
-    		calculateMinutesUntilSunset(weatherData);
+    		getLocalTimeOfSunset(weatherData);
     		fadeIn();
     		fadeOut();
     	}
 
-    	function calculateMinutesUntilSunset(weatherData) {
-    	
+    	function getLocalTimeOfSunset(weatherData) {
     		const timeOptions12Hour = {
 			  hour: 'numeric',
 			  minute: 'numeric',
@@ -155,76 +154,48 @@ document.onreadystatechange = function () {
 			let sunsetUTCHours = weatherData.sys.sunset;
 			sunset.setUTCSeconds(sunsetUTCHours);
 
-			let utcInterval =  Math.abs(now - sunset); //milliseconds between now and sunset
-			durationInMinutes = utcInterval;
-
-			// let sunsetHour = sunset.getHours();
-			// let sunsetMinutes = sunset.getMinutes();
-
-
-
-			// let interval = new Date(utcInterval * 1000); //convert to miliseconds
-			// let hours = (interval.getHours()) * 60;
-			// let minutes = (interval.getMinutes()) * 60;
-			// durationInMinutes = hours + minutes;
-
 			let localTimeAtSunset12Hour = sunset.toLocaleString('en-US', timeOptions12Hour);
-			// if(now > localTimeAtSunset24Hour) {
+			
 			displaySunset.innerHTML = "<span class=\"bold\">" + localTimeAtSunset12Hour + ".</span>";
-				
-			// } 
-			// else {
-			// 	displaySunset.innerHTML = "Hope you had an amazing day!";
-				
-			// }
-			// console.log("current time = " + now);
-			console.log(weatherData, utcInterval);
-			// console.log(sunsetHour, sunsetMinutes);
-			console.log("duration = " + durationInMinutes + " milliseconds");
     		
-    		return startTimer(durationInMinutes, display);
+    		return initializeClock(sunset);
+    	}
+    	//////////////////////////////////////
+    	/// Countdown timer. source: https://www.sitepoint.com/build-javascript-countdown-timer-no-dependencies/
+    	//////////////////////////////////////
+    	function getTimeRemaining(sunset) {
+    		duration = Date.parse(sunset) - Date.parse(new Date());
+    		let seconds = Math.floor( (duration / 1000) % 60);
+    		let minutes = Math.floor( (duration / 1000 / 60) % 60);
+    		let hours = Math.floor( (duration / (1000 * 60 * 60)) %24);
+
+    		return {
+    			'hours': hours, 
+    			'minutes': minutes,
+    			'seconds': seconds
+    		}
     	}
 
-    	//////////////////////////
-    	// countdown until sunset- duration must be in seconds.
-    	//source: https://stackoverflow.com/questions/20618355/the-simplest-possible-javascript-countdown-timer
-    	/////////////////////////
-    	function startTimer(durationInMinutes, display) {
-		    let start = Date.now(),
-		        diff,
-		        minutes,
-		        seconds,
-		        hours;
-	    		
+    	function initializeClock(sunset) {
+    		countdown = document.querySelector('#countdown');
+    		let showHours = document.querySelector('.hours');
+    		let showMin = document.querySelector('.minutes');
+    		let showSec = document.querySelector('.seconds');
 
-		    function timer() {
-		        // get the number of seconds that have elapsed since 
-		        // startTimer() was called
-		        diff = durationInMinutes - (((Date.now() - start) / 1000) | 0);
+    		function updateClock() {
+    			let time = getTimeRemaining(sunset);
+    			showHours.innerHTML = ('0' + time.hours).slice(-2);
+    			showMin.innerHTML =	('0' + time.minutes).slice(-2);
+    			showSec.innerHTML = ('0' + time.seconds).slice(-2);
 
-		        // does the same job as parseInt -truncates the float
-		        minutes = (diff / (1000 * 60)) % 60 | 0; 	// (diff / 60)  | 0;
-		        seconds = (diff / 1000) % 60 | 0;  			// (diff % 60) | 0;
-		        hours = (diff / (1000 * 60 * 60)) % 24 | 0; // minutes / 60 | 0;
- 
-		        hours = hours < 10 ? "0" + hours : hours;
-		        minutes = minutes < 10 ? "0" + minutes : minutes;
-		        seconds = seconds < 10 ? "0" + seconds : seconds;
-
-		        display.textContent = hours + ":" + minutes + ":" + seconds + " left" ; 
-
-		        if (diff <= 0) {
-		            // add one second so that the count down starts at the full duration
-		            // example 05:00 not 04:59
-		            start = Date.now() + 1000;
-		        }
-		    };
-		    // we don't want to wait a full second before the timer starts
-		    timer();
-		    setInterval(timer, 1000); 
-		}
-		///////////////////////////
-
+	    		if(time.total <= 0){
+	    			clearInterval(timeinterval);
+	    		}	
+	    	}
+	    	updateClock();
+	    	let timeinterval = setInterval(updateClock, 1000);
+    	}
+    	//////////////////////////////////////////////////////
     	function fadeIn() {
     		circleMess.classList.toggle('fadeIn');
     		circleCon.classList.toggle('fadeIn');
@@ -238,65 +209,79 @@ document.onreadystatechange = function () {
     	function updateCircleColor(temp) {
 
     		const temperatureColor  = {
-    			freezingCon: 'hsla(259, 100%, 97%, 1)',
-    			freezingTemp: 'hsla(197, 100%, 96%, 1)',
-    			freezingMess: 'hsla(183, 88%, 90%, 1)',
+    		
+    			'freezing': {
+    				con: 'hsla(259, 100%, 97%, 1)',
+    				temp: 'hsla(197, 100%, 96%, 1)',
+    				mess: 'hsla(183, 88%, 90%, 1)'	
+    			}, 
 
-    			coldCon: 'hsla(233, 93%, 83%, 1)',
-    			coldTemp: 'hsla(197, 98%, 81%, 1)',
-    			coldMess: 'hsla(173, 88%, 73%, 1)',
+    			'cold':  {
+    				con: 'hsla(233, 93%, 83%, 1)',
+    				temp: 'hsla(197, 98%, 81%, 1)',
+    				mess: 'hsla(173, 88%, 73%, 1)'
+    			},
 
-    			coolCon: 'hsla(166, 69%, 51%, 1)',
-    			coolTemp: 'hsla(175, 96%, 50%, 1)',
-    			coolMess: 'hsla(137, 75%, 64%, 1)',
+    			'cool': {
+	    			con: 'hsla(166, 69%, 51%, 1)',
+	    			temp: 'hsla(175, 96%, 50%, 1)',
+	    			mess: 'hsla(137, 75%, 64%, 1)'
+    				
+    			},
 
-    			mildCon: 'hsla(60, 75%, 59%, 1)',
-    			mildTemp: 'hsla(143, 47%, 51%, 1)',
-    			mildMess: 'hsla(93, 89%, 41%, 1)',
+    			'mild' : {
+	    			con: 'hsla(60, 75%, 59%, 1)',
+	    			temp: 'hsla(143, 47%, 51%, 1)',
+	    			mess: 'hsla(93, 89%, 41%, 1)'	
+    			}, 
 
-    			warmCon: 'hsla(48, 100%, 52%, 1)',
-    			warmTemp: 'hsla(36, 100%, 64%, 1)',
-    			warmMess: 'hsla(20, 100%, 65%, 1)',
+    			'warm': {
+	    			con: 'hsla(48, 100%, 52%, 1)',
+	    			temp: 'hsla(36, 100%, 64%, 1)',
+	    			mess: 'hsla(20, 100%, 65%, 1)'
+    			},
 
-    			hotCon: 'hsla(20, 100%, 58%, 1)',
-    			hotTemp: 'hsla(2, 100%, 50%, 1)',
-    			hotMess: 'hsla(351, 91%, 64%, 1)'
+    			'hot': {
+	    			con: 'hsla(20, 100%, 58%, 1)',
+	    			temp: 'hsla(2, 100%, 50%, 1)',
+	    			mess: 'hsla(351, 91%, 64%, 1)'	
+    			}
 			} 
 
 			if(temp < 32 ) {
-				circleCon.style.backgroundColor = temperatureColor.freezingCon;
-				circleTemp.style.backgroundColor = temperatureColor.freezingTemp;
-				circleMess.style.backgroundColor = temperatureColor.freezingMess;
+				circleCon.style.backgroundColor = temperatureColor.freezing.con;
+				circleTemp.style.backgroundColor = temperatureColor.freezing.temp;
+				circleMess.style.backgroundColor = temperatureColor.freezing.mess;
 				console.log('it\'s bloody freezing!');
 			}
 			if (temp >= 33 && temp <= 45) {
-				circleCon.style.backgroundColor = temperatureColor.coldCon;
-				circleTemp.style.backgroundColor = temperatureColor.coldTemp;
-				circleMess.style.backgroundColor = temperatureColor.coldMess;
+				circleCon.style.backgroundColor = temperatureColor.cold.con;
+				circleTemp.style.backgroundColor = temperatureColor.cold.temp;
+				circleMess.style.backgroundColor = temperatureColor.cold.mess;
 					console.log('it\'s cold!');
 			}
 			if (temp >= 46 && temp <= 55) {
-				circleCon.style.backgroundColor = temperatureColor.coolCon;
-				circleTemp.style.backgroundColor = temperatureColor.coolTemp;
-				circleMess.style.backgroundColor = temperatureColor.coolMess;
+				circleCon.style.backgroundColor = temperatureColor.cool.con;
+				circleTemp.style.backgroundColor = temperatureColor.cool.temp;
+				circleMess.style.backgroundColor = temperatureColor.cool.mess;
 					console.log('it\'s cool!');
 			}
 			if (temp >= 56 && temp <= 68) {
-				circleCon.style.backgroundColor = temperatureColor.mildCon;
-				circleTemp.style.backgroundColor = temperatureColor.mildTemp;
-				circleMess.style.backgroundColor = temperatureColor.mildMess;
+				circleCon.style.backgroundColor = temperatureColor.mild.con;
+				circleTemp.style.backgroundColor = temperatureColor.mild.temp;
+				circleMess.style.backgroundColor = temperatureColor.mild.mess;
 					console.log('it\'s mild!');
 			}
 			if (temp >= 69 && temp <= 84) {
-				circleCon.style.backgroundColor = temperatureColor.warmCon;
-				circleTemp.style.backgroundColor = temperatureColor.warmTemp;
-				circleMess.style.backgroundColor = temperatureColor.warmMess;
+				circleCon.style.backgroundColor = temperatureColor.warm.con;
+				circleTemp.style.backgroundColor = temperatureColor.warm.temp;
+				circleMess.style.backgroundColor = temperatureColor.warm.mess;
 					console.log('it\'s warm!');
 			}
 			if (temp >= 85) {
-				circleCon.style.backgroundColor = temperatureColor.hotCon;
-				circleTemp.style.backgroundColor = temperatureColor.hotTemp;
-				circleMess.style.backgroundColor = temperatureColor.hotMess;
+				circleCon.style.backgroundColor = temperatureColor.hot.con;
+				circleTemp.style.backgroundColor = temperatureColor.hot.temp;
+				circleMess.style.backgroundColor = temperatureColor.hot.mess;
 					console.log('it\'s hot!');
 			}
     	}
