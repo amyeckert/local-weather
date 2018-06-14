@@ -197,7 +197,6 @@ body {
 
 .circleTemp {
 	display: block;
-	// opacity: 0;
 	height: 125px;
     width: 125px;
     left: -70px;
@@ -221,16 +220,16 @@ body {
 	opacity: 0;
 	height: 300px;
 	width: 300px;
-	top: -33px;
+
 	background: $c-transparent;
 	transition: opacity 2s;
-	@include bp(medsmall) {
-		top: 60px;
-		left: -66px;
+	// @include bp(medsmall) {
+	// 	// top: 60px;
+	// 	// left: -66px;
 
-	}
-	@include bp(medium) {
-		top: 0;
-		left: 0;
-	}
+	// }
+	// @include bp(medium) {
+	// 	// top: 0;
+	// 	// left: 0;
+	// }
 }

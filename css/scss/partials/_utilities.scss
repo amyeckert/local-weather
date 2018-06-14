@@ -6,12 +6,10 @@
 .fadeIn {
 	opacity: 1;
 	z-index: 200;
-
-
 }
 
 .breathe {
-	opacity: 0.9;
+	opacity: 1;
 	z-index: 500;
 	animation-name: breathe;
 	animation-direction: alternate;

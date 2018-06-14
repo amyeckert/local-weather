@@ -207,17 +207,8 @@ body {
   opacity: 0;
   height: 300px;
   width: 300px;
-  top: -33px;
   background: rgba(29, 72, 226, 0);
   transition: opacity 2s; }
-  @media (min-width: 600px) {
-    .circleMess {
-      top: 60px;
-      left: -66px; } }
-  @media (min-width: 911px) {
-    .circleMess {
-      top: 0;
-      left: 0; } }
 
 .bold {
   font-weight: 700;
@@ -228,7 +219,7 @@ body {
   z-index: 200; }
 
 .breathe {
-  opacity: 0.9;
+  opacity: 1;
   z-index: 500;
   -webkit-animation-name: breathe;
           animation-name: breathe;
@@ -305,21 +296,29 @@ button.fadeOut {
 @-webkit-keyframes dropIn {
   0% {
     opacity: 0;
-    left: -70px;
-    top: -250px; }
+    -webkit-transform: translateX(-70px);
+            transform: translateX(-70px);
+    -webkit-transform: translateY(-250px);
+            transform: translateY(-250px); }
   100% {
     opacity: 1;
-    left: -70px;
-    top: 5px; } }
+    -webkit-transform: translateX(-70px);
+            transform: translateX(-70px);
+    -webkit-transform: translateY(5px);
+            transform: translateY(5px); } }
 
 @keyframes dropIn {
   0% {
     opacity: 0;
-    left: -70px;
-    top: -250px; }
+    -webkit-transform: translateX(-70px);
+            transform: translateX(-70px);
+    -webkit-transform: translateY(-250px);
+            transform: translateY(-250px); }
   100% {
     opacity: 1;
-    left: -70px;
-    top: 5px; } }
+    -webkit-transform: translateX(-70px);
+            transform: translateX(-70px);
+    -webkit-transform: translateY(5px);
+            transform: translateY(5px); } }
 
 /*# sourceMappingURL=styles.css.map */
