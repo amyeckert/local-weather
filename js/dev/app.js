@@ -91,7 +91,7 @@ document.onreadystatechange = function () {
     	let api,
     		countdown, 
     		duration,
-    		displaySunsetSunrise = document.querySelector("#sunset_sunrise"),
+    		displayTime = document.querySelector("#display__time"),
             endtime,
             localTimeAtSunrise,
             localTimeAtSunset,
@@ -139,8 +139,7 @@ document.onreadystatechange = function () {
 			tempC = Math.round(weatherData.main.temp);
 			tempF = Math.round((tempC * 1.8000) + 32);
 			updateCircleColor(tempF);
-
-			tempF += "F";
+		    tempF += "F";
 			tempC += "C";	
 
 			let bothTemps = tempF + " \/ " + tempC;
@@ -152,7 +151,6 @@ document.onreadystatechange = function () {
     		fadeInAnimate();
     		fadeOut();
     	}
-
 
     	function getLocalTimeOfSunsetAndSunrise(weatherData) {
     		
@@ -168,10 +166,7 @@ document.onreadystatechange = function () {
 			localTimeAtSunset = sunset.toLocaleString('en-US', timeOptions);
 			localTimeAtSunrise = sunrise.toLocaleString('en-US', timeOptions);
 
-            // displaySunsetSunrise.innerHTML = "<span class=\"bold\">" + localTimeAtSunset + ".</span>";
-			// displaySunsetSunrise.innerHTML = "<span class=\"bold\">" + localTimeAtSunrise + ".</span>";
-
-            console.log("Sunrise = " + localTimeAtSunrise, " Sunset = " + localTimeAtSunset);
+            // console.log("Sunrise = " + localTimeAtSunrise, " Sunset = " + localTimeAtSunset);
 
     		return initializeClock(sunrise, sunset);
     	}
@@ -179,14 +174,11 @@ document.onreadystatechange = function () {
     	/// Countdown timer. source: https://www.sitepoint.com/build-javascript-countdown-timer-no-dependencies/
     	//////////////////////////////////////
 
-
-
     	function getTimeRemainingTilSunset(sunset) {
     		timeTilSunset = Date.parse(sunset) - Date.parse(new Date());
     		let seconds = Math.floor( (timeTilSunset / 1000) % 60);
     		let minutes = Math.floor( (timeTilSunset / 1000 / 60) % 60);
     		let hours = Math.floor( (timeTilSunset / (1000 * 60 * 60)) %24);
-            
             return {
                 'hours': hours, 
                 'minutes': minutes,
@@ -199,28 +191,12 @@ document.onreadystatechange = function () {
             let seconds = Math.floor( (timeTilSunrise / 1000) % 60);
             let minutes = Math.floor( (timeTilSunrise / 1000 / 60) % 60);
             let hours = Math.floor( (timeTilSunrise / (1000 * 60 * 60)) %24);
-        
             return {
                 'hours': hours, 
                 'minutes': minutes,
                 'seconds': seconds 
             }
         }
-        
-
-        // function determineTheEndtime() {
-        // //if timenow is past sunset and before sunrise, sunrise = endtime, else sunset = endtime.
-        //     if(timeNow <= sunriseInSeconds && timeNow >= sunsetInSeconds ) {
-        //         endtime = sunsetInSeconds;
-        //         console.log(" TRUE: sunset has passed, use sunrise for countdown");
-        //         clearInterval(timeinterval);
-        //     }  else {
-        //         endtime = sunriseInSeconds;
-        //         console.log(" FALSE: sunset has not passed yet use sunset ")
-        //         clearInterval(timeinterval);
-        //         // console.log(timeNow, sunsetInSeconds, sunsetInSeconds, sunrise, sunset);
-        //     }
-        // }
 
         function initializeClock(sunset, sunrise) {
             countdown = document.querySelector('#countdown');
@@ -232,30 +208,27 @@ document.onreadystatechange = function () {
 
             function updateClock() {
                 let timeNow = Date.now();
+                let riseOrSet = document.querySelector(".display__sunset_sunrise");
 
-                if(timeNow >= sunriseInMS && timeNow <= sunsetInMS ) {
-                    console.log(" use sunset ");
+                if(timeNow >= sunriseInMS && timeNow <= sunsetInMS ) { 
+                    riseOrSet.innerHTML = " sunrise ";
                     timeTilEnd = getTimeRemainingTilSunrise(sunset);
-                    displaySunsetSunrise.innerHTML = "<span class=\"bold\">" + localTimeAtSunrise + ".</span>";
+                    displayTime.innerHTML = "<span class=\"bold\">" + localTimeAtSunrise + ".</span>";
                 }
-
                 else {
-                    console.log(" use sunrise ");
+                
                     timeTilEnd = getTimeRemainingTilSunset(sunrise);
-                    displaySunsetSunrise.innerHTML = "<span class=\"bold\">" + localTimeAtSunset + ".</span>";
+                    riseOrSet.innerHTML = " sunset ";
+                    displayTime.innerHTML = "<span class=\"bold\">" + localTimeAtSunset + ".</span>";
                 }
-
-                // update the countdown display
+                // update the countdown
                 showHours.innerHTML = ('0' + timeTilEnd.hours).slice(-2);
                 showMin.innerHTML = ('0' + timeTilEnd.minutes).slice(-2);
                 showSec.innerHTML = ('0' + timeTilEnd.seconds).slice(-2);
 
-
                 if(timeTilEnd.total <= 0){
                     clearInterval(timeinterval);
                 }
-                
-            console.log(timeNow, timeTilEnd);
             }
 	    	updateClock();
 	    	let timeinterval = setInterval(updateClock, 1000);
@@ -273,9 +246,7 @@ document.onreadystatechange = function () {
     	}
 
     	function updateCircleColor(temp) {
-
     		temperatureColor  = {
-    		
     			'freezing': {
     				con: 'hsla(259, 100%, 97%, 1)',
     				temp: 'hsla(197, 100%, 96%, 1)',
@@ -285,7 +256,6 @@ document.onreadystatechange = function () {
                         'hsla(183, 88%, 90%, 1)'
                         ]	
     			}, 
-
     			'cold':  {
     				con: 'hsla(233, 93%, 83%, 1)',
     				temp: 'hsla(197, 98%, 81%, 1)',
@@ -295,7 +265,6 @@ document.onreadystatechange = function () {
                         'hsla(173, 88%, 73%, 1)'
                     ]
     			},
-
     			'cool': {
 	    			con: 'hsla(166, 69%, 51%, 1)',
 	    			temp: 'hsla(175, 96%, 50%, 1)',
@@ -305,7 +274,6 @@ document.onreadystatechange = function () {
                         'hsla(137, 75%, 64%, 1)'
     				]
     			},
-
     			'mild' : {
 	    			con: 'hsla(60, 75%, 59%, 1)',
 	    			temp: 'hsla(143, 47%, 51%, 1)',
@@ -315,7 +283,6 @@ document.onreadystatechange = function () {
                         'hsla(93, 89%, 41%, 1)'
                     ]	
     			}, 
-
     			'warm': {
 	    			con: 'hsla(48, 100%, 52%, 1)',
 	    			temp: 'hsla(36, 100%, 64%, 1)',
@@ -325,7 +292,6 @@ document.onreadystatechange = function () {
                         'hsla(20, 100%, 65%, 1)'
                     ]
     			},
-
     			'hot': {
 	    			con: 'hsla(20, 100%, 58%, 1)',
 	    			temp: 'hsla(2, 100%, 50%, 1)',
@@ -341,39 +307,39 @@ document.onreadystatechange = function () {
 				circleCon.style.backgroundColor = temperatureColor.freezing.con;
 				circleTemp.style.backgroundColor = temperatureColor.freezing.temp;
 				circleMess.style.background = "radial-gradient(" + temperatureColor.freezing.mess[0]  +", " + temperatureColor.freezing.mess[1]+ ", " + temperatureColor.freezing.mess[2] + ")";
-				console.log('it\'s bloody freezing!');
+				// console.log('it\'s bloody freezing!');
 			}
 			if (temp >= 33 && temp <= 45) {
 				circleCon.style.backgroundColor = temperatureColor.cold.con;
 				circleTemp.style.backgroundColor = temperatureColor.cold.temp;
 				circleMess.style.background = "radial-gradient(" + temperatureColor.cold.mess[0]  +", " + temperatureColor.cold.mess[1]+ ", " + temperatureColor.cold.mess[2] + ")";
-					console.log('it\'s cold!');
+					// console.log('it\'s cold!');
 			}
 			if (temp >= 46 && temp <= 55) {
 				circleCon.style.backgroundColor = temperatureColor.cool.con;
 				circleTemp.style.backgroundColor = temperatureColor.cool.temp;
 				circleMess.style.background = "radial-gradient(" + temperatureColor.cool.mess[0]  +", " + temperatureColor.cool.mess[1]+ ", " + temperatureColor.cool.mess[2] + ")";
-					console.log('it\'s cool!');
+					// console.log('it\'s cool!');
 			}
 			if (temp >= 56 && temp <= 68) {
 				circleCon.style.backgroundColor = temperatureColor.mild.con;
 				circleTemp.style.backgroundColor = temperatureColor.mild.temp;
 				circleMess.style.background = "radial-gradient(" + temperatureColor.mild.mess[0]  +", " + temperatureColor.mild.mess[1]+ ", " + temperatureColor.mild.mess[2] + ")";
-					console.log('it\'s mild!');
+					// console.log('it\'s mild!');
 			}
 
 			if (temp >= 69 && temp <= 84) {
 				circleCon.style.backgroundColor = temperatureColor.warm.con;
 				circleTemp.style.backgroundColor = temperatureColor.warm.temp;
 				circleMess.style.background = "radial-gradient(" + temperatureColor.warm.mess[0]  +", " + temperatureColor.warm.mess[1]+ ", " + temperatureColor.warm.mess[2] + ")";
-				console.log("warm!");
+				// console.log("warm!");
             } 
 
             if (temp >= 85) {
                 circleCon.style.backgroundColor = temperatureColor.hot.con;
                 circleTemp.style.backgroundColor = temperatureColor.hot.temp;
                 circleMess.style.background = "radial-gradient(" + temperatureColor.hot.mess[0]  +", " + temperatureColor.hot.mess[1]+ ", " + temperatureColor.hot.mess[2] + ")";
-                    console.log('it\'s hot!');
+                    // console.log('it\'s hot!');
             }
     	}
     	
