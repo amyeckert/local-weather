@@ -197,10 +197,10 @@ document.onreadystatechange = function () {
     	//////////////////////////////////////////////////////
 
     	function fadeInAnimate() {
-    		circleMess.classList.toggle('fadeIn');
     		circleCon.classList.toggle('breathe');
-    		circleTemp.classList.toggle('fadeIn');	
-    	}
+    		circleTemp.classList.toggle('dropIn');	
+    		circleMess.classList.toggle('fadeIn');
+    	}	
 
     	function fadeOut() {
     		getLocation.classList.toggle('fadeOut');
@@ -238,7 +238,12 @@ document.onreadystatechange = function () {
     			'warm': {
 	    			con: 'hsla(48, 100%, 52%, 1)',
 	    			temp: 'hsla(36, 100%, 64%, 1)',
-	    			mess: 'hsla(20, 100%, 65%, 1)'
+	    			mess: [
+	    				'hsla(20, 100%, 65%, 0.50)',
+                        'hsla(20, 100%, 65%, 0.90)',
+                        'hsla(20, 100%, 65%, 1)'
+                    ]
+	    		
     			},
 
     			'hot': {
@@ -272,18 +277,20 @@ document.onreadystatechange = function () {
 				circleMess.style.backgroundColor = temperatureColor.mild.mess;
 					console.log('it\'s mild!');
 			}
+
 			if (temp >= 69 && temp <= 84) {
 				circleCon.style.backgroundColor = temperatureColor.warm.con;
 				circleTemp.style.backgroundColor = temperatureColor.warm.temp;
-				circleMess.style.backgroundColor = temperatureColor.warm.mess;
-					console.log('it\'s warm!');
-			}
-			if (temp >= 85) {
-				circleCon.style.backgroundColor = temperatureColor.hot.con;
-				circleTemp.style.backgroundColor = temperatureColor.hot.temp;
-				circleMess.style.backgroundColor = temperatureColor.hot.mess;
-					console.log('it\'s hot!');
-			}
+				circleMess.style.background = "radial-gradient(" + temperatureColor.warm.mess[0]  +", " + temperatureColor.warm.mess[1]+ ", " + temperatureColor.warm.mess[2] + ")";
+				console.log("warm!");
+            } 
+
+            if (temp >= 85) {
+                circleCon.style.backgroundColor = temperatureColor.hot.con;
+                circleTemp.style.backgroundColor = temperatureColor.hot.temp;
+                circleMess.style.backgroundColor = temperatureColor.hot.mess;
+                    console.log('it\'s hot!');
+            }
     	}
     	
 		getLocation.addEventListener("click", function( event ) {

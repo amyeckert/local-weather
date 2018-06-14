@@ -197,7 +197,7 @@ body {
 
 .circleTemp {
 	display: block;
-	opacity: 0;
+	// opacity: 0;
 	height: 125px;
     width: 125px;
     left: -70px;
@@ -222,8 +222,7 @@ body {
 	height: 300px;
 	width: 300px;
 	top: -33px;
-	background: hsla(57, 71%, 50%, 0.9);
-	background-color: $c-transparent;
+	background: $c-transparent;
 	transition: opacity 2s;
 	@include bp(medsmall) {
 		top: 60px;
