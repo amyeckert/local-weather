@@ -63,7 +63,7 @@ body {
     	align-self: center;
 		width: 75%;
 		min-height: 200px;
-		margin: 0 auto;
+		margin: -40px auto 0 auto;
 		border: 1px solid $c-transparent;
 		background-color: $c-transparent;
 		font-family: 'Varela Round', sans-serif;
@@ -145,7 +145,7 @@ body {
 	}
 
 	.circle__inner_con {
-		top: 39%;
+		top: 36.5%;
 
 		.conditions {
 			display: block;
@@ -188,7 +188,6 @@ body {
 	-o-transition: display 1s ease ;
 	transition: display 1s ease ;
 
-
 	@include bp(medium) {
 		top: 0;
 		left: 0;
@@ -203,7 +202,6 @@ body {
     top: 5px;
 	font-family: $font-accent;
 	background-color: $c-transparent;
-	transition: opacity 1s;
 
 	@include bp(medsmall) {
 		left: -15px;
@@ -220,16 +218,15 @@ body {
 	opacity: 0;
 	height: 300px;
 	width: 300px;
-
 	background: $c-transparent;
-	transition: opacity 2s;
-	// @include bp(medsmall) {
-	// 	// top: 60px;
-	// 	// left: -66px;
+	transition: opacity 2.5s;
+	@include bp(medsmall) {
+		top: 60px;
+		left: -66px;
 
-	// }
-	// @include bp(medium) {
-	// 	// top: 0;
-	// 	// left: 0;
-	// }
+	}
+	@include bp(medium) {
+		top: 0;
+		left: 0;
+	}
 }

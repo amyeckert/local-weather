@@ -97,7 +97,7 @@ body {
     align-self: center;
     width: 75%;
     min-height: 200px;
-    margin: 0 auto;
+    margin: -40px auto 0 auto;
     border: 1px solid rgba(29, 72, 226, 0);
     background-color: rgba(29, 72, 226, 0);
     font-family: 'Varela Round', sans-serif;
@@ -152,7 +152,7 @@ body {
     text-align: center;
     font-size: 1.2rem; }
   .information .circle__inner_con {
-    top: 39%; }
+    top: 36.5%; }
     .information .circle__inner_con .conditions {
       display: block;
       margin: auto;
@@ -192,8 +192,7 @@ body {
   left: -70px;
   top: 5px;
   font-family: "Abril Fatface", cursive;
-  background-color: rgba(29, 72, 226, 0);
-  transition: opacity 1s; }
+  background-color: rgba(29, 72, 226, 0); }
   @media (min-width: 600px) {
     .circleTemp {
       left: -15px; } }
@@ -208,7 +207,15 @@ body {
   height: 300px;
   width: 300px;
   background: rgba(29, 72, 226, 0);
-  transition: opacity 2s; }
+  transition: opacity 2.5s; }
+  @media (min-width: 600px) {
+    .circleMess {
+      top: 60px;
+      left: -66px; } }
+  @media (min-width: 911px) {
+    .circleMess {
+      top: 0;
+      left: 0; } }
 
 .bold {
   font-weight: 700;
@@ -217,30 +224,6 @@ body {
 .fadeIn {
   opacity: 1;
   z-index: 200; }
-
-.breathe {
-  opacity: 1;
-  z-index: 500;
-  -webkit-animation-name: breathe;
-          animation-name: breathe;
-  -webkit-animation-direction: alternate;
-          animation-direction: alternate;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
-  -webkit-animation-duration: 5s;
-          animation-duration: 5s; }
-
-.dropIn {
-  opacity: 1;
-  z-index: 999;
-  -webkit-animation-name: dropIn;
-          animation-name: dropIn;
-  -webkit-animation-direction: alternate;
-          animation-direction: alternate;
-  -webkit-animation-iteration-count: 1;
-          animation-iteration-count: 1;
-  -webkit-animation-duration: 1.8s;
-          animation-duration: 1.8s; }
 
 button.fadeOut {
   opacity: 0;
@@ -267,9 +250,33 @@ button.fadeOut {
       display: inline;
       vertical-align: calc(50%); } }
 
+.breathe {
+  opacity: 1;
+  z-index: 500;
+  -webkit-animation-name: breathe;
+          animation-name: breathe;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-duration: 5s;
+          animation-duration: 5s; }
+
+.dropIn {
+  opacity: 1;
+  z-index: 999;
+  -webkit-animation-name: dropIn;
+          animation-name: dropIn;
+  -webkit-animation-direction: normal;
+          animation-direction: normal;
+  -webkit-animation-iteration-count: 1;
+          animation-iteration-count: 1;
+  -webkit-animation-duration: 1.5s;
+          animation-duration: 1.5s; }
+
 @-webkit-keyframes breathe {
   0% {
-    opacity: 0.7;
+    opacity: 1;
     -webkit-transform: scale(1);
             transform: scale(1); }
   50% {
@@ -282,7 +289,7 @@ button.fadeOut {
 
 @keyframes breathe {
   0% {
-    opacity: 0.7;
+    opacity: 1;
     -webkit-transform: scale(1);
             transform: scale(1); }
   50% {
