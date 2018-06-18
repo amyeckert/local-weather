@@ -103,7 +103,11 @@ document.onreadystatechange = function () {
             timeTilEnd,
             timeTilSunrise,
             timeTilSunset,
-            weatherData; 
+            weatherData, 
+            sunriseHour,
+            sunriseMinute,
+            sunsetHour,
+            sunsetMinute;
     	
     	const options = {
 			enableHighAccuracy: true,
@@ -132,7 +136,7 @@ document.onreadystatechange = function () {
 			.then(function(updatedWeatherData) {	
 			   	weatherData = updatedWeatherData;
 			   	return updateConditions(weatherData);
-		    });		
+		    });	
 		}
 
 		function updateConditions(weatherData) {
@@ -150,39 +154,45 @@ document.onreadystatechange = function () {
     		getLocalTimeOfSunsetAndSunrise(weatherData);
     		fadeInAnimate();
     		fadeOut();
+            console.log(weatherData);
     	}
 
     	function getLocalTimeOfSunsetAndSunrise(weatherData) {
     		
 			sunset = new Date(0);
             sunrise = new Date(0);
-
-			let sunsetUTCHours = weatherData.sys.sunset;
+  
+            let sunsetUTCHours = weatherData.sys.sunset;
             let sunriseUTCHours = weatherData.sys.sunrise;
 
             sunset.setUTCSeconds(sunsetUTCHours);
-			sunrise.setUTCSeconds(sunriseUTCHours);
+            sunrise.setUTCSeconds(sunriseUTCHours);
 
-			localTimeAtSunset = sunset.toLocaleString('en-US', timeOptions);
-			localTimeAtSunrise = sunrise.toLocaleString('en-US', timeOptions);
+            sunriseHour = sunrise.getHours();
+            sunriseMinute = sunrise.getMinutes();
+            sunsetHour = sunset.getHours();
+            sunsetMinute = sunset.getMinutes();
 
-            // console.log("Sunrise = " + localTimeAtSunrise, " Sunset = " + localTimeAtSunset);
+            localTimeAtSunset = sunset.toLocaleString('en-US', timeOptions);
+            localTimeAtSunrise = sunrise.toLocaleString('en-US', timeOptions);
+            // console.log("Sunrise = " + sunriseHour + ", Sunset = " + sunsetHour );
 
-    		return initializeClock(sunrise, sunset);
-    	}
-    	//////////////////////////////////////
-    	/// Countdown timer. source: https://www.sitepoint.com/build-javascript-countdown-timer-no-dependencies/
-    	//////////////////////////////////////
+            return initializeClock(sunrise, sunset);
+        }
+        //////////////////////////////////////
+        /// Countdown timer. source: https://www.sitepoint.com/build-javascript-countdown-timer-no-dependencies/
+        //////////////////////////////////////
 
-    	function getTimeRemainingTilSunset(sunset) {
-    		timeTilSunset = Date.parse(sunset) - Date.parse(new Date());
-    		let seconds = Math.floor( (timeTilSunset / 1000) % 60);
-    		let minutes = Math.floor( (timeTilSunset / 1000 / 60) % 60);
-    		let hours = Math.floor( (timeTilSunset / (1000 * 60 * 60)) %24);
+        function getTimeRemainingTilSunset(sunset) {
+            timeTilSunset = Date.parse(sunset) - Date.parse(new Date());
+            let seconds = Math.floor( (timeTilSunset / 1000) % 60);
+            let minutes = Math.floor( (timeTilSunset / 1000 / 60) % 60);
+            let hours = Math.floor( (timeTilSunset / (1000 * 60 * 60)) %24);
+            console.log("MS until sunset = " + timeTilSunset + " hours: " + hours + " min: " + minutes);
             return {
                 'hours': hours, 
                 'minutes': minutes,
-                'seconds': seconds 
+                'seconds': seconds
             }
         }
 
@@ -191,6 +201,7 @@ document.onreadystatechange = function () {
             let seconds = Math.floor( (timeTilSunrise / 1000) % 60);
             let minutes = Math.floor( (timeTilSunrise / 1000 / 60) % 60);
             let hours = Math.floor( (timeTilSunrise / (1000 * 60 * 60)) %24);
+            console.log("MS until sunrise = " + timeTilSunrise + " hours: " + hours + " min: " + minutes);
             return {
                 'hours': hours, 
                 'minutes': minutes,
@@ -203,25 +214,63 @@ document.onreadystatechange = function () {
             let showHours = document.querySelector('.hours');
             let showMin = document.querySelector('.minutes');
             let showSec = document.querySelector('.seconds');
-            let sunriseInMS = Date.parse(sunrise);
-            let sunsetInMS = Date.parse(sunset);
+        
 
             function updateClock() {
-                let timeNow = Date.now();
+                let timeNow = new Date();
+                // let timeNow = new Date('June 18, 2018 22:24:00');
+                let nowHour = timeNow.getHours();
+                let nowMinute = timeNow.getMinutes();
                 let riseOrSet = document.querySelector(".display__sunset_sunrise");
 
-                if(timeNow >= sunriseInMS && timeNow <= sunsetInMS ) { 
-                    riseOrSet.innerHTML = " sunrise ";
-                    timeTilEnd = getTimeRemainingTilSunrise(sunset);
-                    displayTime.innerHTML = "<span class=\"bold\">" + localTimeAtSunrise + ".</span>";
-                }
-                else {
-                
-                    timeTilEnd = getTimeRemainingTilSunset(sunrise);
-                    riseOrSet.innerHTML = " sunset ";
+                console.log(timeNow);
+
+                // time now is after sunsetHour but before sunsetMinute, get time til sunset
+                if (nowHour >= sunsetHour && nowMinute <= sunsetMinute ) {
+                    timeTilEnd = getTimeRemainingTilSunset(sunset);
+                    riseOrSet.innerHTML = " sunset ";    
                     displayTime.innerHTML = "<span class=\"bold\">" + localTimeAtSunset + ".</span>";
+
+                    if(timeTilEnd.hours < 0 || timeTilEnd.minutes < 0 || timeTilEnd.seconds < 0) {
+                        timeTilEnd.hours = -timeTilEnd.hours;
+                        timeTilEnd.minutes = -timeTilEnd.minutes;
+                        timeTilEnd.seconds = -timeTilEnd.seconds;
+                    }
+
+                    console.log("time now is after sunsetHour but still before sunsetMinute, so still calculate time til sunset");
+
+                // time now is after sunsetHour AND after sunsetMinute, get time til sunrise
+                } else if (nowHour >= sunsetHour && nowMinute >= sunsetMinute) { 
+                    timeTilEnd = getTimeRemainingTilSunrise(sunrise);
+                    riseOrSet.innerHTML = " sunrise ";    
+                    displayTime.innerHTML = "<span class=\"bold\">" + localTimeAtSunrise + ".</span>";
+
+                    if(timeTilEnd.hours < 0 || timeTilEnd.minutes < 0 || timeTilEnd.seconds < 0) {
+                        timeTilEnd.hours = -timeTilEnd.hours;
+                        timeTilEnd.minutes = -timeTilEnd.minutes;
+                        timeTilEnd.seconds = -timeTilEnd.seconds;
+                    }
+
+                    console.log(timeTilEnd.hours, timeTilEnd.minutes, timeTilEnd.seconds);
+                    console.log("time now is after sunsetHour AND sunsetMinute, get time til sunrise");
+
+                // time now is before sunsetHour and sunsetMinute, calculate time til sunset
+                } else {
+                    timeTilEnd = getTimeRemainingTilSunset(sunset);
+                    riseOrSet.innerHTML = " sunset ";
+                    displayTime.innerHTML = "<span class=\"bold\">" + localTimeAtSunset+ ".</span>";
+
+                    if(timeTilEnd.hours < 0 || timeTilEnd.minutes < 0 || timeTilEnd.seconds < 0) {
+                        timeTilEnd.hours = -timeTilEnd.hours;
+                        timeTilEnd.minutes = -timeTilEnd.minutes;
+                        timeTilEnd.seconds = -timeTilEnd.seconds;
+                    }
+                    console.log(timeTilEnd.hours, timeTilEnd.minutes, timeTilEnd.seconds);
+                    console.log("else statement");
+
                 }
-                // update the countdown
+
+                //update the countdown
                 showHours.innerHTML = ('0' + timeTilEnd.hours).slice(-2);
                 showMin.innerHTML = ('0' + timeTilEnd.minutes).slice(-2);
                 showSec.innerHTML = ('0' + timeTilEnd.seconds).slice(-2);
@@ -229,9 +278,10 @@ document.onreadystatechange = function () {
                 if(timeTilEnd.total <= 0){
                     clearInterval(timeinterval);
                 }
+
             }
 	    	updateClock();
-	    	let timeinterval = setInterval(updateClock, 1000);
+	    	let timeinterval = setInterval(updateClock, 1000); //updates clock every second
     	}
     	//////////////////////////////////////////////////////
 
