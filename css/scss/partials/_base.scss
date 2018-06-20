@@ -4,6 +4,7 @@ body {
 	padding: 0 0 0 0 ;
 	color: $c-text;
 	height: 100vh;
+	background-color: $c-transparent;
 }
 
 .background {
@@ -11,6 +12,7 @@ body {
 	width: 100%;
 	z-index: 0;
 	overflow: hidden;
+	background-color: $c-transparent;
 }
 
 .container {
@@ -164,7 +166,7 @@ body {
 		}
 	}
 
-	.circle__inner_mess {
+	.circle__inner_clock{
 		top: 26% ;
 
 		.message {
@@ -181,7 +183,7 @@ body {
     top: 72px;
     left: 40px;
     transform: scale(1);
-	background-color: $c-transparent;
+	background: $c-transparent;
 	transition: opacity 0.5s;
 	-webkit-transition: display 1s ease ;
 	-moz-transition: display 1s ease ;
@@ -201,7 +203,7 @@ body {
     left: -70px;
     top: 5px;
 	font-family: $font-accent;
-	background-color: $c-transparent;
+	background: $c-transparent;
 
 	@include bp(medsmall) {
 		left: -15px;
@@ -213,7 +215,7 @@ body {
 	}
 }
 
-.circleMess {
+.circleClock {
 	display: block;
 	opacity: 0;
 	height: 300px;

@@ -4,7 +4,7 @@ document.onreadystatechange = function () {
     	"use strict";
     	// working on implementing this section to automatically prompt for location permission
 
-		// function prompt(window, pref, message, callback) {
+		// function prompt(window, pref, clockage, callback) {
 		//     let branch = Components.classes["@mozilla.org/preferences-service;1"]
 		//                            .getService(Components.interfaces.nsIPrefBranch);
 
@@ -30,7 +30,7 @@ document.onreadystatechange = function () {
 		//     let self = window.PopupNotifications.show(
 		//         window.gBrowser.selectedBrowser,
 		//         "geolocation",
-		//         message,
+		//         clockage,
 		//         "geo-notification-icon",
 		//         {
 		//             label: "Share Location",
@@ -75,30 +75,98 @@ document.onreadystatechange = function () {
 		////////////////////
         // global variables;
         //////////////////// 
-    	const circleCon = document.querySelector(".circleCon");
-    	const circleTemp = document.querySelector(".circleTemp");
-    	const circleMess = document.querySelector(".circleMess");
+        const getLocation = document.querySelector(".getLocation");
+        const information = document.querySelector(".information");
+        const temperature = document.querySelector(".temperature");
     	const conditions = document.querySelector(".conditions");
-    	const getLocation = document.querySelector(".getLocation");
-    	const information = document.querySelector(".information");
-    	const temperature = document.querySelector(".temperature");
         const timeOptions = {
               hour: 'numeric',
               minute: 'numeric',
               hour12: true
             };
+        let circleCon = document.querySelector(".circleCon");
+        let circleTemp = document.querySelector(".circleTemp");
+        let circleClock = document.querySelector(".circleClock");
+        let colors = { 
+            'day': {
+                'freezing': {
+                    con: 'hsla(259, 100%, 97%, 1)',
+                    temp: 'hsla(197, 100%, 96%, 1)',
+                    clock: [
+                        'hsla(183, 88%, 90%, 0.5)',
+                        'hsla(183, 88%, 90%, 0.9)',
+                        'hsla(183, 88%, 90%, 1)'
+                        ]   
+                }, 
+                'cold':  {
+                    con: 'hsla(233, 93%, 83%, 1)',
+                    temp: 'hsla(197, 98%, 81%, 1)',
+                    clock: [
+                        'hsla(173, 88%, 73%, 0.5)',    
+                        'hsla(173, 88%, 73%, 0.9)',    
+                        'hsla(173, 88%, 73%, 1)'
+                    ]
+                },
+                'cool': {
+                    con: 'hsla(166, 69%, 51%, 1)',
+                    temp: 'hsla(175, 96%, 50%, 1)',
+                    clock: [
+                        'hsla(137, 75%, 64%, 0.5)',
+                        'hsla(137, 75%, 64%, 0.9)',
+                        'hsla(137, 75%, 64%, 1)'
+                    ]
+                },
+                'mild' : {
+                    con: 'hsla(60, 75%, 59%, 1)',
+                    temp: 'hsla(143, 47%, 51%, 1)',
+                    clock: [
+                        'hsla(93, 89%, 41%, 0.5)',
+                        'hsla(93, 89%, 41%, 0.9)',
+                        'hsla(93, 89%, 41%, 1)'
+                    ]   
+                }, 
+                'warm': {
+                    con: 'hsla(48, 100%, 52%, 1)',
+                    temp: 'hsla(17, 85%, 50%, 1)',
+                    clock: [
+                        'hsla(20, 100%, 65%, 0.50)',
+                        'hsla(20, 100%, 65%, 0.90)',
+                        'hsla(20, 100%, 65%, 1)'
+                    ]
+                },
+                'hot': {
+                    con: 'hsla(20, 100%, 58%, 1)',
+                    temp: 'hsla(2, 100%, 50%, 1)',
+                    clock: [
+                        'hsla(351, 91%, 64%, 0.5)',
+                        'hsla(351, 91%, 64%, 0.9)',
+                        'hsla(351, 91%, 64%, 1)'
+                    ]   
+                }
+            }, 
+            'night': {
+                night_text: 'hsla(0, 0%, 100%, 1)',
+                con: 'hsla(0, 0%, 7%, 1)',
+                temp: 'hsla(247, 9%, 17%, 1)',
+                clock: 'hsla(170, 12%, 10%, 1)',
+                freezing: 'hsla(291, 47%, 3%, 1)',
+                cold: 'hsla(246, 100%, 4%, 1)',
+                cool: 'hsla(220, 45%, 6%, 1)',
+                mild: 'hsla(114, 83%, 2%, 1)',
+                warm: 'hsla(44, 100%, 3%, 1)',
+                hot: 'hsla(0, 79%, 4%, 1)'
+            }   
+        }
 
     	let api,
     		countdown,
     		displayTime = document.querySelector("#display__time"),
-            // duration,
             localTimeAtSunrise,
             localTimeAtSunset,
             sunset,
             sunrise,
             tempC,
-            tempF,
-            temperatureColor,
+            tempF, 
             timeNow,
             timeAtEnd,
             timeAtSunrise,
@@ -113,7 +181,7 @@ document.onreadystatechange = function () {
 
 		function error(error) {
     		alert("Please allow this site to access your location information.");
-    		console.warn(`ERROR(${error.code}): ${error.message}`);
+    		console.warn(`ERROR(${error.code}): ${error.clockage}`);
     	}
 
     	function success(position) {
@@ -153,7 +221,7 @@ document.onreadystatechange = function () {
         function updateConditions(weatherData) {
             tempC = Math.round(weatherData.main.temp);
             tempF = Math.round((tempC * 1.8000) + 32);
-            updateCircleColor(tempF);
+            updateCircleColor(0);
             tempF += "F";
             tempC += "C";   
 
@@ -190,20 +258,21 @@ document.onreadystatechange = function () {
         }
 
         function chooseEndTime(sunrise, sunset) {
-            let now = Date.now();
-            let nowString = '' + now;
-            nowString = Number(nowString.slice(0, -3));
-            now = nowString;
-            console.log(now, nowString); 
-            console.log("sunrise = " + sunrise + ", sunset = " + sunset);
+            // let now = Date.now();
+            // let nowString = '' + now;
+            // nowString = Number(nowString.slice(0, -3));
+            // now = nowString;
+            // console.log(now, nowString); 
+            // console.log("sunrise = " + sunrise + ", sunset = " + sunset);
          
-            // now = new Date('June 19, 2018 22:24:00'); 
+            let now = new Date('June 20, 2018 22:24:00'); 
             let riseOrSet = document.querySelector(".display__sunset_sunrise");
 
             if (now >= timeAtSunrise && now <= timeAtSunset) {
                 riseOrSet.innerHTML = " sunset ";    
                 displayTime.innerHTML = "<span class=\"bold\">" + localTimeAtSunset + ".</span>";
                 timeAtEnd = sunset;
+                updateCircleColor();
                 // console.log("countdown to sunset at " + localTimeAtSunset);
             }
           
@@ -211,6 +280,7 @@ document.onreadystatechange = function () {
                 riseOrSet.innerHTML = " sunrise "; 
                 displayTime.innerHTML = "<span class=\"bold\">" + localTimeAtSunrise + ".</span>";
                 timeAtEnd = sunrise;
+                updateBackgroundColor(tempF);
                 // console.log("countdown to sunrise at " + localTimeAtSunrise);
             }
 
@@ -240,7 +310,7 @@ document.onreadystatechange = function () {
     	function fadeInAnimate() {
     		circleCon.classList.toggle('breathe');
     		circleTemp.classList.toggle('dropIn');	
-    		circleMess.classList.toggle('fadeIn');
+    		circleClock.classList.toggle('fadeIn');
     	}	
 
     	function fadeOut() {
@@ -248,108 +318,73 @@ document.onreadystatechange = function () {
     	}
 
     	function updateCircleColor(temp) {
-    		temperatureColor  = {
-    			'freezing': {
-    				con: 'hsla(259, 100%, 97%, 1)',
-    				temp: 'hsla(197, 100%, 96%, 1)',
-    				mess: [
-                        'hsla(183, 88%, 90%, 0.5)',
-                        'hsla(183, 88%, 90%, 0.9)',
-                        'hsla(183, 88%, 90%, 1)'
-                        ]	
-    			}, 
-    			'cold':  {
-    				con: 'hsla(233, 93%, 83%, 1)',
-    				temp: 'hsla(197, 98%, 81%, 1)',
-    				mess: [
-                        'hsla(173, 88%, 73%, 0.5)',    
-                        'hsla(173, 88%, 73%, 0.9)',    
-                        'hsla(173, 88%, 73%, 1)'
-                    ]
-    			},
-    			'cool': {
-	    			con: 'hsla(166, 69%, 51%, 1)',
-	    			temp: 'hsla(175, 96%, 50%, 1)',
-	    			mess: [
-                        'hsla(137, 75%, 64%, 0.5)',
-                        'hsla(137, 75%, 64%, 0.9)',
-                        'hsla(137, 75%, 64%, 1)'
-    				]
-    			},
-    			'mild' : {
-	    			con: 'hsla(60, 75%, 59%, 1)',
-	    			temp: 'hsla(143, 47%, 51%, 1)',
-	    			mess: [
-                        'hsla(93, 89%, 41%, 0.5)',
-                        'hsla(93, 89%, 41%, 0.9)',
-                        'hsla(93, 89%, 41%, 1)'
-                    ]	
-    			}, 
-    			'warm': {
-	    			con: 'hsla(48, 100%, 52%, 1)',
-	    			temp: 'hsla(36, 100%, 64%, 1)',
-	    			mess: [
-	    				'hsla(20, 100%, 65%, 0.50)',
-                        'hsla(20, 100%, 65%, 0.90)',
-                        'hsla(20, 100%, 65%, 1)'
-                    ]
-    			},
-    			'hot': {
-	    			con: 'hsla(20, 100%, 58%, 1)',
-	    			temp: 'hsla(2, 100%, 50%, 1)',
-	    			mess: [
-                        'hsla(351, 91%, 64%, 0.5)',
-                        'hsla(351, 91%, 64%, 0.9)',
-                        'hsla(351, 91%, 64%, 1)'
-                    ]	
-    			}
-			} 
-
+    		
 			if(temp < 32 ) {
-				circleCon.style.backgroundColor = temperatureColor.freezing.con;
-				circleTemp.style.backgroundColor = temperatureColor.freezing.temp;
-				circleMess.style.background = "radial-gradient(" + temperatureColor.freezing.mess[0]  +", " + temperatureColor.freezing.mess[1]+ ", " + temperatureColor.freezing.mess[2] + ")";
+				circleCon.style.background = colors.day.freezing.con;
+				circleTemp.style.background = colors.day.freezing.temp;
+				circleClock.style.background = "radial-gradient(" + colors.day.freezing.clock[0]  +", " + colors.day.freezing.clock[1]+ ", " + colors.day.freezing.clock[2] + ")";
 				// console.log('it\'s bloody freezing!');
 			}
 			if (temp >= 33 && temp <= 45) {
-				circleCon.style.backgroundColor = temperatureColor.cold.con;
-				circleTemp.style.backgroundColor = temperatureColor.cold.temp;
-				circleMess.style.background = "radial-gradient(" + temperatureColor.cold.mess[0]  +", " + temperatureColor.cold.mess[1]+ ", " + temperatureColor.cold.mess[2] + ")";
+				circleCon.style.backgroundColor = colors.day.cold.con;
+				circleTemp.style.backgroundColor = colors.day.cold.temp;
+				circleClock.style.background = "radial-gradient(" + colors.day.cold.clock[0]  +", " + colors.day.cold.clock[1]+ ", " + colors.day.cold.clock[2] + ")";
 					// console.log('it\'s cold!');
 			}
 			if (temp >= 46 && temp <= 55) {
-				circleCon.style.backgroundColor = temperatureColor.cool.con;
-				circleTemp.style.backgroundColor = temperatureColor.cool.temp;
-				circleMess.style.background = "radial-gradient(" + temperatureColor.cool.mess[0]  +", " + temperatureColor.cool.mess[1]+ ", " + temperatureColor.cool.mess[2] + ")";
+				circleCon.style.backgroundColor = colors.day.cool.con;
+				circleTemp.style.backgroundColor = colors.day.cool.temp;
+				circleClock.style.background = "radial-gradient(" + colors.day.cool.clock[0]  +", " + colors.day.cool.clock[1]+ ", " + colors.day.cool.clock[2] + ")";
 					// console.log('it\'s cool!');
 			}
 			if (temp >= 56 && temp <= 68) {
-				circleCon.style.backgroundColor = temperatureColor.mild.con;
-				circleTemp.style.backgroundColor = temperatureColor.mild.temp;
-				circleMess.style.background = "radial-gradient(" + temperatureColor.mild.mess[0]  +", " + temperatureColor.mild.mess[1]+ ", " + temperatureColor.mild.mess[2] + ")";
+				circleCon.style.backgroundColor = colors.day.mild.con;
+				circleTemp.style.backgroundColor = colors.day.mild.temp;
+				circleClock.style.background = "radial-gradient(" + colors.day.mild.clock[0]  +", " + colors.day.mild.clock[1]+ ", " + colors.day.mild.clock[2] + ")";
 					// console.log('it\'s mild!');
 			}
 
 			if (temp >= 69 && temp <= 84) {
-				circleCon.style.backgroundColor = temperatureColor.warm.con;
-				circleTemp.style.backgroundColor = temperatureColor.warm.temp;
-				circleMess.style.background = "radial-gradient(" + temperatureColor.warm.mess[0]  +", " + temperatureColor.warm.mess[1]+ ", " + temperatureColor.warm.mess[2] + ")";
+				circleCon.style.backgroundColor = colors.day.warm.con;
+				circleTemp.style.backgroundColor = colors.day.warm.temp;
+				circleClock.style.background = "radial-gradient(" + colors.day.warm.clock[0]  +", " + colors.day.warm.clock[1]+ ", " + colors.day.warm.clock[2] + ")";
 				// console.log("warm!");
             } 
 
             if (temp >= 85) {
-                circleCon.style.backgroundColor = temperatureColor.hot.con;
-                circleTemp.style.backgroundColor = temperatureColor.hot.temp;
-                circleMess.style.background = "radial-gradient(" + temperatureColor.hot.mess[0]  +", " + temperatureColor.hot.mess[1]+ ", " + temperatureColor.hot.mess[2] + ")";
+                circleCon.style.backgroundColor = colors.day.hot.con;
+                circleTemp.style.backgroundColor = colors.day.hot.temp;
+                circleClock.style.background = "radial-gradient(" + colors.day.hot.clock[0]  +", " + colors.day.hot.clock[1]+ ", " + colors.day.hot.clock[2] + ")";
                     // console.log('it\'s hot!');
             }
     	}
+
+        function updateBackgroundColor(temp) {
+            //switch to night color scheme
+            let background = document.querySelector(".background");
+            let body = document.querySelector('body');
+            body.style.color = colors.night.night_text;
+            // console.log(temp);
+            if( temp < 32 ) { 
+                background.style.backgroundColor = colors.night.freezing;
+            }
+
+            circleCon.style.background = 'hsla(0, 0%, 7%, 1)';
+            circleTemp.style.background = 'hsla(247, 9%, 17%, 1)';
+            circleClock.style.background = 'hsla(170, 12%, 10%, 1)';
+
+
+            console.log(colors.night.freezing);
+
+            // background.classList.toggle('.night'); 
+        }
     	
 		getLocation.addEventListener("click", function( event ) {
 			event.preventDefault(event);
 			getLocation.innerHTML = "One moment, please...";
 			navigator.geolocation.getCurrentPosition(success, error, options);
-			updateCircleColor();
+			// updateCircleColor();
+            // updateBackgroundColor();
 	 	});
 	}
 }

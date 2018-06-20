@@ -62,13 +62,15 @@ body {
   font-size: 16px;
   padding: 0 0 0 0;
   color: #1c1d1b;
-  height: 100vh; }
+  height: 100vh;
+  background-color: rgba(29, 72, 226, 0); }
 
 .background {
   height: 100%;
   width: 100%;
   z-index: 0;
-  overflow: hidden; }
+  overflow: hidden;
+  background-color: rgba(29, 72, 226, 0); }
 
 .container {
   display: flex;
@@ -163,9 +165,9 @@ body {
     top: 38%; }
     .information .circle__inner_temp .temperature {
       display: block; }
-  .information .circle__inner_mess {
+  .information .circle__inner_clock {
     top: 26%; }
-    .information .circle__inner_mess .message {
+    .information .circle__inner_clock .message {
       display: block; }
 
 .circleCon {
@@ -177,7 +179,7 @@ body {
   left: 40px;
   -webkit-transform: scale(1);
           transform: scale(1);
-  background-color: rgba(29, 72, 226, 0);
+  background: rgba(29, 72, 226, 0);
   transition: opacity 0.5s;
   transition: display 1s ease; }
   @media (min-width: 911px) {
@@ -192,7 +194,7 @@ body {
   left: -70px;
   top: 5px;
   font-family: "Abril Fatface", cursive;
-  background-color: rgba(29, 72, 226, 0); }
+  background: rgba(29, 72, 226, 0); }
   @media (min-width: 600px) {
     .circleTemp {
       left: -15px; } }
@@ -201,7 +203,7 @@ body {
       top: 0;
       left: 0; } }
 
-.circleMess {
+.circleClock {
   display: block;
   opacity: 0;
   height: 300px;
@@ -209,11 +211,11 @@ body {
   background: rgba(29, 72, 226, 0);
   transition: opacity 2.5s; }
   @media (min-width: 600px) {
-    .circleMess {
+    .circleClock {
       top: 60px;
       left: -66px; } }
   @media (min-width: 911px) {
-    .circleMess {
+    .circleClock {
       top: 0;
       left: 0; } }
 
