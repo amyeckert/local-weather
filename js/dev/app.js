@@ -159,6 +159,7 @@ document.onreadystatechange = function () {
         }
 
     	let api,
+            background = document.querySelector('.background'),
     		countdown,
     		displayTime = document.querySelector("#display__time"),
             localTimeAtSunrise,
@@ -226,7 +227,7 @@ document.onreadystatechange = function () {
             tempF += "F";
             tempC += "C";   
 
-            let bothTemps = tempF + " \/ " + tempC;
+            let bothTemps = tempF + "\/" + tempC;
             let localConditions = weatherData.weather[0]["description"];
 
             conditions.textContent = localConditions;
@@ -263,11 +264,13 @@ document.onreadystatechange = function () {
             nowString = Number(nowString.slice(0, -3));
             now = nowString;
          
-            // let now = new Date('June 20, 2018 22:24:00'); 
+            // let now = new Date('June 25, 2018 22:24:00'); 
             if (now >= timeAtSunrise && now <= timeAtSunset) {
                 riseOrSet.innerHTML = " sunset ";    
                 displayTime.innerHTML = "<span class=\"bold\">" + localTimeAtSunset + ".</span>";
                 timeAtEnd = sunset;
+                background.classList.remove('night');
+                background.classList.add('daytime');
                 updateCircleColor();
             }
             else  {
@@ -275,6 +278,9 @@ document.onreadystatechange = function () {
                 displayTime.innerHTML = "<span class=\"bold\">" + localTimeAtSunrise + ".</span>";
                 timeAtEnd = sunrise;
                 updateBackgroundColor(tempF);
+                background.classList.remove('daytime');
+                background.classList.add('night');
+
             }
             return timeAtEnd;
         }
@@ -343,7 +349,6 @@ document.onreadystatechange = function () {
 
         function updateBackgroundColor(tempF) {
             //switch to night color scheme
-            let background = document.querySelector('.background');
             let body = document.querySelector('.body');
             body.style.color = colors.night.night_text;
             background.classList.add('night');
@@ -367,9 +372,9 @@ document.onreadystatechange = function () {
                 body.style.backgroundColor = colors.night.hot;
             }
 
-            circleCon.style.background = 'hsla(0, 0%, 7%, 1)';
-            circleTemp.style.background = 'hsla(247, 9%, 17%, 1)';
-            circleClock.style.background = 'hsla(170, 12%, 10%, 1)';
+            // circleCon.style.background = 'hsla(0, 0%, 7%, 1)';
+            // circleTemp.style.background = 'hsla(247, 9%, 17%, 1)';
+            // circleClock.style.background = 'hsla(170, 12%, 10%, 1)';
 
             console.log(tempF, colors.night.freezing, background, body);
         }
