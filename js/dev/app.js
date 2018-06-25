@@ -66,15 +66,13 @@ document.onreadystatechange = function () {
 		//        "extensions.local-weather.allowGeolocation",
 		//        "This page wants to know your location.",
 		//        function callback(allowed) { alert(allowed); 
-  //      });
-////////////////////////////////////
+        //      });
+        ////////////////////////////////////
 
     	if (!navigator.geolocation) {
-		    alert(" Please enable Geolocation Services in order to use this silly thing.");
+		    alert(" Please enable Geolocation Services on your device/browser.");
 		} 
-		////////////////////
-        // global variables;
-        //////////////////// 
+
         const getLocation = document.querySelector(".getLocation");
         const information = document.querySelector(".information");
         const temperature = document.querySelector(".temperature");
@@ -260,6 +258,7 @@ document.onreadystatechange = function () {
         function chooseEndTime(sunrise, sunset) {
             let riseOrSet = document.querySelector(".display__sunset_sunrise");
             let now = Date.now();
+            // NOTE* date now returned in Unix ms needs to be in seconds to work with times returned from API.
             let nowString = '' + now;
             nowString = Number(nowString.slice(0, -3));
             now = nowString;
