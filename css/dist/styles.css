@@ -59,7 +59,7 @@ table {
 ********************/
 .body {
   font-family: "Varela Round", sans-serif;
-  font-size: 16px;
+  font-size: 1rem;
   padding: 0 0 0 0;
   color: #1c1d1b;
   height: 100vh;
@@ -77,10 +77,14 @@ table {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  width: 100%;
+  min-height: 22rem;
+  height: 100vh;
+  width: auto;
   margin: 0 auto;
   background-color: transparent; }
+  @media (min-width: 420px) {
+    .container {
+      margin: 0 auto; } }
   .container .container__inner {
     width: 100%;
     height: 100%;
@@ -90,16 +94,16 @@ table {
     align-items: center; }
     @media (min-width: 1000px) {
       .container .container__inner {
-        width: 600px;
-        height: 600px;
+        width: 37.5rem;
+        height: 37.5rem;
         z-index: 3; } }
   .container button {
     position: absolute;
     -ms-grid-row-align: center;
     align-self: center;
     width: 75%;
-    min-height: 200px;
-    margin: -40px auto 0 auto;
+    min-height: 12.5rem;
+    margin: -2.5rem auto 0 auto;
     border: 1px solid rgba(29, 72, 226, 0);
     background-color: rgba(29, 72, 226, 0);
     font-family: 'Varela Round', sans-serif;
@@ -111,11 +115,9 @@ table {
     transition: opacity 0.8s ease-out, z-index 1s ease-out; }
     @media (min-width: 420px) {
       .container button {
-        font-size: 2rem;
-        width: 400px; } }
+        font-size: 2rem; } }
     @media (min-width: 600px) {
       .container button {
-        width: 600px;
         font-size: 3.2rem; } }
     @media (min-width: 1000px) {
       .container button {
@@ -125,42 +127,49 @@ table {
       border: none; }
 
 .information {
-  min-width: 100%;
-  min-height: 100vh;
+  max-width: 15.75rem;
+  max-height: 15.75rem;
+  width: 100%;
+  height: 100%;
+  min-height: 25rem;
   margin: 0 auto;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
+  position: relative;
   background-color: transparent;
   z-index: 2; }
   .information .circle {
     margin: 0 auto;
     display: block;
     border-radius: 50%;
-    position: relative;
     -webkit-transform: scale(1);
             transform: scale(1); }
+  @media (min-width: 420px) {
+    .information {
+      max-width: 28.5rem;
+      max-height: 28.5rem; } }
   @media (min-width: 600px) {
     .information {
-      flex-flow: row nowrap;
-      min-width: 600px;
-      min-height: 600px;
-      -webkit-transform: translateY(20%);
-              transform: translateY(20%); } }
+      max-width: 28.5rem;
+      max-height: 28.5rem; } }
   .information .circle__inner {
     position: absolute;
     width: 100%;
-    padding: 5px;
+    padding: 0.3125rem;
     text-align: center;
     font-size: 1.2rem; }
   .information .circle__inner_con {
     top: 36.5%; }
+    @media (min-width: 420px) {
+      .information .circle__inner_con {
+        top: 35.5%; } }
     .information .circle__inner_con .conditions {
       display: block;
       margin: auto;
       height: 100%;
       width: 100%;
       text-transform: capitalize; }
+      @media (min-width: 420px) {
+        .information .circle__inner_con .conditions {
+          font-size: 1.5rem; } }
   .information .circle__inner_temp {
     top: 36%; }
     .information .circle__inner_temp .temperature {
@@ -174,55 +183,77 @@ table {
 .circleCon {
   display: block;
   opacity: 0;
-  height: 175px;
-  width: 175px;
-  top: 72px;
-  left: 40px;
+  height: 8rem;
+  width: 8rem;
+  position: absolute;
+  left: 34%;
+  top: 0;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
   -webkit-transform: scale(1);
           transform: scale(1);
   background: rgba(29, 72, 226, 0);
   transition: opacity 0.5s;
   transition: display 1s ease; }
+  @media (min-width: 420px) {
+    .circleCon {
+      min-height: 10rem;
+      min-width: 10rem;
+      left: 38%;
+      top: -6%; } }
   @media (min-width: 911px) {
     .circleCon {
-      top: 0;
-      left: 0; } }
+      top: 20%;
+      left: -9%; } }
 
 .circleTemp {
   display: block;
-  height: 125px;
-  width: 125px;
-  left: -70px;
-  top: 5px;
+  height: 5.8125rem;
+  width: 5.8125rem;
+  position: absolute;
+  left: 55%;
+  top: 30%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
   font-family: "Abril Fatface", cursive;
   background: rgba(29, 72, 226, 0); }
-  @media (min-width: 600px) {
+  @media (min-width: 420px) {
     .circleTemp {
-      left: -15px; } }
+      min-width: 7.8125rem;
+      min-height: 7.8125rem;
+      left: 58%;
+      top: 26%; } }
   @media (min-width: 911px) {
     .circleTemp {
-      top: 0;
-      left: 0; } }
+      left: 25%;
+      top: 19%; } }
 
 .circleClock {
   display: block;
   opacity: 0;
-  height: 300px;
-  width: 300px;
+  height: 15.75rem;
+  width: 15.75rem;
+  position: absolute;
+  left: 0;
+  top: 39%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
   background: rgba(29, 72, 226, 0);
   transition: opacity 2.5s; }
-  @media (min-width: 600px) {
+  @media (min-width: 420px) {
     .circleClock {
-      top: 60px;
-      left: -66px; } }
+      height: 18.75rem;
+      width: 18.75rem;
+      left: 10%;
+      top: 41%; } }
   @media (min-width: 911px) {
     .circleClock {
-      top: 0;
-      left: 0; } }
+      left: 46%;
+      top: 26%; } }
 
 .bold {
   font-weight: 700;
-  font-size: 32px; }
+  font-size: 2rem; }
 
 .fadeIn {
   opacity: 1; }
@@ -237,18 +268,18 @@ button.fadeOut {
 .smaller {
   display: block;
   font-size: 0.8rem;
-  text-transform: uppercase;
+  text-transform: none;
   border: 1px solid rgba(5, 250, 230, 0.98);
-  border-radius: 5px;
-  padding: 8px 14px; }
+  border-radius: 0.3125rem;
+  padding: 0.5rem 0.875rem; }
   .smaller:hover {
     background-color: rgba(5, 250, 230, 0.98);
     border: 1px solid rgba(5, 250, 230, 0.98);
-    border-radius: 5px; }
+    border-radius: 0.3125rem; }
   @media (min-width: 420px) {
     .smaller {
-      width: 50%;
-      max-width: 200px;
+      width: 70%;
+      max-width: 12.5rem;
       margin: 0 auto; } }
   @media (min-width: 911px) {
     .smaller {
@@ -308,30 +339,22 @@ button.fadeOut {
 @-webkit-keyframes dropIn {
   0% {
     opacity: 0;
-    -webkit-transform: translateX(-70px);
-            transform: translateX(-70px);
-    -webkit-transform: translateY(-250px);
-            transform: translateY(-250px); }
+    -webkit-transform: translateY(-15.625rem);
+            transform: translateY(-15.625rem); }
   100% {
     opacity: 1;
-    -webkit-transform: translateX(-70px);
-            transform: translateX(-70px);
-    -webkit-transform: translateY(5px);
-            transform: translateY(5px); } }
+    -webkit-transform: translateY(0.3125rem);
+            transform: translateY(0.3125rem); } }
 
 @keyframes dropIn {
   0% {
     opacity: 0;
-    -webkit-transform: translateX(-70px);
-            transform: translateX(-70px);
-    -webkit-transform: translateY(-250px);
-            transform: translateY(-250px); }
+    -webkit-transform: translateY(-15.625rem);
+            transform: translateY(-15.625rem); }
   100% {
     opacity: 1;
-    -webkit-transform: translateX(-70px);
-            transform: translateX(-70px);
-    -webkit-transform: translateY(5px);
-            transform: translateY(5px); } }
+    -webkit-transform: translateY(0.3125rem);
+            transform: translateY(0.3125rem); } }
 
 .night {
   background-color: none;

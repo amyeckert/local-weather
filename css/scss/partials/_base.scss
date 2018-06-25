@@ -1,6 +1,6 @@
 .body {
 	font-family: $font-base;
-	font-size: 16px;
+	font-size: $base-font-size;
 	padding: 0 0 0 0 ;
 	color: $c-text;
 	height: 100vh;
@@ -14,7 +14,6 @@
 	width: 100%;
 	z-index: 0;
 	overflow: hidden;
-	// background-color: $c-white;
 }
 
 .container {
@@ -31,10 +30,15 @@
 	-webkit-box-pack: center;
 	    -ms-flex-pack: center;
 	        justify-content: center;
-	height: 100%;
-	width: 100%;
+	min-height: 22rem;
+	height: 100vh;
+    width: auto;
 	margin: 0 auto;
 	background-color: transparent;
+
+	@include bp(small) {
+		margin: 0 auto;
+	}
 	
 	.container__inner {
 		width: 100%;
@@ -54,8 +58,8 @@
 	           	align-items: center;
 			
 		@include bp(large) {
-			width: 600px;
-			height: 600px;
+			width: 37.5rem;
+			height: 37.5rem;
 			z-index: 3;
 		}
 	}
@@ -66,8 +70,8 @@
     	-ms-grid-row-align: center;
     	align-self: center;
 		width: 75%;
-		min-height: 200px;
-		margin: -40px auto 0 auto;
+		min-height: 12.5rem;
+		margin: -2.5rem auto 0 auto;
 		border: 1px solid $c-transparent;
 		background-color: $c-transparent;
 		font-family: 'Varela Round', sans-serif;
@@ -84,12 +88,10 @@
 
 		@include bp(small) {
 			font-size: 2rem;
-			width: 400px;
-
 		}
 
 		@include bp(medsmall) {
-			width: 600px;
+			// width: 37.5rem;
 			font-size: 3.2rem;
 		}
 
@@ -105,19 +107,14 @@
 }
 
 .information {
- 	min-width: 100%;
- 	min-height: 100vh;
+ 	max-width: 15.75rem;
+ 	max-height: 15.75rem;
+ 	width: 100%;
+ 	height: 100%;
+ 	min-height: 25rem;
  	margin: 0 auto;
- 	display: -webkit-box;
- 	display: -ms-flexbox;
- 	display: flex;
-	-webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
-	    -ms-flex-flow: column nowrap;
-	        flex-flow: column nowrap;
-	-webkit-box-pack: center;
-	    -ms-flex-pack: center;
-	        justify-content: center;
+ 	position: relative;
+
  	background-color: transparent;
  	z-index: 2;
 
@@ -125,31 +122,32 @@
 		margin: 0 auto;
 		display: block;
 		border-radius: 50%;
-		position: relative;	
 		transform: scale(1);
+	}
 
+	@include bp(small) {
+ 		max-width: 28.5rem;
+ 		max-height: 28.5rem;
 	}
 
 	@include bp(medsmall) {
-		-webkit-box-orient: horizontal;
-		-webkit-box-direction: normal;
-    	-ms-flex-flow: row nowrap;
-        flex-flow: row nowrap;
- 		min-width: 600px;
- 		min-height: 600px;
- 		transform: translateY(20%);
+ 		max-width: 28.5rem;
+ 		max-height: 28.5rem;
 	}
 
 	.circle__inner {
 		position: absolute;
 		width: 100%;
-		padding: 5px;
+		padding: 0.3125rem;
 		text-align: center;
 		font-size: 1.2rem;
 	}
 
 	.circle__inner_con {
 		top: 36.5%;
+		@include bp(small) {
+			top: 35.5%;
+		}
 
 		.conditions {
 			display: block;
@@ -157,6 +155,9 @@
 			height: 100%;
 			width: 100%;
 			text-transform: capitalize;
+			@include bp(small) {
+				font-size: 1.5rem;
+			}
 		}
 	}
 
@@ -181,10 +182,12 @@
 .circleCon {
 	display: block;
 	opacity: 0;
-    height: 175px;
-    width: 175px;
-    top: 72px;
-    left: 40px;
+    height: 8rem;
+    width: 8rem;
+    position: absolute;
+ 	left: 34%;
+  	top: 0;
+  	transform: translate(-50%, -50%);
     transform: scale(1);
 	background: $c-transparent;
 	transition: opacity 0.5s;
@@ -193,45 +196,63 @@
 	-o-transition: display 1s ease ;
 	transition: display 1s ease ;
 
+	@include bp(small) {
+		min-height: 10rem;
+		min-width: 10rem;
+    	left: 38%;
+	    top: -6%;
+	}
+
 	@include bp(medium) {
-		top: 0;
-		left: 0;
+		top: 20%;
+		left: -9%;
 	}
 }
 
 .circleTemp {
 	display: block;
-	height: 125px;
-    width: 125px;
-    left: -70px;
-    top: 5px;
+	height: 5.8125rem;
+    width: 5.8125rem;
+    position: absolute;
+	left: 55%;
+    top: 30%;
+  	transform: translate(-50%, -50%);
 	font-family: $font-accent;
 	background: $c-transparent;
+	
+	@include bp(small) {
+		min-width: 7.8125rem;
+		min-height: 7.8125rem;
+		left: 58%;
+		top: 26%;
 
-	@include bp(medsmall) {
-		left: -15px;
 	}
-
 	@include bp(medium) {
-		top: 0;
-		left: 0;
+		left: 25%;
+    	top: 19%;
 	}
 }
 
 .circleClock {
 	display: block;
 	opacity: 0;
-	height: 300px;
-	width: 300px;
+	height: 15.75rem;
+	width: 15.75rem;
+    position: absolute;
+	left: 0;
+  	top: 39%;
+  	transform: translate(-50%, -50%);
 	background: $c-transparent;
 	transition: opacity 2.5s;
-	@include bp(medsmall) {
-		top: 60px;
-		left: -66px;
 
+	@include bp(small) {
+		height: 18.75rem;
+		width: 18.75rem;
+		left: 10%;
+		top: 41%;
 	}
 	@include bp(medium) {
-		top: 0;
-		left: 0;
+		left: 46%;
+		top: 26%;
 	}
 }
