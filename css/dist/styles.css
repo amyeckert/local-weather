@@ -57,20 +57,20 @@ table {
 /********************
 ** Partials
 ********************/
-body {
+.body {
   font-family: "Varela Round", sans-serif;
   font-size: 16px;
   padding: 0 0 0 0;
   color: #1c1d1b;
   height: 100vh;
-  background-color: rgba(29, 72, 226, 0); }
+  background-color: rgba(29, 72, 226, 0);
+  background: rgba(29, 72, 226, 0); }
 
 .background {
   height: 100%;
   width: 100%;
   z-index: 0;
-  overflow: hidden;
-  background-color: rgba(29, 72, 226, 0); }
+  overflow: hidden; }
 
 .container {
   display: flex;
@@ -224,8 +224,7 @@ body {
   font-size: 32px; }
 
 .fadeIn {
-  opacity: 1;
-  z-index: 200; }
+  opacity: 1; }
 
 button.fadeOut {
   opacity: 0;
@@ -264,18 +263,6 @@ button.fadeOut {
   -webkit-animation-duration: 5s;
           animation-duration: 5s; }
 
-.dropIn {
-  opacity: 1;
-  z-index: 999;
-  -webkit-animation-name: dropIn;
-          animation-name: dropIn;
-  -webkit-animation-direction: normal;
-          animation-direction: normal;
-  -webkit-animation-iteration-count: 1;
-          animation-iteration-count: 1;
-  -webkit-animation-duration: 1.5s;
-          animation-duration: 1.5s; }
-
 @-webkit-keyframes breathe {
   0% {
     opacity: 1;
@@ -301,6 +288,18 @@ button.fadeOut {
     opacity: 1;
     -webkit-transform: scale(1);
             transform: scale(1); } }
+
+.dropIn {
+  opacity: 1;
+  z-index: 999;
+  -webkit-animation-name: dropIn;
+          animation-name: dropIn;
+  -webkit-animation-direction: normal;
+          animation-direction: normal;
+  -webkit-animation-iteration-count: 1;
+          animation-iteration-count: 1;
+  -webkit-animation-duration: 1.5s;
+          animation-duration: 1.5s; }
 
 @-webkit-keyframes dropIn {
   0% {
@@ -329,5 +328,28 @@ button.fadeOut {
             transform: translateX(-70px);
     -webkit-transform: translateY(5px);
             transform: translateY(5px); } }
+
+.night {
+  background-color: none;
+  -webkit-animation-name: darken;
+          animation-name: darken;
+  -webkit-animation-direction: normal;
+          animation-direction: normal;
+  -webkit-animation-iteration-count: 1;
+          animation-iteration-count: 1;
+  -webkit-animation-duration: 0.5s;
+          animation-duration: 0.5s; }
+
+@-webkit-keyframes darken {
+  0% {
+    background-color: #fff; }
+  100% {
+    background-color: none; } }
+
+@keyframes darken {
+  0% {
+    background-color: #fff; }
+  100% {
+    background-color: none; } }
 
 /*# sourceMappingURL=styles.css.map */

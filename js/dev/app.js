@@ -221,7 +221,8 @@ document.onreadystatechange = function () {
         function updateConditions(weatherData) {
             tempC = Math.round(weatherData.main.temp);
             tempF = Math.round((tempC * 1.8000) + 32);
-            updateCircleColor(0);
+            updateCircleColor(tempF);
+            updateBackgroundColor(tempF);
             tempF += "F";
             tempC += "C";   
 
@@ -243,12 +244,10 @@ document.onreadystatechange = function () {
         function getTimeRemaining(timeAtEnd) {
             timeNow = Date.parse(new Date());
             let duration = Date.parse(timeAtEnd) - timeNow
-
             let seconds = Math.floor( (duration / 1000) % 60);
             let minutes = Math.floor( (duration / 1000 / 60) % 60);
             let hours = Math.floor( (duration / (1000 * 60 * 60)) % 24);
 
-            // console.log("duration = " + hours + ":" + minutes + ":" + seconds);
             return {
                 'total': duration,
                 'hours': hours,  
@@ -258,32 +257,25 @@ document.onreadystatechange = function () {
         }
 
         function chooseEndTime(sunrise, sunset) {
-            // let now = Date.now();
-            // let nowString = '' + now;
-            // nowString = Number(nowString.slice(0, -3));
-            // now = nowString;
-            // console.log(now, nowString); 
-            // console.log("sunrise = " + sunrise + ", sunset = " + sunset);
-         
-            let now = new Date('June 20, 2018 22:24:00'); 
             let riseOrSet = document.querySelector(".display__sunset_sunrise");
-
+            let now = Date.now();
+            let nowString = '' + now;
+            nowString = Number(nowString.slice(0, -3));
+            now = nowString;
+         
+            // let now = new Date('June 20, 2018 22:24:00'); 
             if (now >= timeAtSunrise && now <= timeAtSunset) {
                 riseOrSet.innerHTML = " sunset ";    
                 displayTime.innerHTML = "<span class=\"bold\">" + localTimeAtSunset + ".</span>";
                 timeAtEnd = sunset;
                 updateCircleColor();
-                // console.log("countdown to sunset at " + localTimeAtSunset);
             }
-          
             else  {
                 riseOrSet.innerHTML = " sunrise "; 
                 displayTime.innerHTML = "<span class=\"bold\">" + localTimeAtSunrise + ".</span>";
                 timeAtEnd = sunrise;
                 updateBackgroundColor(tempF);
-                // console.log("countdown to sunrise at " + localTimeAtSunrise);
             }
-
             return timeAtEnd;
         }
 
@@ -295,7 +287,6 @@ document.onreadystatechange = function () {
 
             function updateClock() {
                 var time = getTimeRemaining(endtime);
-
                 //update the countdown display
                 hoursSpan.innerHTML = ('0' + time.hours).slice(-2);
                 minutesSpan.innerHTML = ('0' + time.minutes).slice(-2);
@@ -305,7 +296,6 @@ document.onreadystatechange = function () {
 	    	updateClock();
 	    	let timeinterval = setInterval(updateClock, 1000);
     	}
-    	//////////////////////////////////////////////////////
 
     	function fadeInAnimate() {
     		circleCon.classList.toggle('breathe');
@@ -318,73 +308,76 @@ document.onreadystatechange = function () {
     	}
 
     	function updateCircleColor(temp) {
-    		
+    		//daytime color scheme
 			if(temp < 32 ) {
 				circleCon.style.background = colors.day.freezing.con;
 				circleTemp.style.background = colors.day.freezing.temp;
 				circleClock.style.background = "radial-gradient(" + colors.day.freezing.clock[0]  +", " + colors.day.freezing.clock[1]+ ", " + colors.day.freezing.clock[2] + ")";
-				// console.log('it\'s bloody freezing!');
 			}
 			if (temp >= 33 && temp <= 45) {
 				circleCon.style.backgroundColor = colors.day.cold.con;
 				circleTemp.style.backgroundColor = colors.day.cold.temp;
 				circleClock.style.background = "radial-gradient(" + colors.day.cold.clock[0]  +", " + colors.day.cold.clock[1]+ ", " + colors.day.cold.clock[2] + ")";
-					// console.log('it\'s cold!');
 			}
 			if (temp >= 46 && temp <= 55) {
 				circleCon.style.backgroundColor = colors.day.cool.con;
 				circleTemp.style.backgroundColor = colors.day.cool.temp;
 				circleClock.style.background = "radial-gradient(" + colors.day.cool.clock[0]  +", " + colors.day.cool.clock[1]+ ", " + colors.day.cool.clock[2] + ")";
-					// console.log('it\'s cool!');
 			}
 			if (temp >= 56 && temp <= 68) {
 				circleCon.style.backgroundColor = colors.day.mild.con;
 				circleTemp.style.backgroundColor = colors.day.mild.temp;
 				circleClock.style.background = "radial-gradient(" + colors.day.mild.clock[0]  +", " + colors.day.mild.clock[1]+ ", " + colors.day.mild.clock[2] + ")";
-					// console.log('it\'s mild!');
 			}
-
 			if (temp >= 69 && temp <= 84) {
 				circleCon.style.backgroundColor = colors.day.warm.con;
 				circleTemp.style.backgroundColor = colors.day.warm.temp;
 				circleClock.style.background = "radial-gradient(" + colors.day.warm.clock[0]  +", " + colors.day.warm.clock[1]+ ", " + colors.day.warm.clock[2] + ")";
-				// console.log("warm!");
             } 
-
             if (temp >= 85) {
                 circleCon.style.backgroundColor = colors.day.hot.con;
                 circleTemp.style.backgroundColor = colors.day.hot.temp;
                 circleClock.style.background = "radial-gradient(" + colors.day.hot.clock[0]  +", " + colors.day.hot.clock[1]+ ", " + colors.day.hot.clock[2] + ")";
-                    // console.log('it\'s hot!');
             }
     	}
 
-        function updateBackgroundColor(temp) {
+        function updateBackgroundColor(tempF) {
             //switch to night color scheme
-            let background = document.querySelector(".background");
-            let body = document.querySelector('body');
+            let background = document.querySelector('.background');
+            let body = document.querySelector('.body');
             body.style.color = colors.night.night_text;
-            // console.log(temp);
-            if( temp < 32 ) { 
-                background.style.backgroundColor = colors.night.freezing;
+            background.classList.add('night');
+
+            if (tempF < 32) { 
+                body.style.backgroundColor = colors.night.freezing;
+            }
+            if (tempF >= 33 && tempF <= 45) { 
+                body.style.backgroundColor = colors.night.cold;
+            }
+            if (tempF >= 46 && tempF <= 55) { 
+                body.style.backgroundColor = colors.night.cool;
+            }
+            if (tempF >= 56 && tempF <= 68) { 
+                body.style.backgroundColor = colors.night.mild;
+            }
+            if (tempF >= 69 && tempF <= 84) { 
+                body.style.backgroundColor = colors.night.warm;
+            }
+            if (tempF >= 85) { 
+                body.style.backgroundColor = colors.night.hot;
             }
 
             circleCon.style.background = 'hsla(0, 0%, 7%, 1)';
             circleTemp.style.background = 'hsla(247, 9%, 17%, 1)';
             circleClock.style.background = 'hsla(170, 12%, 10%, 1)';
 
-
-            console.log(colors.night.freezing);
-
-            // background.classList.toggle('.night'); 
+            console.log(tempF, colors.night.freezing, background, body);
         }
     	
 		getLocation.addEventListener("click", function( event ) {
 			event.preventDefault(event);
 			getLocation.innerHTML = "One moment, please...";
 			navigator.geolocation.getCurrentPosition(success, error, options);
-			// updateCircleColor();
-            // updateBackgroundColor();
 	 	});
 	}
 }
