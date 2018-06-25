@@ -172,6 +172,9 @@
 
 	.circle__inner_clock{
 		top: 26% ;
+		@include bp(medium) {
+			top: 30%;
+		}
 
 		.message {
 			display: block;

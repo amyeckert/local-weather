@@ -177,6 +177,9 @@ table {
       letter-spacing: 0.075rem; }
   .information .circle__inner_clock {
     top: 26%; }
+    @media (min-width: 911px) {
+      .information .circle__inner_clock {
+        top: 30%; } }
     .information .circle__inner_clock .message {
       display: block; }
 
