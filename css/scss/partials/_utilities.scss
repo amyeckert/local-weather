@@ -8,13 +8,13 @@
 }
 
 .daytime {
+	display: block;
 	background-color: $c-white;
 	color: $c-text;
 }
 
 .night {
 	color: $c-white;
-
 	animation-name: darkenBackground;
 	animation-direction: normal;
 	animation-iteration-count: 1;

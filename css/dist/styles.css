@@ -262,6 +262,7 @@ table {
   opacity: 1; }
 
 .daytime {
+  display: block;
   background-color: #fff;
   color: #1c1d1b; }
 
