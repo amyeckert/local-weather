@@ -7,6 +7,15 @@
 	opacity: 1;
 }
 
+.waiting-message {
+	text-align: left;
+}
+
+.container__inner-top.fadeOut {
+
+	opacity: 0;
+	z-index: 0;
+}
 .daytime {
 	display: block;
 	background-color: $c-white;
@@ -21,33 +30,4 @@
 	animation-duration: 0.5s;
 }
 
-button.fadeOut {
-	opacity: 0;
-	z-index: 0;
-}
 
-.smaller {
-	display: block;
-	font-size: 0.8rem;
-	text-transform: none;
-	border: 1px solid $c-cond-cool;
-	border-radius: 0.3125rem;
-	padding: 0.5rem 0.875rem;
-
-	&:hover {
-		background-color: $c-cond-cool;
-		border: 1px solid $c-cond-cool;
-		border-radius: 0.3125rem;
-	}
-
-	@include bp(small) {
-		width: 70%;
-		max-width: 12.5rem;
-		margin: 0 auto;
-	}
-
-	@include bp(medium) {
-		display: inline;
-		vertical-align: calc(50%);
-	}
-}

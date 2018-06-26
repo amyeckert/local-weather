@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<title>Local Weather</title>
-  	<meta name="description" content="Local weather conditions">
+  	<meta name="description" content="Local weather conditions, with the click of a button!">
   	<meta name="keywords" content="weather">
   	<meta name="author" content="Amy Eckert">
 	<meta charset="utf-8">
@@ -13,39 +13,40 @@
 </head>
 <body class="body">
 	<div class="background">
-			
+
 		<div class="container">
-			
-			<div class="container__inner">
 
-				<button class="getLocation"><h1>What's it like outside?</h1>
-					<span class="smaller">Click here to get your local weather conditions!</span>
+			<div class="container__inner container__inner-top">
+				<h1 class="question">What is it like outside right now?</h1>
+				<button class="getLocation">
+					Click here to get your local weather conditions!
 				</button>
-
-				<div class="information">
-					<div class="circle circleCon">
-						<div class="circle__inner circle__inner_con">
-							<p class="conditions"></p>
-						</div>
-					</div>
-					<div class="circle circleTemp">
-						<div class="circle__inner circle__inner_temp">
-							<p class="temperature"></p>
-						</div> 
-					</div>
-					<div class="circle circleClock">
-						<div class="circle__inner circle__inner_clock">
-							<p class="">You have </p>
-							<p id="countdown">
-								<span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span> left
-							</p>
-							<p>before <span class="display__sunset_sunrise "></span> at </p>
-							<p id="display__time"></p>
-
-						</div>
-					</div>
-				</div>	
 			</div>
+
+			<div class="container__inner container__inner-bottom">
+				<div class="circle circleCon">
+					<div class="circle__inner circle__inner_con">
+						<p class="conditions"></p>
+					</div>
+				</div>
+				<div class="circle circleTemp">
+					<div class="circle__inner circle__inner_temp">
+						<p class="temperature"></p>
+					</div> 
+				</div>
+				<div class="circle circleClock">
+					<div class="circle__inner circle__inner_clock">
+						<p class="">You have </p>
+						<p id="countdown">
+							<span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span> left
+						</p>
+						<p>before <span class="display__sunset_sunrise "></span> at </p>
+						<p id="display__time"></p>
+
+					</div>
+				</div>
+			</div>	
+			
 		</div>
 	</div>
 </body>

@@ -74,9 +74,11 @@ document.onreadystatechange = function () {
 		} 
         const body = document.querySelector('.body');
         const getLocation = document.querySelector(".getLocation");
-        const information = document.querySelector(".information");
+        const information = document.querySelector(".container__inner-bottom");
         const temperature = document.querySelector(".temperature");
     	const conditions = document.querySelector(".conditions");
+        const innerTop = document.querySelector('.container__inner-top');
+        const question = document.querySelector('.question');
         const timeOptions = {
               hour: 'numeric',
               minute: 'numeric',
@@ -316,8 +318,10 @@ document.onreadystatechange = function () {
     	}	
 
     	function fadeOut() {
-    		getLocation.classList.toggle('fadeOut');
-    	}
+            // question = document.querySelector('.question');
+            // getLocation.classList.toggle('fadeOut');
+            innerTop.classList.toggle('fadeOut');    	
+        }
 
     	function updateCircleColor(temp) {
     		//daytime color scheme
@@ -387,7 +391,8 @@ document.onreadystatechange = function () {
     	
 		getLocation.addEventListener("click", function( event ) {
 			event.preventDefault(event);
-			getLocation.innerHTML = "One moment, please...";
+			question.innerHTML = "<p class=\"waiting-message\">One moment, please...</p>";
+            getLocation.style.display = 'none';
 			navigator.geolocation.getCurrentPosition(success, error, options);
 	 	});
 	}
