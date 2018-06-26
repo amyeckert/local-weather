@@ -40,24 +40,10 @@
 }
 
 .night {
-	background-color: none;
 	animation-name: darkenBackground;
 	animation-direction: normal;
 	animation-iteration-count: 1;
 	animation-duration: 0.5s;
-	
-	.circleCon {
-		background-color: hsla(0, 0%, 7%, 1);	
-	}
-
-	.circleTemp {
-		background-color: hsla(247, 9%, 17%, 1);
-		
-	}
-	.circleClock {
-		background-color: hsla(170, 12%, 10%, 1);
-
-	}
 }
 
 @keyframes darkenBackground {
@@ -67,7 +53,7 @@
 
 	}
 	100% {
-		background-color: none;
+		background-color: $c-transparent;
 	}
 }
 

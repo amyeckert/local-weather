@@ -6,10 +6,20 @@
 .fadeIn {
 	opacity: 1;
 }
+
 .daytime {
 	background-color: $c-white;
+	color: $c-text;
 }
 
+.night {
+	color: $c-white;
+
+	animation-name: darkenBackground;
+	animation-direction: normal;
+	animation-iteration-count: 1;
+	animation-duration: 0.5s;
+}
 
 button.fadeOut {
 	opacity: 0;

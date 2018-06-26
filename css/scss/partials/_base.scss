@@ -114,7 +114,6 @@
  	min-height: 25rem;
  	margin: 0 auto;
  	position: relative;
-
  	background-color: transparent;
  	z-index: 2;
 
@@ -145,6 +144,7 @@
 
 	.circle__inner_con {
 		top: 36.5%;
+
 		@include bp(small) {
 			top: 35.5%;
 		}
@@ -155,6 +155,7 @@
 			height: 100%;
 			width: 100%;
 			text-transform: capitalize;
+
 			@include bp(small) {
 				font-size: 1.5rem;
 			}
@@ -172,6 +173,7 @@
 
 	.circle__inner_clock{
 		top: 26% ;
+
 		@include bp(medium) {
 			top: 30%;
 		}
@@ -228,8 +230,8 @@
 		min-height: 7.8125rem;
 		left: 58%;
 		top: 26%;
-
 	}
+
 	@include bp(medium) {
 		left: 25%;
     	top: 19%;
@@ -254,6 +256,7 @@
 		left: 10%;
 		top: 41%;
 	}
+	
 	@include bp(medium) {
 		left: 46%;
 		top: 26%;

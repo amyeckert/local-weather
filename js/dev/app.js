@@ -72,7 +72,7 @@ document.onreadystatechange = function () {
     	if (!navigator.geolocation) {
 		    alert(" Please enable Geolocation Services on your device/browser.");
 		} 
-
+        const body = document.querySelector('.body');
         const getLocation = document.querySelector(".getLocation");
         const information = document.querySelector(".information");
         const temperature = document.querySelector(".temperature");
@@ -178,6 +178,11 @@ document.onreadystatechange = function () {
 			maximumAge: 0
 		};
 
+        //clear circles of any color
+        circleCon.style.background = 'transparent';
+        circleTemp.style.background = 'transparent';
+        circleClock.style.background = 'transparent';
+
 		function error(error) {
     		alert("Please allow this site to access your location information.");
     		console.warn(`ERROR(${error.code}): ${error.clockage}`);
@@ -258,27 +263,29 @@ document.onreadystatechange = function () {
         function chooseEndTime(sunrise, sunset) {
             let riseOrSet = document.querySelector(".display__sunset_sunrise");
             let now = Date.now();
-            // NOTE* date now returned in Unix ms needs to be in seconds to work with times returned from API.
+            // NOTE* date now returned in Unix ms needs to be in seconds to work with times returned from weather API.
             let nowString = '' + now;
             nowString = Number(nowString.slice(0, -3));
             now = nowString;
          
-            // let now = new Date('June 25, 2018 22:24:00'); 
+            // let now = new Date('June 27, 2018 22:24:00'); 
             if (now >= timeAtSunrise && now <= timeAtSunset) {
                 riseOrSet.innerHTML = " sunset ";    
                 displayTime.innerHTML = "<span class=\"bold\">" + localTimeAtSunset + ".</span>";
-                timeAtEnd = sunset;
-                background.classList.remove('night');
-                background.classList.add('daytime');
-                updateCircleColor();
+                timeAtEnd = sunset; 
+                updateCircleColor(tempF);
+                console.log('daytime');
             }
             else  {
                 riseOrSet.innerHTML = " sunrise "; 
                 displayTime.innerHTML = "<span class=\"bold\">" + localTimeAtSunrise + ".</span>";
-                timeAtEnd = sunrise;
+                timeAtEnd = sunrise; 
+                circleCon.style.background = colors.night.con;
+                circleTemp.style.background = colors.night.temp;
+                circleClock.style.background = colors.night.clock;
                 updateBackgroundColor(tempF);
-                background.classList.remove('daytime');
-                background.classList.add('night');
+                console.log('nighttime');
+
 
             }
             return timeAtEnd;
@@ -314,7 +321,10 @@ document.onreadystatechange = function () {
 
     	function updateCircleColor(temp) {
     		//daytime color scheme
-			if(temp < 32 ) {
+            background.classList.remove('night');
+            background.classList.add('daytime');
+            
+			if (temp < 32 ) {
 				circleCon.style.background = colors.day.freezing.con;
 				circleTemp.style.background = colors.day.freezing.temp;
 				circleClock.style.background = "radial-gradient(" + colors.day.freezing.clock[0]  +", " + colors.day.freezing.clock[1]+ ", " + colors.day.freezing.clock[2] + ")";
@@ -348,8 +358,8 @@ document.onreadystatechange = function () {
 
         function updateBackgroundColor(tempF) {
             //switch to night color scheme
-            let body = document.querySelector('.body');
-            body.style.color = colors.night.night_text;
+            
+            background.classList.remove('daytime');
             background.classList.add('night');
 
             if (tempF < 32) { 
@@ -371,11 +381,8 @@ document.onreadystatechange = function () {
                 body.style.backgroundColor = colors.night.hot;
             }
 
-            // circleCon.style.background = 'hsla(0, 0%, 7%, 1)';
-            // circleTemp.style.background = 'hsla(247, 9%, 17%, 1)';
-            // circleClock.style.background = 'hsla(170, 12%, 10%, 1)';
+           
 
-            console.log(tempF, colors.night.freezing, background, body);
         }
     	
 		getLocation.addEventListener("click", function( event ) {

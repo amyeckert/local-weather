@@ -262,7 +262,19 @@ table {
   opacity: 1; }
 
 .daytime {
-  background-color: #fff; }
+  background-color: #fff;
+  color: #1c1d1b; }
+
+.night {
+  color: #fff;
+  -webkit-animation-name: darkenBackground;
+          animation-name: darkenBackground;
+  -webkit-animation-direction: normal;
+          animation-direction: normal;
+  -webkit-animation-iteration-count: 1;
+          animation-iteration-count: 1;
+  -webkit-animation-duration: 0.5s;
+          animation-duration: 0.5s; }
 
 button.fadeOut {
   opacity: 0;
@@ -360,7 +372,6 @@ button.fadeOut {
             transform: translateY(0.3125rem); } }
 
 .night {
-  background-color: none;
   -webkit-animation-name: darkenBackground;
           animation-name: darkenBackground;
   -webkit-animation-direction: normal;
@@ -369,23 +380,17 @@ button.fadeOut {
           animation-iteration-count: 1;
   -webkit-animation-duration: 0.5s;
           animation-duration: 0.5s; }
-  .night .circleCon {
-    background-color: #121212; }
-  .night .circleTemp {
-    background-color: #28272f; }
-  .night .circleClock {
-    background-color: #161d1c; }
 
 @-webkit-keyframes darkenBackground {
   0% {
     background-color: #fff; }
   100% {
-    background-color: none; } }
+    background-color: rgba(29, 72, 226, 0); } }
 
 @keyframes darkenBackground {
   0% {
     background-color: #fff; }
   100% {
-    background-color: none; } }
+    background-color: rgba(29, 72, 226, 0); } }
 
 /*# sourceMappingURL=styles.css.map */
