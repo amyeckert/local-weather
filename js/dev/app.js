@@ -72,6 +72,7 @@ document.onreadystatechange = function () {
     	if (!navigator.geolocation) {
 		    alert(" Please enable Geolocation Services on your device/browser.");
 		} 
+
         const body = document.querySelector('.body');
         const getLocation = document.querySelector(".getLocation");
         const information = document.querySelector(".container__inner-bottom");
@@ -162,6 +163,7 @@ document.onreadystatechange = function () {
             background = document.querySelector('.background'),
     		countdown,
     		displayTime = document.querySelector("#display__time"),
+            getUpdate = document.querySelector('.update'),
             localTimeAtSunrise,
             localTimeAtSunset,
             sunset,
@@ -238,6 +240,7 @@ document.onreadystatechange = function () {
             conditions.textContent = localConditions;
             temperature.textContent = bothTemps;
             getLocalTimeOfSunsetAndSunrise(weatherData);
+            
             fadeInAnimate();
             fadeOut();            
 
@@ -315,11 +318,9 @@ document.onreadystatechange = function () {
     		circleCon.classList.toggle('breathe');
     		circleTemp.classList.toggle('dropIn');	
     		circleClock.classList.toggle('fadeIn');
-    	}	
+        }
 
     	function fadeOut() {
-            // question = document.querySelector('.question');
-            // getLocation.classList.toggle('fadeOut');
             innerTop.classList.toggle('fadeOut');    	
         }
 
@@ -384,17 +385,22 @@ document.onreadystatechange = function () {
             if (tempF >= 85) { 
                 body.style.backgroundColor = colors.night.hot;
             }
-
-           
-
         }
-    	
+        
+        getUpdate.addEventListener('click', function(event) {
+            event.preventDefault(event);
+            console.log('update conditions without reloading page');
+            window.location.reload(true);
+        }); 
+
 		getLocation.addEventListener("click", function( event ) {
 			event.preventDefault(event);
 			question.innerHTML = "<p class=\"waiting-message\">One moment, please...</p>";
             getLocation.style.display = 'none';
 			navigator.geolocation.getCurrentPosition(success, error, options);
 	 	});
+
+
 	}
 }
 
