@@ -370,8 +370,11 @@ table {
           animation-direction: normal;
   -webkit-animation-iteration-count: 1;
           animation-iteration-count: 1;
-  -webkit-animation-duration: 1.5s;
-          animation-duration: 1.5s; }
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+  /* easeOutCirc */ }
 
 @-webkit-keyframes dropIn {
   0% {
@@ -380,8 +383,8 @@ table {
             transform: translateY(-15.625rem); }
   100% {
     opacity: 1;
-    -webkit-transform: translateY(0.3125rem);
-            transform: translateY(0.3125rem); } }
+    -webkit-transform: translateY(0.28rem);
+            transform: translateY(0.28rem); } }
 
 @keyframes dropIn {
   0% {
@@ -390,8 +393,8 @@ table {
             transform: translateY(-15.625rem); }
   100% {
     opacity: 1;
-    -webkit-transform: translateY(0.3125rem);
-            transform: translateY(0.3125rem); } }
+    -webkit-transform: translateY(0.28rem);
+            transform: translateY(0.28rem); } }
 
 .night {
   -webkit-animation-name: darkenBackground;

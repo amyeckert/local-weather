@@ -26,8 +26,13 @@
 	animation-name: dropIn;
 	animation-direction: normal;
 	animation-iteration-count: 1;
-	animation-duration: 1.5s;
+	animation-duration: 1s;
+	-webkit-animation-timing-function: cubic-bezier(0.075, 0.820, 0.165, 1.000); 
+   	-moz-animation-timing-function: cubic-bezier(0.075, 0.820, 0.165, 1.000); 
+     -o-animation-timing-function: cubic-bezier(0.075, 0.820, 0.165, 1.000); 
+        animation-timing-function: cubic-bezier(0.075, 0.820, 0.165, 1.000); /* easeOutCirc */	
 }
+
 @keyframes dropIn {
 	0% {
 		opacity: 0;
@@ -35,7 +40,7 @@
 	}
 	100% {
 		opacity: 1;
-    	transform: translateY(0.3125rem);
+    	transform: translateY(0.28rem);
 	}
 }
 
