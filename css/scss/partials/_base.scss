@@ -32,8 +32,10 @@ button {
 	baseline-shift: baseline;
 
 	&:focus {
-		outline: none;
 		border: none;
+		outline: 2px solid $c-cond-cool;
+		border-radius: 0.3125rem;
+		box-shadow: 0 0 10px 10px $c-cond-cool,
 	}
 	&:hover {
 		background-color: $c-cond-cool;
@@ -61,7 +63,14 @@ button {
 	border-radius: 0.3125rem;
 	opacity: 1;
 	color: $c-text;
+	
+	&:focus {
+		border: none;
+		outline: 2px solid $c-cond-freezing;
+		border-radius: 0.3125rem;
+		box-shadow: 0 0 5px 5px $c-cond-freezing,
 
+	}
 	&:hover {
 		border: 2px solid $c-cond-freezing;
 		background-color: $c-cond-freezing;

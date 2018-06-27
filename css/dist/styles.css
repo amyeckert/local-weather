@@ -89,8 +89,10 @@ button {
   text-align: center;
   baseline-shift: baseline; }
   button:focus {
-    outline: none;
-    border: none; }
+    border: none;
+    outline: 2px solid rgba(5, 250, 230, 0.98);
+    border-radius: 0.3125rem;
+    box-shadow: 0 0 10px 10px rgba(5, 250, 230, 0.98); }
   button:hover {
     background-color: rgba(5, 250, 230, 0.98); }
   @media (min-width: 420px) {
@@ -113,6 +115,11 @@ button {
   border-radius: 0.3125rem;
   opacity: 1;
   color: #1c1d1b; }
+  .update:focus {
+    border: none;
+    outline: 2px solid #e6c2fe;
+    border-radius: 0.3125rem;
+    box-shadow: 0 0 5px 5px #e6c2fe; }
   .update:hover {
     border: 2px solid #e6c2fe;
     background-color: #e6c2fe; }
