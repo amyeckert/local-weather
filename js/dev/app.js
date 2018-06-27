@@ -327,6 +327,7 @@ document.onreadystatechange = function () {
     	function updateCircleColor(temp) {
     		//daytime color scheme
             background.classList.remove('night');
+            getUpdate.classList.remove('night');
             background.classList.add('daytime');
             
 			if (temp < 32 ) {
