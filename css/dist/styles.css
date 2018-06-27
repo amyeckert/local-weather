@@ -319,7 +319,7 @@ button {
       top: 26%; } }
 
 .screenreader {
-  display: block;
+  display: none;
   position: absolute;
   top: auto;
   overflow: hidden;
