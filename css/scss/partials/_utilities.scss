@@ -7,10 +7,6 @@
 	opacity: 1;
 }
 
-// .fadeInSlow {
-// 	opacity: 1;
-// }
-
 .waiting-message {
 	text-align: left;
 }
@@ -33,4 +29,6 @@
 	animation-duration: 0.5s;
 }
 
-
+button.night:hover {
+		color: $c-text;
+}

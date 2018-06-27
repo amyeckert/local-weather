@@ -111,7 +111,8 @@ button {
   background-color: rgba(29, 72, 226, 0);
   border: 2px solid #00000030;
   border-radius: 0.3125rem;
-  opacity: 1; }
+  opacity: 1;
+  color: #1c1d1b; }
   .update:hover {
     border: 2px solid #e6c2fe;
     background-color: #e6c2fe; }
@@ -339,6 +340,9 @@ button {
           animation-iteration-count: 1;
   -webkit-animation-duration: 0.5s;
           animation-duration: 0.5s; }
+
+button.night:hover {
+  color: #1c1d1b; }
 
 .breathe {
   opacity: 1;
