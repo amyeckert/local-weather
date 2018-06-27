@@ -267,13 +267,13 @@ document.onreadystatechange = function () {
 
         function chooseEndTime(sunrise, sunset) {
             let riseOrSet = document.querySelector(".display__sunset_sunrise");
-            // let now = Date.now();
-            // // NOTE* date now returned in Unix ms needs to be in seconds to work with times returned from weather API.
-            // let nowString = '' + now;
-            // nowString = Number(nowString.slice(0, -3));
-            // now = nowString;
+            let now = Date.now();
+            // NOTE* date now returned in Unix ms needs to be in seconds to work with times returned from weather API.
+            let nowString = '' + now;
+            nowString = Number(nowString.slice(0, -3));
+            now = nowString;
          
-            let now = new Date('June 27, 2018 22:24:00'); 
+            // let now = new Date('June 27, 2018 22:24:00'); 
             if (now >= timeAtSunrise && now <= timeAtSunset) {
                 riseOrSet.innerHTML = " sunset ";    
                 displayTime.innerHTML = "<span class=\"bold\">" + localTimeAtSunset + ".</span>";
