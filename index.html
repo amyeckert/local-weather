@@ -13,16 +13,16 @@
 	<script src="js/dist/app.js"></script>
 </head>
 <body class="body">
-	<div class="background">
+	<main class="background">
 
-		<div class="container">
+		<section class="container">
 
-			<div class="container__inner container__inner-top">
+			<header class="container__inner container__inner-top">
 				<h1 class="question">What is it like outside right now?</h1>
 				<button class="getLocation">
 					Click here to get your local weather conditions!
 				</button>
-			</div>
+			</header>
 
 			<div class="container__inner container__inner-bottom">
 				<div class="circle circleCon">
@@ -41,15 +41,36 @@
 						<p id="countdown">
 							<span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span> left
 						</p>
-						<p>before <span class="display__sunset_sunrise "></span> at </p>
+						<p>before <span class="display__sunset_sunrise"></span> at </p>
 						<p id="display__time"></p>
 						<button class="update">Update</button>
 
+						
+
 					</div>
 				</div>
-			</div>	
-			
-		</div>
-	</div>
+			</div>
+			<table>	
+				<tbody class="screenreader">
+					<tr>
+					  <th scope="row">Conditions:</th>
+					  	<td class="screenreader-conditions">sunny</td>
+					</tr>
+					<tr>
+					  <th scope="row">Temperature:</th>
+					  	<td class="screenreader-temp"> 81F/22C</td>
+				  	</tr>
+				  	<tr>
+					  <th scope="row">Time left:</th>
+					  	<td class="screenreader-clock">hh:mm:ss until </td>
+					  	<td class="screenreader-rise-or-set"> sunset at</td>
+					  	<td class="screenreader-time">hh:mm PM.</td>	
+					</tr>  
+				</tbody>
+			</table>
+		</section>
+
+		
+	</main>
 </body>
 </html>

@@ -318,6 +318,16 @@ button {
       left: 46%;
       top: 26%; } }
 
+.screenreader {
+  display: block;
+  position: absolute;
+  top: auto;
+  overflow: hidden;
+  bottom: 10%;
+  background-color: orange;
+  width: 100%;
+  height: auto; }
+
 .bold {
   font-weight: 700;
   font-size: 2rem; }
