@@ -1,3 +1,12 @@
+.fadeIn {
+	opacity: 1;
+}
+
+.container__inner-top.fadeOut {
+	opacity: 0;
+	z-index: 0;
+}
+
 .breathe {
 	opacity: 1;
 	z-index: 500;
@@ -6,6 +15,7 @@
 	animation-iteration-count: infinite;
 	animation-duration: 5s;
 }
+
 @keyframes breathe {
 	0% {
 		opacity: 1;
@@ -20,35 +30,16 @@
 	}
 }
 
-.dropIn {
-	opacity: 1;
-	z-index: 999;
-	animation-name: dropIn;
-	animation-direction: normal;
-	animation-iteration-count: 1;
-	animation-duration: 1s;
-	-webkit-animation-timing-function: cubic-bezier(0.075, 0.820, 0.165, 0.850);
-	-moz-animation-timing-function: cubic-bezier(0.075, 0.820, 0.165, 0.850); 
-     -o-animation-timing-function: cubic-bezier(0.075, 0.820, 0.165, 0.850); 
-        animation-timing-function: cubic-bezier(0.075, 0.820, 0.165, 0.850); /* easeOutCirc */	
-}
-
-@keyframes dropIn {
-	0% {
-		opacity: 0;
-    	transform: translateY(-15.625rem);
-	}
-	100% {
-		opacity: 1;
-    	transform: translateY(0.28rem);
-	}
-}
-
 .night {
+	color: $c-white;
 	animation-name: darkenBackground;
 	animation-direction: normal;
 	animation-iteration-count: 1;
 	animation-duration: 0.5s;
+}
+
+button.night:hover {
+		color: $c-text;
 }
 
 @keyframes darkenBackground {
@@ -61,4 +52,19 @@
 		background-color: $c-transparent;
 	}
 }
+
+.dropIn {
+	opacity: 1;	
+    top: 30%;
+
+	@include bp(small) {
+
+		top: 26%;
+	}
+
+	@include bp(medium) {
+    	top: 19%;
+	}	
+}
+
 

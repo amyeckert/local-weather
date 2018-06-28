@@ -3,32 +3,12 @@
 	font-size: $h1-font-size;
 }
 
-.fadeIn {
-	opacity: 1;
-}
-
 .waiting-message {
 	text-align: left;
 }
 
-.container__inner-top.fadeOut {
-	opacity: 0;
-	z-index: 0;
-}
 .daytime {
 	display: block;
 	background-color: $c-white;
 	color: $c-text;
-}
-
-.night {
-	color: $c-white;
-	animation-name: darkenBackground;
-	animation-direction: normal;
-	animation-iteration-count: 1;
-	animation-duration: 0.5s;
-}
-
-button.night:hover {
-		color: $c-text;
 }
