@@ -274,6 +274,7 @@ button {
       left: -9%; } }
 
 .circleTemp {
+  z-index: 999;
   display: block;
   height: 5.8125rem;
   width: 5.8125rem;
@@ -410,8 +411,8 @@ button.night:hover {
           animation-iteration-count: 1;
   -webkit-animation-duration: 1s;
           animation-duration: 1s;
-  -webkit-animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
-  animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+  -webkit-animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 0.85);
+  animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 0.85);
   /* easeOutCirc */ }
 
 @-webkit-keyframes dropIn {

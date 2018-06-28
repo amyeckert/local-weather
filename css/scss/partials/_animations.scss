@@ -27,10 +27,10 @@
 	animation-direction: normal;
 	animation-iteration-count: 1;
 	animation-duration: 1s;
-	-webkit-animation-timing-function: cubic-bezier(0.075, 0.820, 0.165, 1.000); 
-   	-moz-animation-timing-function: cubic-bezier(0.075, 0.820, 0.165, 1.000); 
-     -o-animation-timing-function: cubic-bezier(0.075, 0.820, 0.165, 1.000); 
-        animation-timing-function: cubic-bezier(0.075, 0.820, 0.165, 1.000); /* easeOutCirc */	
+	-webkit-animation-timing-function: cubic-bezier(0.075, 0.820, 0.165, 0.850);
+	-moz-animation-timing-function: cubic-bezier(0.075, 0.820, 0.165, 0.850); 
+     -o-animation-timing-function: cubic-bezier(0.075, 0.820, 0.165, 0.850); 
+        animation-timing-function: cubic-bezier(0.075, 0.820, 0.165, 0.850); /* easeOutCirc */	
 }
 
 @keyframes dropIn {
