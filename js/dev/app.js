@@ -290,8 +290,6 @@ document.onreadystatechange = function () {
                 circleClock.style.background = colors.night.clock;
                 updateBackgroundColor(tempF);
                 console.log('nighttime');
-
-
             }
             return timeAtEnd;
         }

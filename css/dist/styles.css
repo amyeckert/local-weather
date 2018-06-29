@@ -284,7 +284,7 @@ button {
   font-family: "Abril Fatface", cursive;
   background: rgba(29, 72, 226, 0);
   opacity: 0;
-  transition: top 2s cubic-bezier(0, 0.86, 0, 0.995), opacity 2s ease-out; }
+  transition: top 1s cubic-bezier(0, 0.86, 0, 0.995), opacity 0.8s ease-out; }
   @media (min-width: 420px) {
     .circleTemp {
       min-width: 7.8125rem;
