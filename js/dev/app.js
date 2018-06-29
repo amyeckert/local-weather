@@ -386,13 +386,13 @@ document.onreadystatechange = function () {
             }
         }
         
-        getUpdate.addEventListener('click', function(event) {
+        getUpdate.addEventListener('click', (event) => {
             event.preventDefault(event);
             console.log('update conditions without reloading page');
             window.location.reload(true);
         }); 
 
-		getLocation.addEventListener("click", function( event ) {
+		getLocation.addEventListener("click", (event) => {
 			event.preventDefault(event);
 			question.innerHTML = "<p class=\"waiting-message\">One moment, please...</p>";
             getLocation.style.display = 'none';
