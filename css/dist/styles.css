@@ -234,7 +234,7 @@ button {
         text-transform: capitalize; }
         @media (min-width: 420px) {
           .container .container__inner-bottom .circle__inner_con .conditions {
-            font-size: 1.5rem; } }
+            font-size: 1.3rem; } }
     .container .container__inner-bottom .circle__inner_temp {
       top: 36%; }
       .container .container__inner-bottom .circle__inner_temp .temperature {
