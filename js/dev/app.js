@@ -163,7 +163,7 @@ document.onreadystatechange = function () {
             background = document.querySelector('.background'),
     		countdown,
     		displayTime = document.querySelector("#display__time"),
-            getUpdate = document.querySelector('.update'),
+            // getUpdate = document.querySelector('.update'),
             localTimeAtSunrise,
             localTimeAtSunset,
             sunset,
@@ -325,7 +325,7 @@ document.onreadystatechange = function () {
     	function updateCircleColor(temp) {
     		//daytime color scheme
             background.classList.remove('night');
-            getUpdate.classList.remove('night');
+            // getUpdate.classList.remove('night');
             background.classList.add('daytime');
             
 			if (temp < 32 ) {
@@ -364,7 +364,7 @@ document.onreadystatechange = function () {
             //switch to night color scheme  
             background.classList.remove('daytime');
             background.classList.add('night');
-            getUpdate.classList.add('night');
+            // getUpdate.classList.add('night');
 
             if (tempF < 32) { 
                 body.style.backgroundColor = colors.night.freezing;
@@ -386,11 +386,11 @@ document.onreadystatechange = function () {
             }
         }
         
-        getUpdate.addEventListener('click', (event) => {
-            event.preventDefault(event);
-            console.log('update conditions without reloading page');
-            window.location.reload(true);
-        }); 
+        // getUpdate.addEventListener('click', (event) => {
+        //     event.preventDefault(event);
+        //     console.log('update conditions without reloading page');
+        //     window.location.reload(true);
+        // }); 
 
 		getLocation.addEventListener("click", (event) => {
 			event.preventDefault(event);
