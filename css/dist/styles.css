@@ -103,7 +103,7 @@ button {
       flex: 0 1 auto; } }
 
 .update {
-  display: block;
+  display: none;
   position: absolute;
   top: 104%;
   left: 29%;
